@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script type="text/javascript" src="index.js"></script>
 </head>
 <body>
-<button id="btn-left">0</button>
-<button id="btn-right">1</button>
-<script src="index.js"></script>
+<button id="btn-left">pick left</button>
+<button id="btn-right">pick right</button>
+<script type="text/javascript">
+	var WC = new WouldCup({
+                            members : ['윌리', '제프리', '션', '빵야', '멀린', '에드워드', '시혼', '우즈', '노엘', '딜런'],
+                            btnLeft : document.getElementById('btn-left'),
+                            btnRight: document.getElementById('btn-right')
+                          });
+</script>
 </body>
 </html>

@@ -1,4 +1,3 @@
-
 var WouldCup = function (opts) {
 	this.opts     = opts || {};
 	this.members  = opts.members || [];
@@ -28,40 +27,41 @@ WouldCup.prototype.nominate   = function (cnt) {
 	var currentMembers    = this.currentMembers;
 	this.nominatedMembers = currentMembers.slice(0, cnt);
 	this.currentMembers   = currentMembers.slice(cnt);
+	this.win();
 	return this;
 };
 WouldCup.prototype.pick       = function (key) {
 	var keyMap = {'left': 0, 'right': 1};
 	var keyIdx = keyMap[key];
-	console.log('picked : ', [this.nominatedMembers[keyIdx]]);
 	this.currentMembers.push(this.nominatedMembers[keyIdx]);
+	console.log('picked : ', [this.nominatedMembers[keyIdx]]);
 	return this;
 };
-WouldCup.prototype.hasResult  = function () {
-	if (this.currentMembers.length < 2) {
-		console.log('your winner : ', this.currentMembers);
-		return true;
+WouldCup.prototype.win        = function () {
+	if (this.nominatedMembers.length === 1) {
+		console.log('your winner : ', this.nominatedMembers);
+		return this;
 	}
-	return false;
 };
 WouldCup.prototype.bindEvents = function () {
 	var that = this;
 	that.btnLeft.addEventListener('click', function () {
-		if (that.hasResult()) {
+		if (that.nominatedMembers.length < 2) {
 			return false;
 		}
-		var result = that.pick('left').nominate(2);
-		// console.log(result.currentMembers);
-		console.log('pick one : ', result.nominatedMembers);
-		
+		var nominateMembers = that.pick('left').nominate(2).nominatedMembers;
+		if (nominateMembers.length === 2) {
+			console.log('pick one : ', nominateMembers);
+		}
 	});
 	that.btnRight.addEventListener('click', function () {
-		if (that.hasResult()) {
+		if (that.nominatedMembers.length < 2) {
 			return false;
 		}
-		var result = that.pick('right').nominate(2);
-		// console.log(result.currentMembers);
-		console.log('pick one : ', result.nominatedMembers);
+		var nominateMembers = that.pick('left').nominate(2).nominatedMembers;
+		if (nominateMembers.length === 2) {
+			console.log('pick one : ', nominateMembers);
+		}
 	});
 };
 WouldCup.prototype.init       = function () {
@@ -71,12 +71,3 @@ WouldCup.prototype.init       = function () {
 	console.log('pick one : ', gameList.nominate(2).nominatedMembers);
 	this.bindEvents();
 };
-
-var WC = new WouldCup({
-												members : ['윌리', '제프리', '션', '빵야', '멀린', '에드워드', '시혼', '우즈', '노엘', '딜런'],
-												btnLeft : document.getElementById('btn-left'),
-												btnRight: document.getElementById('btn-right')
-											});
-
-
-
