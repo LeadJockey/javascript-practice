@@ -4,7 +4,8 @@
   "description": "...",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "merlin": "jest src/merdash"
   },
   "repository": {
     "type": "git",
