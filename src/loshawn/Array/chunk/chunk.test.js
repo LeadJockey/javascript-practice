@@ -1,5 +1,16 @@
 const chunk = require('./index');
 
-test('[1, 2, 3, 4] -> [[1,2],[3,4]]', () => {
-	expect(chunk([1, 2, 3, 4], 2)).toEqual([[1,2],[3,4]]);
+const testList = [
+	{
+		given   : [[1, 2, 3, 4], 2],
+		expected: [[1, 2], [3, 4]]
+	}
+];
+testList.forEach((testcase) => {
+	const given    = testcase.given;
+	const expected = testcase.expected;
+	const desc     = `given ${JSON.stringify(given)} / expected ${JSON.stringify(expected)}`;
+	test(desc, () => {
+		expect(chunk(given[0], given[1])).toEqual(expected);
+	});
 });
