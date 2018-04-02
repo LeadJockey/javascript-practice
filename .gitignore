@@ -3,4 +3,6 @@
 node_modules/*
 package-lock.json
 javascript-practice.iml
+yarn-error.log
 .vscode/*
+

@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "merlin": "jest src/merdash"
+    "merlin": "jest src/merdash",
+    "shawn": "jest src/loshawn",
+    "edward":"jest src/loedward",
+    "rain": "jest src/radash"
   },
   "repository": {
     "type": "git",
@@ -20,5 +23,8 @@
   "devDependencies": {
     "jest": "^22.4.3",
     "jest-cli": "^22.4.3"
+  },
+  "dependencies": {
+    "package.json": "^2.0.1"
   }
 }
