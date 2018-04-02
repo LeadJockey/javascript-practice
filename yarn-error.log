@@ -1,0 +1,66 @@
+Arguments: 
+  /usr/local/Cellar/node/7.10.0/bin/node /usr/local/bin/yarn test
+
+PATH: 
+  /usr/local/Cellar/maven/3.5.3/libexec/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  7.10.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "javascript-practice",
+    "version": "1.0.0",
+    "description": "...",
+    "main": "index.js",
+    "scripts": {
+      "test": "jest",
+      "merlin": "jest src/merdash",
+      "shawn": "jest src/loshawn"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/LeadJockey/javascript-practice.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/LeadJockey/javascript-practice/issues"
+    },
+    "homepage": "https://github.com/LeadJockey/javascript-practice#readme",
+    "devDependencies": {
+      "jest": "^22.4.3",
+      "jest-cli": "^22.4.3"
+    },
+    "dependencies": {
+      "package.json": "^2.0.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Command failed.
+  Exit code: 1
+  Command: sh
+  Arguments: -c jest
+  Directory: /Users/danbi/Desktop/javascript-practice
+  Output:
+  
+      at ProcessTermError.MessageError (/usr/local/lib/node_modules/yarn/lib/cli.js:186:110)
+      at new ProcessTermError (/usr/local/lib/node_modules/yarn/lib/cli.js:226:113)
+      at ChildProcess.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:30281:17)
+      at emitTwo (events.js:106:13)
+      at ChildProcess.emit (events.js:194:7)
+      at maybeClose (internal/child_process.js:899:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
