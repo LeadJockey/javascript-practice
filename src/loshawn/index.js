@@ -1,6 +1,6 @@
-const chunk   = require('./chunk');
-const compact = require('./compact');
-const concat  = require('./concat');
+const chunk   = require('./Array/chunk');
+const compact = require('./Array/compact');
+const concat  = require('./Array/concat');
 const isArray = require('./isArray');
 const sum     = require('./sum');
 

@@ -1,4 +1,4 @@
-const isArray = require('./../isArray');
+const isArray = require('../../isArray/index');
 
 const concat = function (rootList, targetList) {
 	const result = [];
