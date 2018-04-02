@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "merlin": "jest src/merdash",
-    "shawn": "jest src/loshawn"
+    "shawn": "jest src/loshawn",
+    "edward":"jest src/loedward"
   },
   "repository": {
     "type": "git",
