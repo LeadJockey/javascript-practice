@@ -15,11 +15,11 @@ const _findDiffer = function (list,target) {
 const difference = function (rootList, targetList) {
 	
 	if(!isArray(rootList)){
-		throw new TypeError(`compact 의 첫번째 인자는 ${message.mustTypeArray}`);
+		throw new TypeError(`difference 의 첫번째 인자는 ${message.mustTypeArray}`);
 	}
 	
 	if(!isArray(targetList)){
-		throw new TypeError(`compact 의 두번째 인자는 ${message.mustTypeArray}`);
+		throw new TypeError(`difference 의 두번째 인자는 ${message.mustTypeArray}`);
 	}
 	
 	let result = rootList.slice(0);
