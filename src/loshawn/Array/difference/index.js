@@ -15,7 +15,7 @@ const difference = function (rootList, targetList) {
 	for(let target of targetList){
 		result = _findDiffer(result, target);
 	}
-	return result;
+	return result;  
 };
 
 module.exports = difference;
