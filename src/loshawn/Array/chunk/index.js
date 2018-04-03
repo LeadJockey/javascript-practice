@@ -1,14 +1,15 @@
-const isArray = require('../../util/isArray');
-const isInteger = require('../../util/isInteger');
+const isArray = require('./../../util/isArray');
+const isInteger = require('./../../util/isInteger');
+const message = require('./../../test/message');
 
 const chunk = function(list, count){
 	
 	if(!isArray(list)){
-		throw new TypeError(chunk.message.mustTypeArray);
+		throw new TypeError(`chunk 의 첫번째 인자는 ${message.mustTypeArray}`);
 	}
 	
 	if(!isInteger(count)){
-		throw new TypeError(chunk.message.mustTypeNumber);
+		throw new TypeError(`chunk 의 두번쨰 인자는 ${message.mustTypeNumber}`);
 	}
 	
 	if(count >= list.length){
@@ -31,11 +32,6 @@ const chunk = function(list, count){
 	}
 	
 	return result;
-};
-
-chunk.message = {
-	mustTypeArray:'chunk 의 첫번째 인자는 Array(배열) 이어야 합니다.',
-	mustTypeNumber:'chunk 의 두번째 인자는 Integer(정수) 이어야 합니다.',
 };
 
 module.exports = chunk;
