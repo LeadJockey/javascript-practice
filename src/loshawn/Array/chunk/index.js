@@ -3,19 +3,15 @@ const isInteger = require('./../../isInteger');
 
 const chunk = function(list, count){
 	
-	if(!list || !count){
-		return new TypeError(chunk.message.needArguments)
-	}
-	
 	if(!isArray(list)){
-		return new TypeError(chunk.message.mustTypeArray);
+		throw new TypeError(chunk.message.mustTypeArray);
 	}
 	
 	if(!isInteger(count)){
-		return new TypeError(chunk.message.mustTypeNumber);
+		throw new TypeError(chunk.message.mustTypeNumber);
 	}
 	
-	if(count > list.length){
+	if(count >= list.length){
 		return [list.slice(0)];
 	}
 	
@@ -38,7 +34,6 @@ const chunk = function(list, count){
 };
 
 chunk.message = {
-	needArguments:'chunk(Array, Integer)',
 	mustTypeArray:'chunk 의 첫번째 인자는 Array(배열) 이어야 합니다.',
 	mustTypeNumber:'chunk 의 두번째 인자는 Integer(정수) 이어야 합니다.',
 };

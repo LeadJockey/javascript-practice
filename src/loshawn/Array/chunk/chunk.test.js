@@ -1,34 +1,55 @@
+const tester = require('./../../test');
 const chunk = require('./index');
 
 const testList = [
 	{
-		given:[[1, 2, 3, 4], 2],
+		given:chunk.apply(null, [[1, 2, 3, 4], 2]),
 		expected:[[1, 2], [3, 4]],
 		method:'toEqual',
 	},
 	{
-		given:[[1, 2, 3, 4], 5],
+		given:chunk.apply(null, [[1, 2, 3, 4], 5]),
 		expected:[[1, 2, 3, 4]],
 		method:'toEqual',
 	},
 	{
-		given:[[1, 2, 3, 4], 4],
-		expected:[[1,2,3,4]],
+		given:chunk.apply(null, [[1, 2, 3, 4], 4]),
+		expected:[[1, 2, 3, 4]],
 		method:'toEqual',
 	},
 	{
-		given:[[1, 2, 3, 4], 1],
-		expected:[[1],[2],[3],[4]],
+		given:chunk.apply(null, [[1, 2, 3, 4], 1]),
+		expected:[[1], [2], [3], [4]],
 		method:'toEqual',
+	},
+	{
+		given:chunk.bind(null, false),
+		expected:TypeError,
+		method:'toThrow',
+	},
+	{
+		given:chunk.bind(null, '1234', 2),
+		expected:TypeError,
+		method:'toThrow',
+	},
+	{
+		given:chunk.bind(null, [1, 2, 3, 4], '2'),
+		expected:TypeError,
+		method:'toThrow',
+	},
+	{
+		given:chunk.bind(null, undefined, undefined),
+		expected:TypeError,
+		method:'toThrow',
+	},
+	{
+		given:chunk.bind(null, null, null),
+		expected:TypeError,
+		method:'toThrow',
 	},
 ];
 
-testList.forEach((testcase) =>{
-	const given = testcase.given;
-	const expected = testcase.expected;
-	const method = testcase.method;
-	const desc = `given ${JSON.stringify(given)} / expected ${JSON.stringify(expected)}`;
-	test(desc, () =>{
-			expect(chunk(given[0],given[1]))[method](expected);
-	});
+describe('my chunk method test', () =>{
+	tester(testList);
 });
+
