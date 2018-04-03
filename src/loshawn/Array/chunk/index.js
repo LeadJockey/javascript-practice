@@ -1,5 +1,5 @@
-const isArray = require('./../../isArray');
-const isInteger = require('./../../isInteger');
+const isArray = require('../../util/isArray');
+const isInteger = require('../../util/isInteger');
 
 const chunk = function(list, count){
 	
