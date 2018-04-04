@@ -3,6 +3,11 @@ const chunk = require('./index');
 
 const testList = [
 	{
+		given:chunk.apply(null, [['a', 'b', 'c', 'd'], 2]),
+		expected:[['a', 'b'], ['c', 'd']],
+		method:'toEqual',
+	},
+	{
 		given:chunk.apply(null, [[1, 2, 3, 4], 2]),
 		expected:[[1, 2], [3, 4]],
 		method:'toEqual',
