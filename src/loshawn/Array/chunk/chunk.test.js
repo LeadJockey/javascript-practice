@@ -30,7 +30,7 @@ const testList = [
 	{
 		given:chunk.bind(null, false),
 		expected:TypeError,
-		method:'toThrow', 
+		method:'toThrow',
 	},
 	{
 		given:chunk.bind(null, '1234', 2),
