@@ -1,5 +1,5 @@
 
-function chunk(arr, sliceNum) {
+const chunk = (arr, sliceNum) => {
   const result = [];
   
   for(let i=0;i <= arr.length;i+=1 ){
