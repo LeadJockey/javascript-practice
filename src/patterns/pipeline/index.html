@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="index.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	var capitalize = function(text){
+		return text[0].toUpperCase() + text.substring(1);
+	};
+	var replace = function(text){
+		return text.replace('o', '^O^');
+	};
+	var add = function(text){
+        return text +'[added something!]';
+		};
+
+	var excited = new Pipeline();
+	console.log(excited);
+
+	excited.pipe(capitalize)
+           .pipe(replace)
+           .pipe(add);
+
+	console.log(excited.process('hello'));
+</script>
+</body>
+</html>
