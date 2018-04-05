@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "merlin": "jest src/merdash",
-    "shawn": "jest src/loshawn",
-    "edward": "jest src/loedward",
-    "rain": "jest src/radash"
+    "merlin": "jest src/lodash/merdash",
+    "shawn": "jest src/lodash/loshawn",
+    "edward": "jest src/lodash/loedward",
+    "rain": "jest src/lodash/radash"
   },
   "repository": {
     "type": "git",
