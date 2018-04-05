@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="index.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	function run(){
+		var instance1 = Singleton.getInstance();
+		var instance2 = Singleton.getInstance();
+
+		console.log("is Same instance? " + (instance1 === instance2));
+	}
+	run();
+</script>
+</body>
+</html>
