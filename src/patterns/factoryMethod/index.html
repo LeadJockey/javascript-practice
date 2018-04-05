@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="index.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+
+	function run(){
+		var employees = [];
+		var factory = new Factory();
+
+		employees.push(factory.createEmployee("fulltime"));
+		employees.push(factory.createEmployee("parttime"));
+		employees.push(factory.createEmployee("temporary"));
+		employees.push(factory.createEmployee("contractor"));
+
+		employees.forEach(function(employee){ employee.say(); });
+	}
+
+	run();
+</script>
+</body>
+</html>
