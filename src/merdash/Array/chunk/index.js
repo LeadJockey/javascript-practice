@@ -4,7 +4,6 @@ const isArray = require("../../isArray")
 function chunk(collection) {
 
   var size = Array.prototype.slice.call(arguments, 1, 2)[0];
-  var tempCollection = collection.slice();
   var result = [];
 
   if (!isArray(collection)) {
@@ -16,11 +15,12 @@ function chunk(collection) {
   }
 
   if ((size === 0) || (size === undefined)) {
-    return tempCollection;
+    return collection;
   }
 
   // ['a' , 'b' , 'c'] ,2  => ['a','b'],['c']
   // result.push(element)
+  var tempCollection = collection.slice();
   while (tempCollection.length > 0) {
     var element = [];
     for (var i = size; i > 0; i--) {
