@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="index.js"></script>
+</head>
+<body>
+<div id="pathFromArrays"></div>
+<script type="text/javascript">
+	var arrayData = [
+		[10, 130],
+		[100, 60],
+		[190, 160],
+		[280, 10]
+	];
+	var lineGenerator = d3.svg.line();
+	var path = lineGenerator(arrayData);
+	console.log(path);
+	// document.getElementById('pathFromArrays')
+     //        .setAttribute('d', path);
+
+	/*
+	*
+	* 함수가 함수를 반환하는 일은
+	* 프로그래밍 언어에서 대개 혼동을 일으키는 금기 상황이지만,
+	* 자바스크립트에서 아키텍처의 선택권을 넓혀주는 지극히 당연한 습관이다.
+	* 강력한 자바스크립트 코드를 원한다면 우선 일급 객체인 함수를
+	* 인자로 주고 반환값으로 돌려받는 형태에 길들어야 한다.
+	*
+	* 출처 : 자바스크립트 패턴과 테스트
+	*
+	*/
+
+</script>
+</body>
+</html>
