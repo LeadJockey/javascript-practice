@@ -8,7 +8,8 @@
     "merlin": "jest src/lodash/merdash",
     "shawn": "jest src/lodash/loshawn",
     "edward": "jest src/lodash/loedward",
-    "rain": "jest src/lodash/radash"
+    "rain": "jest src/lodash/radash",
+    "del": "jest src/lodash/dashed"
   },
   "repository": {
     "type": "git",
