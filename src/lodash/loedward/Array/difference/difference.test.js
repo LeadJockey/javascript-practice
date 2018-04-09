@@ -9,7 +9,7 @@ const testList = [
   },
   {
     given:[1, 5, 7],
-    target:[1, 6, 8],
+    target:[1, 6, 8, 9],
     expected:[5, 7],
     method:'toEqual'
   }

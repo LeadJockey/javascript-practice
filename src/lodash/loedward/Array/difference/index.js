@@ -1,21 +1,17 @@
 const difference = (root, target)=>{
-  const newArr = [];
+  let rootArr = root.slice(0);
 
-  let i;
-  let j;
-  for(i = 0; i < root.length; i+=1){
-    let differenceArr = [];
-    for(j = 0; j < target.length; j+=1){
-      if(root[i] !== target[j]){
-        differenceArr.push(1);
-        if(differenceArr.length === root.length){
-          newArr.push(root[i]);
-        }
-
+  target.forEach(function(targetItem){
+    let newArr = [];
+    rootArr.forEach(function(rootItem){
+      if(targetItem !== rootItem){
+        return newArr.push(rootItem);
       }
-    }
-  }
-  return newArr;
+    });
+    return rootArr = newArr;
+  });
+
+  return rootArr;
 };
 
 module.exports = difference;
