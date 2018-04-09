@@ -3,15 +3,17 @@ const differenceBy = require('./index');
 
 const testList = [
 	{
-		given:differenceBy.apply(null, [[2.1, 1.2], [2.3, 3.4], Math.floor]),
+		given:'[2.1, 1.2], [2.3, 3.4], Math.floor',
+		logic:differenceBy.apply(null, [[2.1, 1.2], [2.3, 3.4], Math.floor]),
 		expected:[1.2],
 		method:'toEqual',
 	},
-	// {
-	// 	given:difference.bind(null, false),
-	// 	expected:TypeError,
-	// 	method:'toThrow',
-	// },
+	{
+		given:'[{ \'x\': 2 }, { \'x\': 1 }], [{ \'x\': 1 }], \'x\'',
+		logic:differenceBy.apply(null, [[{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }], 'x']),
+		expected:[{ 'x': 2 }],
+		method:'toEqual',
+	},
 	// {
 	// 	given:difference.bind(null, undefined),
 	// 	expected:TypeError,
