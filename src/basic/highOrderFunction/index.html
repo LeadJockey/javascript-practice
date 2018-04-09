@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script type="text/javascript" src="index.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <!--<script type="text/javascript" src="index.js"></script>-->
 </head>
 <body>
 <div id="pathFromArrays"></div>
 <script type="text/javascript">
+
 	var arrayData = [
 		[10, 130],
 		[100, 60],
 		[190, 160],
 		[280, 10]
 	];
-	var lineGenerator = d3.svg.line();
+	var lineGenerator = d3test.svg.line();
 	var path = lineGenerator(arrayData);
 	console.log(path);
-	// document.getElementById('pathFromArrays')
-     //        .setAttribute('d', path);
+	document.getElementById('pathFromArrays')
+             .setAttribute('d', path);
 
 	/*
 	*
