@@ -26,6 +26,7 @@
     "jest-cli": "^22.4.3"
   },
   "dependencies": {
+    "lodash": "^4.17.5",
     "package.json": "^2.0.1"
   }
 }
