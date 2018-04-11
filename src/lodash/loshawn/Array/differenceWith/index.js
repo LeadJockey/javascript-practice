@@ -1,6 +1,7 @@
 const isArray = require('./../../util/isArray');
 const isFunction = require('./../../util/isFunction');
 const message = require('./../../test/message');
+const _ =require('lodash');
 
 const _findDifferByFunction = function(list, target, criterion){
   const result = [];

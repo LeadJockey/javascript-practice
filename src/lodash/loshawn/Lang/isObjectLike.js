@@ -4,7 +4,7 @@
  * @returns {boolean}
  */
 const isObjectLike = function(value){
-  return (value !== null) && (typeof value === 'object');
+  return value !== null && typeof value === 'object';
 };
 
 module.exports = isObjectLike;

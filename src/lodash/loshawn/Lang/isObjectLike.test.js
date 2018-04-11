@@ -1,34 +1,39 @@
 const isObjectLike = require('./isObjectLike');
 
-const testList = [
-  {
-    func:isObjectLike({}),
-    given:'{}',
-    expected:true,
-    method:'toBe',
-  },
-  {
-    func:isObjectLike([1,2,3]),
-    given:'[1,2,3]',
-    expected:true,
-    method:'toBe',
-  },
-  {
-    func:isObjectLike(null),
-    given:'null',
-    expected:false,
-    method:'toBe',
-  },
-];
-
 describe('loshawn isObjectLike method test', () =>{
 
-  testList.forEach((testcase) =>{
-    //명제 하나
-    test(`given ${JSON.stringify(testcase.given)} => expected ${JSON.stringify(testcase.expected)}`, () =>{
-      //기대값과 결과값
-      expect(testcase.func)[testcase.method](testcase.expected);
-    });
+  test(`given {} => expected true`, () =>{
+    expect(isObjectLike({})).toBe(true);
+  });
+  test(`given [1, 2, 3] => expected true`, () =>{
+    expect(isObjectLike([1, 2, 3])).toBe(true);
+  });
+  test(`given null => expected false`, () =>{
+    expect(isObjectLike(null)).toBe(false);
+  });
+  test(`given undefined => expected false`, () =>{
+    expect(isObjectLike(undefined)).toBe(false);
+  });
+  test(`given true => expected false`, () =>{
+    expect(isObjectLike(true)).toBe(false);
+  });
+  test(`given true => expected false`, () =>{
+    expect(isObjectLike(false)).toBe(false);
+  });
+  test(`given 0 => expected false`, () =>{
+    expect(isObjectLike(0)).toBe(false);
+  });
+  test(`given -1 => expected false`, () =>{
+    expect(isObjectLike(-1)).toBe(false);
+  });
+  test(`given 1 => expected false`, () =>{
+    expect(isObjectLike(1)).toBe(false);
+  });
+  test(`given 'text' => expected false`, () =>{
+    expect(isObjectLike('text')).toBe(false);
+  });
+  test(`given '' => expected false`, () =>{
+    expect(isObjectLike('')).toBe(false);
   });
 
 });
