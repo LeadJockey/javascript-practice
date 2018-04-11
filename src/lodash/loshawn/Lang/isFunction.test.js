@@ -1,8 +1,8 @@
 const isFunction = require('./isFunction');
 
-describe('loshawn isLength method test', () =>{
+describe('loshawn isFunction method test', () =>{
 
-  test(`given 3 => expected true`, () =>{
+  test(`given function(){} => expected true`, () =>{
     expect(isFunction(function(){})).toBe(true);
   });
   test(`given /abc/ => expected false`, () =>{
