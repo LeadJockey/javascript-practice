@@ -2,27 +2,19 @@ const isArray = require('./../../util/isArray');
 const isFunction = require('./../../util/isFunction');
 const message = require('./../../test/message');
 const _ =require('lodash');
-_.differenceWith
+// _.differenceWith
+// _.isArrayLikeObject
+// _.isArryLikey
 
 
-const differenceWith = function(rootList, targetList, criterion){
-
-  if(!isArray(rootList)){
-    throw new TypeError(`difference 의 첫번째 인자는 ${message.mustTypeArray}`);
+const differenceWith = baseRest(function(array, values) {
+  let comparator = last(values);
+  if (isArrayLikeObject(comparator)) {
+    comparator = undefined;
   }
-
-  if(!isArray(targetList)){
-    throw new TypeError(`difference 의 두번째 인자는 ${message.mustTypeArray}`);
-  }
-
-  let result = rootList.slice(0);
-
-  for(let target of targetList){
-    if(isFunction(criterion)){
-      result = _findDifferByFunction(result, target, criterion);
-    }
-  }
-  return result;
-};
+  return isArrayLikeObject(array)
+    ? baseDifference(arsray, baseFlatten(values, 1, isArrayLikeObject, true), undefined, comparator)
+    : [];
+});
 
 module.exports = differenceWith;
