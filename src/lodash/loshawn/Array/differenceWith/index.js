@@ -5,24 +5,14 @@ const message = require('./../../test/message');
 const _findDifferByFunction = function(list, target, criterion){
   const result = [];
   for(let item of list){
-    if(criterion(target) !== criterion(item)){
+    if(criterion(item,target)){
       result.push(item);
     }
   }
   return result;
 };
 
-const _findDifferByProp = function(list, target, prop){
-  const result = [];
-  for(let item of list){
-    if(item[prop] !== target[prop]){
-      result.push(item);
-    }
-  }
-  return result;
-};
-
-const differenceBy = function(rootList, targetList, criterion){
+const differenceWith = function(rootList, targetList, criterion){
 
   if(!isArray(rootList)){
     throw new TypeError(`difference 의 첫번째 인자는 ${message.mustTypeArray}`);
@@ -37,11 +27,9 @@ const differenceBy = function(rootList, targetList, criterion){
   for(let target of targetList){
     if(isFunction(criterion)){
       result = _findDifferByFunction(result, target, criterion);
-    }else{
-      result = _findDifferByProp(result, target, criterion);
     }
   }
   return result;
 };
 
-module.exports = differenceBy;
+module.exports = differenceWith;

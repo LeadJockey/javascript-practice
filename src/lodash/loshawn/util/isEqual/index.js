@@ -17,8 +17,8 @@ const isEqual = function(target, compare){
       }
     }
   }
-  console.log(Object.keys(target).length);
-  console.log(count);
+  // console.log(Object.keys(target).length);
+  // console.log(count);
 
   return Object.keys(target).length === count;
 };
