@@ -8,6 +8,10 @@ describe("concat 함수는", () => {
       {
         given: [1, 2, 3, 4],
         expect: [1, 2, 3, 4]
+      },
+      {
+        given: [2, 3],
+        expect: [2, 3]
       }
     ];
 
