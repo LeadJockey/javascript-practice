@@ -1,20 +1,22 @@
-const isArray = require('./../../util/isArray');
-const isFunction = require('./../../util/isFunction');
-const message = require('./../../test/message');
-const _ =require('lodash');
-// _.differenceWith
-// _.isArrayLikeObject
-// _.isArryLikey
+const isArrayLikeObj = require('./../../Lang/isArrayLikeObject');
+const last = require('./../last');
+const _ = require('lodash');
+// _.iteratee()
+const differenceWith =function(){
 
-
-const differenceWith = baseRest(function(array, values) {
-  let comparator = last(values);
-  if (isArrayLikeObject(comparator)) {
-    comparator = undefined;
-  }
-  return isArrayLikeObject(array)
-    ? baseDifference(arsray, baseFlatten(values, 1, isArrayLikeObject, true), undefined, comparator)
-    : [];
-});
+};
+// const baseDifference = function(array, values, looper, comparator){
+//
+// };
+//
+// const differenceWith = function(array, values) {
+//   let comparator = last(values);
+//   if (isArrayLikeObject(comparator)) {
+//     comparator = undefined;
+//   }
+//   return isArrayLikeObject(array)
+//     ? baseDifference(array, values, looper, comparator)
+//     : [];
+// };
 
 module.exports = differenceWith;
