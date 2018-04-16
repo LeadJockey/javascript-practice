@@ -5,7 +5,6 @@
  * @returns {boolean}
  */
 const isLength = function(value){
-  console.log('MAX_SAFE_INTEGER : ',Number.MAX_SAFE_INTEGER);
   return typeof value === 'number'
     && value > -1
     && value % 1 === 0
