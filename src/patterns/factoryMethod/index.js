@@ -1,8 +1,8 @@
-var Factory = function(){
+const Factory = function(){
 	this.createEmployee = function(type){
-		var employee;
+		let employee;
 		// 추상화 시킨 펙토리얼 메서드 맵퍼
-		var employeeTypeMap = {
+		const employeeTypeMap = {
 			'fulltime':new FullTime(),
 			'parttime':new PartTime(),
 			'temporary':new Temporary(),
@@ -21,18 +21,18 @@ var Factory = function(){
 	}
 };
 
-var FullTime = function(){
+const FullTime = function(){
 	this.hourly = "$12";
 };
 
-var PartTime = function(){
+const PartTime = function(){
 	this.hourly = "$11";
 };
 
-var Temporary = function(){
+const Temporary = function(){
 	this.hourly = "$10";
 };
 
-var Contractor = function(){
+const Contractor = function(){
 	this.hourly = "$15";
 };

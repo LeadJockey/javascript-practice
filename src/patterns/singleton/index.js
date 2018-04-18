@@ -1,8 +1,8 @@
-var Singleton = (function(){
-	var instance;
+const Singleton = (function(){
+	let instance;
 	
 	function createInstance(){
-		var object = new Object("I am the instance");
+		const object = new Object("I am the instance");
 		return object;
 	}
 	

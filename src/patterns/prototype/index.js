@@ -1,4 +1,4 @@
-var WouldCup = function (opts) {
+const WouldCup = function (opts) {
 	this.opts     = opts || {};
 	this.members  = opts.members || [];
 	this.btnLeft  = opts.btnLeft;
@@ -11,7 +11,7 @@ WouldCup.prototype.clone      = function () {
 	return this;
 };
 WouldCup.prototype.shuffle    = function () {
-	var swapIdx, tmp, i,
+	let swapIdx, tmp, i,
 			shuffledList = this.currentMembers,
 			length       = shuffledList.length - 1;
 	for (i = length; i > 0; i--) {
@@ -24,15 +24,15 @@ WouldCup.prototype.shuffle    = function () {
 	return this;
 };
 WouldCup.prototype.nominate   = function (cnt) {
-	var currentMembers    = this.currentMembers;
+	const currentMembers    = this.currentMembers;
 	this.nominatedMembers = currentMembers.slice(0, cnt);
 	this.currentMembers   = currentMembers.slice(cnt);
 	this.win();
 	return this;
 };
 WouldCup.prototype.pick       = function (key) {
-	var keyMap = {'left': 0, 'right': 1};
-	var keyIdx = keyMap[key];
+	const keyMap = {'left': 0, 'right': 1};
+	const keyIdx = keyMap[key];
 	this.currentMembers.push(this.nominatedMembers[keyIdx]);
 	console.log('picked : ', [this.nominatedMembers[keyIdx]]);
 	return this;
@@ -44,12 +44,12 @@ WouldCup.prototype.win        = function () {
 	}
 };
 WouldCup.prototype.bindEvents = function () {
-	var that = this;
+	const that = this;
 	that.btnLeft.addEventListener('click', function () {
 		if (that.nominatedMembers.length < 2) {
 			return false;
 		}
-		var nominateMembers = that.pick('left').nominate(2).nominatedMembers;
+		const nominateMembers = that.pick('left').nominate(2).nominatedMembers;
 		if (nominateMembers.length === 2) {
 			console.log('pick one : ', nominateMembers);
 		}
@@ -58,14 +58,14 @@ WouldCup.prototype.bindEvents = function () {
 		if (that.nominatedMembers.length < 2) {
 			return false;
 		}
-		var nominateMembers = that.pick('left').nominate(2).nominatedMembers;
+		const nominateMembers = that.pick('left').nominate(2).nominatedMembers;
 		if (nominateMembers.length === 2) {
 			console.log('pick one : ', nominateMembers);
 		}
 	});
 };
 WouldCup.prototype.init       = function () {
-	var gameList = this.clone().shuffle();
+	const gameList = this.clone().shuffle();
 	console.log('game initialized');
 	console.log('gameList : ', gameList.currentMembers);
 	console.log('pick one : ', gameList.nominate(2).nominatedMembers);

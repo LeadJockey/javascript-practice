@@ -25,11 +25,11 @@
 
 
 // 이러한 함수는 완젼히 통으로 짜여져서 유지보수하기 어렵고 가독성도 떨어진다.
-var users = ['sHaWn', 'EdwarD', 'mErLin', 'BrAd'];
+const users = ['sHaWn', 'EdwarD', 'mErLin', 'BrAd'];
 
 function greeter(users){
 	return users.map(function(name){
-		var userName = name.toLowerCase();
+		const userName = name.toLowerCase();
 		return 'hi ' + userName.charAt(0).toUpperCase() + userName.slice(1);
 	});
 }
@@ -37,10 +37,10 @@ console.log(greeter(users));
 
 // 한번 단일 책임 원칙을 생각하면서 리펙토링 해보자.
 
-var Formater = function(){};
+const Formater = function(){};
 Formater.prototype.sentenceCase = function(string){
-	var lowerCaseString = this.lowerCase(string);
-	var capitalized = this.capitalize(lowerCaseString);
+	const lowerCaseString = this.lowerCase(string);
+	const capitalized = this.capitalize(lowerCaseString);
 	return capitalized;
 };
 Formater.prototype.lowerCase = function(string){
@@ -50,16 +50,16 @@ Formater.prototype.capitalize = function(string){
 	return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-var Greeter = function(users, greetFormater){
+const Greeter = function(users, greetFormater){
 	this.users = users;
 	this.greetFormater = greetFormater;
 };
 Greeter.prototype.greet = function(){
-	var that = this;
-	var i=0;
+	const that = this;
+	const i=0;
 	this.users.map(function(user){
 		console.log(++i);
-		var formattedUserName = that.greetFormater.sentenceCase(user);
+		const formattedUserName = that.greetFormater.sentenceCase(user);
 		that.sendGreetingMsg(formattedUserName);
 	});
 };
@@ -68,6 +68,6 @@ Greeter.prototype.sendGreetingMsg = function(name){
 };
 
 
-var f = new Formater();
-var eventGreeter = new Greeter(users, f);
+const f = new Formater();
+const eventGreeter = new Greeter(users, f);
 eventGreeter.greet();

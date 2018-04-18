@@ -11,7 +11,7 @@ Pipeline.prototype.process = function(args){
 		return args;
 	}
 	
-	var stageOutput = args;
+	let stageOutput = args;
 	
 	this.stages.forEach(function(stage, counter){
 		// 마지막 스테이지가 프로미스인지 확인
