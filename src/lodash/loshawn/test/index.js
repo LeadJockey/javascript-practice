@@ -1,7 +1,5 @@
 
 const _ = require('lodash');
-_.difference
-
 
 const tester = (testList) =>{
 	

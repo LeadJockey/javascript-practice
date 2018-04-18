@@ -1,4 +1,4 @@
-const isArray = require('./../../util/isArray/index');
+const isArray = require('../../Lang/isArray');
 const message = require('./../../test/message');
 
 const _findDiffer = function (list,target) {

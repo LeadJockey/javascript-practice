@@ -1,4 +1,4 @@
-const isArray = require('./index');
+const isArray = require('./isArray');
 
 test('[0, 1, false, 2, \'\', 3] -> true', () => {
 	expect(isArray([0, 1, false, 2, '', 3])).toBe(true);

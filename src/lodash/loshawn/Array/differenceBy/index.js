@@ -1,5 +1,5 @@
-const isArray = require('./../../util/isArray');
-const isFunction = require('./../../util/isFunction');
+const isArray = require('../../Lang/isArray');
+const isFunction = require('./../../Lang/isFunction');
 const message = require('./../../test/message');
 
 const _findDifferByFunction = function(list, target, criterion){
