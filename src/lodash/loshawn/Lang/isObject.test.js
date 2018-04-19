@@ -1,4 +1,4 @@
-const isObject = require('./index');
+const isObject = require('./isObject');
 
 test('3 -> false', () => {
   expect(isObject('3')).toBe(false);

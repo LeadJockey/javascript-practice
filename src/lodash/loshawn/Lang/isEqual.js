@@ -1,11 +1,11 @@
-const isObject = require('./../isObject');
+const isObject = require('./isObject');
 
 /*
 * 인자 두개를 받아서 같은지 비교해 주는 함수 ( 인자는 반드시 오브젝트 형태 여야 한다
 * */
 const isEqual = function(target, compare){
 
-  if(!(isObject && isObject(compare))){
+  if(!(isObject(target) && isObject(compare))){
     return false;
   }
 
@@ -17,8 +17,6 @@ const isEqual = function(target, compare){
       }
     }
   }
-  // console.log(Object.keys(target).length);
-  // console.log(count);
 
   return Object.keys(target).length === count;
 };

@@ -1,11 +1,9 @@
-const isArray = require('../../Lang/isArray');
-const message = require('./../../test/message');
-
+const isArray = require('../Lang/isArray');
 
 const compact = function(list){
 	
-	if(!isArray(list)){
-		throw new TypeError(`compact 의 첫번째 인자는 ${message.mustTypeArray}`);
+	if(!isArray(list) || (list.length < 1)){
+		throw new TypeError(`compact 의 첫번째 인자는 배열이어야 합니다`);
 	}
 	
 	const result = [];
