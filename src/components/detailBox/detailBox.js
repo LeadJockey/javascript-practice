@@ -39,10 +39,12 @@ const DetailBox = function(opts){
   this.chunkedPlayers = this.chunk(this.$players, this.chunkSize);
 };
 /**
- * 배열 하나를 지정된 수만큼 잘라서 다시 배열을 만들어서 저장 즉 쪼개진 2중배열을 얻는 함수
+ * 배열 하나를 지정된 수만큼 잘라서 다시 배열을 만들어서 저장 즉 쪼개진 새로운 2중배열을 얻는 함수
  * @param list 덩어리로 나뉘어질 기본 배열
  * @param chunkSize 몇개를 기준으로 나눠어야 할지 설정
- * @returns {Array} 덩어리로 쪼개진 2중 배열 반환
+ * @returns {Array} 덩어리로 쪼개진 새로운 2중 배열 반환
+ * @example
+ * chunk([1,2,3,4,5],2) // [[1,2],[3,4],[5]]
  */
 DetailBox.prototype.chunk = function(list, chunkSize){
   const length = list === null ? 0:list.length;
@@ -69,6 +71,15 @@ DetailBox.prototype.chunk = function(list, chunkSize){
  * 실행시점은 모든 이벤트가 달리기 전에 init 해줄때 실행 필요 ( 이후 이 값을 기준으로 이벤트가 바인딩 되기 때문 )
  * @param chunkedList chunk 되어진 2중 배열
  * @param dataAttrName chunk 되어진 배열의 모든 아이탬들에게 청크의 인텍스를 data-{dataAttrName} 으로 세팅
+ * @example
+ * 2중 배열로 쪼개진 li 리스트가 있다고 가정핼때 모든 아이탬에
+ * <li></li> => <li data-player-row="0"></li>
+ * <li></li> => <li data-player-row="0"></li>
+ * <li></li> => <li data-player-row="0"></li>
+ * <li></li> => <li data-player-row="1"></li>
+ * <li></li> => <li data-player-row="1"></li>
+ * <li></li> => <li data-player-row="1"></li>...
+ * 값음 1차 배열의 인덱스를 따라갑니다.
  */
 DetailBox.prototype.setDataAttr = function(chunkedList, dataAttrName){
   chunkedList.forEach(function(eachRowList, rowIdx){
@@ -90,6 +101,8 @@ DetailBox.prototype.setDetailData = function(templateId, data){
 };
 /**
  * 상세정보 보여주기의 이벤트 집합 함수 ( 선수 클릭시 토글 형식으로 선수들의 정보를 보여주는 역할을 합니다. )
+ * setDataAttr 로 박혀진 data-attr 를 확인하여 해당하는 엘리먼트가 가지고 있는 row idx 를 찾습니다.
+ * 그리고 그열의 마지막 아이탬 뒤에 상세박스를 동적으로 그려서 랭딩해 줍니다.
  */
 DetailBox.prototype.bindEvents = function(){
   const that = this;
@@ -104,6 +117,8 @@ DetailBox.prototype.bindEvents = function(){
 };
 /**
  * 초기화 시켜주는 함수
+ * 이벤트가 dataAttr 여부로 동작하기에 반드시 setDataAttr 을 먼저 실행 시켜주어야 합니다.
+ * 초기화는 내부적으로 작동안하고 생성 후 init() 함수를 실행시킴으로써 적용됩니다.
  */
 DetailBox.prototype.init = function(){
   this.setDataAttr(this.chunkedPlayers, this.dataAttrPlayerRow);
