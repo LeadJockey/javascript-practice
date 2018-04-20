@@ -1,0 +1,7 @@
+#wrap{border:1px solid gray; width:350px;margin:10px auto}
+#wrap .list-player{overflow:hidden;padding:5px}
+#wrap .list-player li{float:left;width:33.3333%;}
+#wrap .list-player .link-player{display:block;padding:5px}
+#wrap .list-player .img-player{vertical-align:top;width:100%}
+#wrap .list-player li.info-player{width:100%}
+#wrap .list-player .box-player{height:200px;margin:0 5px;background-color:#007aff;color:white}
