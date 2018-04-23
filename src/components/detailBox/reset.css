@@ -29,4 +29,6 @@ img[data-original-src]{background-color:#fff}
 .ir_wa{display:block;overflow:hidden;position:relative;width:100%;height:100%;z-index:-1}
 .screen_out{display:block;overflow:hidden;position:absolute;left:-9999px;width:1px;height:1px;font-size:0;line-height:0;text-indent:-9999px}
 .screen_hide{height:0;font-size:0;line-height:0;visibility:hidden}
+.dl_comp{overflow:hidden;margin:3px 0 3px;line-height:1.3}
+.txt_tag{font-size:15px;color:#919191}
 /* reset end */

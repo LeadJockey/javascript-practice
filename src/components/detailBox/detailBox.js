@@ -4,9 +4,8 @@
  *  생성자 함수 DetailBox 에서 // value setting - must need 이쪽 주석 부분을 참고 하시고 채워주세요
  *
  * 박스를 그려주는 방식은 jsRender 를 사용합니다.
- * jsRender 는 스크립트 기반으로 지정된 하나의 template 를 id 기준으로 잡아서 붙혀주는 역할을 하고 data를 옵션값으로 넘길수 있습니다.
- * 따라서 상세 박스에 들어갈 정보는 해당 데이터를 통해서 커스터 마이징 하면 되겠습니다.
- * 상세 박스의 데이터 값을 바꿀수 있도록 커스텀 함수를 빼 놓았습니다. setDetailData() 매서드에 함수를 기입하여 데이터를 컨버팅 해서 반환해주세요.
+ * jsRender 는 스크립트 기반으로 지정된 하나의 template 를 id 기준으로 잡아서 붙혀주는 역할을 하고, 옵션의 template 를통해서 입력합니다.
+ * template에 매핑되어질 데이터의 형태는 배열이고 dataList 옵션을 통해서 입력하게 됩니다 현제 클릭되는 인덱스를 기반으로 노출하게 됩니다.
  *
  * @param opts
  * @constructor
@@ -14,10 +13,11 @@
  *
  * const playerDetailBox = new DetailBox({
  *    $ctx:$('#wrap'),
- *    detailHtmlString:'<li class="info-player"><div class="box-player">선수정보</div></li>'
+ *    template:$.templates('#detailBoxTmpl'),
+ *    dataList:playerInfoList // [{playerInfo},{playerInfo},...]
  * });
  *
- * playerDetailBox.init();
+ *
  */
 const DetailBox = function(opts){
   // options
@@ -28,15 +28,20 @@ const DetailBox = function(opts){
   this.listSelectName = opts.listSelectName || '.list-player';
   this.ItemSelectName = opts.ItemSelectName || 'li';
   this.detailSelectName = opts.detailSelectName || '.info-player';
-  this.detailHtmlString = opts.detailHtmlString || '<div>noting to show</div>'; //임시
+  this.template = opts.template || '';
+  this.dataList = opts.dataList || [];
   this.dataAttrPlayerRow = opts.dataAttrPlayerRow || 'data-player-row';
   this.chunkSize = opts.chunkSize || 3;
+  this.detailBoxCloseSelector = opts.detailBoxCloseSelector || '.btn_close';
 
   // inner values
   this.$player = this.$ctx.find(this.listSelectName); //jquery list elem
   this.$playersItem = this.$player.find(this.ItemSelectName);//jquery list elem children
   this.$players = this.$playersItem.not(this.detailSelectName);// jquery list elem without detailHtmlString
   this.chunkedPlayers = this.chunk(this.$players, this.chunkSize);
+
+  // initialize
+  this.init();
 };
 /**
  * 배열 하나를 지정된 수만큼 잘라서 다시 배열을 만들어서 저장 즉 쪼개진 새로운 2중배열을 얻는 함수
@@ -89,30 +94,26 @@ DetailBox.prototype.setDataAttr = function(chunkedList, dataAttrName){
   });
 };
 /**
- * 박스를 그려주는 방식은 jsRender 를 사용합니다.
- * jsRender 는 스크립트 기반으로 지정된 하나의 template 를 id 기준으로 잡아서 붙혀주는 역할을 하고 data를 옵션값으로 넘길수 있습니다.
- * 따라서 상세 박스에 들어갈 정보는 해당 데이터를 통해서 커스터 마이징 하면 되겠습니다.
- * 상세 박스의 데이터 값을 바꿀수 있도록 커스텀 함수를 빼 놓았습니다. setDetailData() 매서드에 함수를 기입하여 데이터를 컨버팅 해서 반환해주세요.
- * @param templateId
- * @param data
- */
-DetailBox.prototype.setDetailData = function(templateId, data){
-  //some code
-};
-/**
  * 상세정보 보여주기의 이벤트 집합 함수 ( 선수 클릭시 토글 형식으로 선수들의 정보를 보여주는 역할을 합니다. )
  * setDataAttr 로 박혀진 data-attr 를 확인하여 해당하는 엘리먼트가 가지고 있는 row idx 를 찾습니다.
  * 그리고 그열의 마지막 아이탬 뒤에 상세박스를 동적으로 그려서 랭딩해 줍니다.
  */
 DetailBox.prototype.bindEvents = function(){
   const that = this;
+  //박스 보여주
   that.$players.on('click', function(){
+    const $this = $(this);
     const $playerInfo = that.$player.find(that.detailSelectName);
-    const rowIdx = $(this).data(that.dataAttrPlayerRow.replace('data-',''));
+    const rowIdx = $this.data(that.dataAttrPlayerRow.replace('data-', ''));
     const $targetRow = that.$player.find('[' + that.dataAttrPlayerRow + '=\"' + rowIdx + '\"]');
     const targetElem = $targetRow[$targetRow.length - 1] || $targetRow[0];
     $playerInfo.remove();
-    $(targetElem).after(that.detailHtmlString.replace('선수정보','선수번호:'+$(this).index()));
+    $(targetElem).after(that.template.render(that.dataList[$this.index()]));
+  });
+  //박스 닫기
+  that.$player.on('click',that.detailBoxCloseSelector, function(){
+    const $playerInfo = that.$player.find(that.detailSelectName);
+    $playerInfo.remove();
   });
 };
 /**
@@ -124,6 +125,27 @@ DetailBox.prototype.init = function(){
   this.setDataAttr(this.chunkedPlayers, this.dataAttrPlayerRow);
   this.bindEvents();
 };
+/**
+ * 더미데이터를 통한 테스트
+ */
+const playerInfoList = [];
+const playerInfo = {
+  name:'손흥민',
+  fcName:'토트넘 핫스퍼FC',
+  fcLink:'javascript:;',
+  moreLink:'javascript:;',
+  position:'공격수(FW)',
+  birth:'1980년 생, 만 37세',
+  recordLink:'javascript:;',
+  imgSrc:'https://dummyimage.com/60x40/efefef/000000',
+  recordGame:21,
+  recordGoal:5,
+  recordAssist:3,
+  recordFoul:20
+};
+for(let i = 0; i < 12; i++){
+  playerInfoList.push(Object.assign({ idx:i }, playerInfo));
+}
 
 /**
  * 상세정보 보기 인스턴스 생성 및 사용 예제
@@ -131,8 +153,7 @@ DetailBox.prototype.init = function(){
  */
 const playerDetailBox = new DetailBox({
   $ctx:$('#wrap'),
-  detailHtmlString:'<li class="info-player"><div class="box-player">선수정보</div></li>'
+  template:$.templates('#detailBoxTmpl'),
+  dataList:playerInfoList
 });
 
-// 실행 및 초기화
-playerDetailBox.init();

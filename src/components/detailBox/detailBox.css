@@ -3,5 +3,22 @@
 #wrap .list-player li{float:left;width:33.3333%;}
 #wrap .list-player .link-player{display:block;padding:5px}
 #wrap .list-player .img-player{vertical-align:top;width:100%}
-#wrap .list-player li.info-player{width:100%}
-#wrap .list-player .box-player{height:200px;margin:0 5px;background-color:#007aff;color:white}
+
+#wrap .list-player li.info-player{position:relative;width:calc(100% - 28px);margin:0 14px;padding:16px;border:1px solid #dedede;box-sizing:border-box}
+#wrap .txt_player .txt_name{font-size:18px;color:#000;margin-right:8px}
+
+#wrap .dl_comp{float:left}
+
+#wrap .wrap_info{overflow:hidden}
+#wrap .wrap_info .txt_position:before{float:left;width:1px;height:12px;margin:0 8px;background-color:#dedede;content:''}
+#wrap .wrap_info .birth_item{float:none;clear:both}
+
+#wrap .wrap_record{overflow:hidden;padding-top:14px;border-top:1px solid #f5f5f5;box-sizing:border-box}
+#wrap .wrap_record .link_record{float:left;width:28%}
+#wrap .wrap_record .img_nation{display:block;margin:7px auto}
+#wrap .wrap_record .txt_record{font-size:15px}
+#wrap .wrap_record .dl_comp{border-left:1px solid #f5f5f5;width:18%;margin:0;box-sizing:border-box;text-align:center}
+#wrap .wrap_record .dl_comp > dt{}
+#wrap .wrap_record .dl_comp > dd{margin-top:14px;font-size:20px}
+#wrap .info-player .btn_close{position:absolute;top:16px;right:16px}
+

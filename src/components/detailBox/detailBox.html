@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="detailBox.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.90/jsrender.js"></script>
 </head>
 <body>
 <div id="wrap">
@@ -22,8 +23,57 @@
         <li><a href="javascript:;" class="link-player"><img src="https://dummyimage.com/100x100/efefef/000000" class="img-player" alt=""></a></li>
         <li><a href="javascript:;" class="link-player"><img src="https://dummyimage.com/100x100/efefef/000000" class="img-player" alt=""></a></li>
         <li><a href="javascript:;" class="link-player"><img src="https://dummyimage.com/100x100/efefef/000000" class="img-player" alt=""></a></li>
+        <li><a href="javascript:;" class="link-player"><img src="https://dummyimage.com/100x100/efefef/000000" class="img-player" alt=""></a></li>
     </ul>
 </div>
+<script id="detailBoxTmpl" type="text/x-jsrender">
+  <li class="info-player">
+    <div class="wrap_player">
+        <strong class="txt_name">{{:name}}{{:idx}}</strong>
+        <a href="{{:moreLink}}" class="txt_tag">자세히 보기<span class="ico_player ico_arrow">></span></a>
+    </div>
+      <div class="wrap_info">
+        <dl class="dl_comp">
+        <dt class="screen_out">구단명</dt>
+        <dd><a href="{{:fcLink}}" class="link-fc">{{:fcName}}</a></dd>
+      </dl>
+      <dl class="dl_comp">
+        <dt class="screen_out">포지션</dt>
+        <dd class="txt_position">{{:position}}</dd>
+      </dl>
+        <dl class="dl_comp birth_item">
+        <dt class="screen_out">생년월일, 나이</dt>
+      <dd>{{:birth}}</dd>
+      </dl>
+      </div>
+      <div class="wrap_record">
+          <a href="{{:recordLink}}" class="link_record">
+            <img src="{{:imgSrc}}" width="30px" height="20px" class="img_nation" alt="국가 이미지">
+            <span class="txt_record">A 매치 성적</span>
+          </a>
+          <dl class="dl_comp">
+            <dt>경기</dt>
+            <dd>{{:recordGame}}</dd>
+          </dl>
+          <dl class="dl_comp">
+            <dt>득점</dt>
+            <dd>{{:recordGoal}}</dd>
+          </dl>
+          <dl class="dl_comp">
+            <dt>도움</dt>
+            <dd>{{:recordAssist}}</dd>
+          </dl>
+            <dl class="dl_comp">
+            <dt>파울</dt>
+            <dd>{{:recordFoul}}</dd>
+          </dl>
+      </div>
+    <a href="javascript:;" class="btn_close">
+      <span class="screen_out">닫기</span>
+      <span style="display:inline-block;width:18px;height:18px;color:#000;text-align:center">X</span>
+    </a>
+  </li>
+</script>
 <script type="text/javascript" src="detailBox.js"></script>
 </body>
 </html>
