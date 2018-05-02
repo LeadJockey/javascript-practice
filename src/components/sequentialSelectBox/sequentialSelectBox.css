@@ -1,0 +1,12 @@
+.hide{display:none}
+
+#wrap{margin:0 auto;width:322px;box-sizing:border-box;border:1px solid red}
+.list_menu{overflow:hidden}
+.menu_item{float:left;margin-left:10px;width:100px;height:50px}
+.menu_item:first-child{margin-left:0}
+.link_menu{display:inline-block;height:100%;width:100%;background-color:gold;color:black;text-align:center;line-height:50px}
+.text_menu{display:inline-block;height:100%;width:100%;background-color:orange;color:white;text-align:center;line-height:50px
+}
+
+.list_cont{}
+.cont_item{height:150px;text-align:center;line-height:150px}
