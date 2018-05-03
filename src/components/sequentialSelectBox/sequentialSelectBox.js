@@ -1,32 +1,41 @@
+
 const $ctx = $('#wrap');
 
 const $menu = $ctx.find('.list_menu');
 const $menuList = $menu.find('.menu_item');
-const $contList = $ctx.find('.list_cont .cont_item');
+const tf = _templateFactory();
+
 const state = {
+  currentMenuIndex:0,
   menus:[
     {
       isClickAble:true,
-      text:'Lv1'
+      isContOpened:false,
+      isSelected:false,
+      text:'지역시',
+      defaultText:'지역시'
     },
     {
       isClickAble:false,
-      text:'Lv2'
+      isContOpened:false,
+      isSelected:false,
+      text:'지역구',
+      defaultText:'지역구'
     },
     {
       isClickAble:false,
-      text:'Lv3'
+      isContOpened:false,
+      isSelected:false,
+      text:'지역동',
+      defaultText:'지역동'
     }
   ]
 };
-
-
-
 bindEvents();
 render(
   stateLog,
-  activeMenu,
-  showMenuCont
+  menuTab,
+  menuCont,
 );
 
 function setState(state, newState){
@@ -47,35 +56,64 @@ function render(){
 }
 
 function bindEvents(){
-  $menuList.on('click', function(){
-    console.log('clicked');
-    const $this = $(this);
-    const menus = state.menus.slice();
+  $menuList.on('click', 'a' ,function(){
+    const $this = $(this).parents('.menu_item');
     const idx = $this.index();
-    const $currCont = $contList.eq(idx);
-    $this.toggleClass('_active');
-    menus[idx].isClickAble = $this.hasClass('_active');
+    const menus = state.menus.slice();
+    const targetMenu = menus[idx];
+    const tmpFlag = targetMenu.isContOpened;
+
+    menus.forEach(function(v,i){
+       v.isClickAble = (i === idx && v.isSelected);
+    });
+
+    targetMenu.isContOpened = !tmpFlag;
+    setState(state, { currentMenuIndex:idx, menus:menus });
+  });
+  // $menuList.on('click', 'span' ,function(){
+  //   const $this = $(this).parents('.menu_item');
+  //   const idx = $this.index();
+  //   const menus = state.menus.slice();
+  //
+  //   menus.forEach(function(v,i){
+  //     v.isClickAble = !(i <idx && v.isSelected);
+  //   });
+  // });
 
 
-    // if($this.hasClass('_active')){
-    //   // $currCont.removeClass('hide').siblings().addClass('hide');
-    //   menus.forEach(function(el,i){
-    //     if(i < idx){
-    //       el.isClickAble = false;
-    //     }
-    //   });
-    // }else{
-    //   // $currCont.addClass('hide');
-    // }
+    $ctx.on('click','.tmpl_ssb a', function(){
+    const $this = $(this);
+    const idx = $this.parents('.tmpl_ssb').data('tmpl-idx');
+    const text = $this.text();
+    const menus = state.menus.slice();
+    const targetMenu = menus[idx];
+    targetMenu.text = text;
+    targetMenu.isSelected = true;
+    targetMenu.isContOpened = false;
     setState(state, { menus:menus });
   });
+}
+
+function _templateFactory(){
+  const templateContainer = {};
+
+  function getTemplate(templateId){
+    if(!templateContainer[templateId]){
+      templateContainer[templateId] = $.templates(templateId);
+    }
+    return templateContainer[templateId];
+  }
+
+  return {
+    getTemplate:getTemplate
+  }
 }
 
 function stateLog(){
   console.table(state.menus);
 }
 
-function activeMenu(){
+function menuTab(){
   state.menus.forEach(function(menuItem, i){
     const text = menuItem.text || '';
     const tagTypeA = '<a href="javascript:;" class="link_menu">' + text + '</a>';
@@ -84,15 +122,25 @@ function activeMenu(){
     $menuList.eq(i).html(html);
   });
 }
-function showMenuCont(){
-  state.menus.forEach(function(menu,i){
-    const $currentCont = $contList.eq(i);
-    if(menu.isClickAble){
-      $currentCont.removeClass('hide').siblings().addClass('hide');
-    }else{
-      $currentCont.addClass('hide');
-    }
-  });
+
+function menuCont(){
+  //TODO ajex로 데이터 받는 것을 가정 -start
+  const DATA1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17];
+  const DATA2 = [1,2,3,4,5,6,7,8,9];
+  const DATA3 = [1,2,3,4,5,6,7,8,9,10,11,12];
+  const DATA_MAP = {
+    0:{name:'지역시',list:DATA1,idx:0},
+    1:{name:'지역구',list:DATA2,idx:1},
+    2:{name:'지역동',list:DATA3,idx:2},
+  };
+  const RESULT_DATA = DATA_MAP[state.currentMenuIndex];
+  //TODO ajex로 데이터 받는 것을 가정 -end
+
+  $ctx.find('.tmpl_ssb').remove();
+  if(state.menus[state.currentMenuIndex].isContOpened){
+    const html = tf.getTemplate('#sequentialSelectBoxTemplate').render(RESULT_DATA);
+    $menu.after(html);
+  }
 }
 
 $(state).trigger('state-updated');

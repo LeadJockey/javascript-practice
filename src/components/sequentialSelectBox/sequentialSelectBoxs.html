@@ -16,12 +16,19 @@
         <div class="menu_item"><a href="javascript:;" class="link_menu">Lv2</a></div>
         <div class="menu_item"><a href="javascript:;" class="link_menu">Lv3</a></div>
     </div>
-    <div class="list_cont">
-        <div class="cont_item hide">1</div>
-        <div class="cont_item hide">2</div>
-        <div class="cont_item hide">3</div>
-    </div>
 </div>
+<script id="sequentialSelectBoxTemplate" type="text/x-jsrender">
+    <div class="tmpl_ssb" data-tmpl-idx="{{:idx}}">
+        <ul class="list_cont">
+            {{for list ~place=name}}
+                <li>
+                    <a href="javascript:;"> {{:~place}}{{:#data}} </a>
+                </li>
+            {{/for}}
+        </ul>
+    </div>
+
+</script>
 <script type="text/javascript" src="sequentialSelectBox.js"></script>
 </body>
 </html>

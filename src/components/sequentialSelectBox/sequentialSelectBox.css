@@ -10,3 +10,9 @@
 
 .list_cont{}
 .cont_item{height:150px;text-align:center;line-height:150px}
+
+
+.tmpl_ssb{}
+.tmpl_ssb .list_cont{overflow:hidden;padding:5px}
+.tmpl_ssb .list_cont li{float:left;width:25%;text-align:center}
+.tmpl_ssb .list_cont li a{display:block;background-color:khaki}
