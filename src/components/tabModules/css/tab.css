@@ -1,0 +1,105 @@
+a, a:visited {color: black; text-decoration: none;}
+body {background-color: #f0f0f0;}
+.wrap { width: 320px; margin: 0 auto; padding: 20px; background-color: #fff; box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5)}
+hr{margin: 50px 0;border:none;}
+h2 {
+    font-size: 20px;
+    line-height: 2;
+}
+/**
+    tab 공통 css
+ */
+.list-tab {
+    background-color: #E4FDE1;
+    display: flex;
+}
+.items-tab {
+    background-color: #E4FDE1;
+    flex-grow: 1;
+}
+.items-tab.on {
+    background-color: #F45B69;
+}
+.items-tab.hover {
+    background-color: #028090;
+}
+.link-tab {
+    color: #114B5F;
+    display: block;
+    text-align: center;
+    line-height: 3;
+}
+.items-tab.on .link-tab, .items-tab.hover .link-tab {
+    color: #E4FDE1;
+}
+
+/**
+패널 css
+ */
+.list-panel {
+    padding: 20px;
+}
+.items-panel {
+    border: 1px solid #0e0e0e;
+    line-height: 10;
+    text-align: center;
+}
+
+/**
+슬라이드 패널 css
+ */
+.viewport-slide {
+    position: relative;
+    width: 320px;
+    overflow: hidden;
+}
+.list-slide {
+    width: 1280px;
+}
+.list-slide:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+}
+.items-slide {
+    float: left;
+    width: 310px;
+    font-size: 50px;
+    text-align: center;
+    padding: 50px 0;
+    background: #EFEFEF;
+    border: 5px solid #999;
+    color: #666;
+}
+
+/**
+탭 네비게이션
+ */
+
+.nav-tab{
+    position: absolute;
+    left:50%;
+    bottom: 15px;
+    transform: translateX(-50%);
+}
+.nav-tab .items-nav{
+    display:inline-block;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    background-color: #E4FDE1;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+.nav-tab .items-nav.on{
+    background-color: #F45B69;
+}
+.nav-tab .items-nav.hover{
+    background-color: #028090;
+}
+.nav-tab .link-nav{
+    overflow: hidden;
+    display:block;
+    height:100%;
+    text-indent: -999px;
+}

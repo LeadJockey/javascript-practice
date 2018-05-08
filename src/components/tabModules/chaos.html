@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>탭 예제</title>
+    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="css/tab.css"/>
+    <script src="js/libs/flipsnap.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <div id="basicTab">
+        <h2>1. 기본 탭</h2>
+        <ul class="list-tab">
+            <li class="items-tab on"><a href="javascript:;" class="link-tab">A</a></li>
+            <li class="items-tab"><a href="javascript:;" class="link-tab">B</a></li>
+            <li class="items-tab"><a href="javascript:;" class="link-tab">C</a></li>
+            <li class="items-tab"><a href="javascript:;" class="link-tab">D</a></li>
+        </ul>
+        <ul class="list-panel">
+            <li class="items-panel">A</li>
+            <li class="items-panel">B</li>
+            <li class="items-panel">C</li>
+            <li class="items-panel">D</li>
+        </ul>
+    </div>
+    <hr/>
+    <div id="slidingTab">
+        <h2>2. 슬라이딩 탭</h2>
+        <ul class="list-tab">
+            <li class="items-tab on"><a href="javascript:;" class="link-tab">A</a></li>
+            <li class="items-tab"><a href="javascript:;" class="link-tab">B</a></li>
+            <li class="items-tab"><a href="javascript:;" class="link-tab">C</a></li>
+            <li class="items-tab"><a href="javascript:;" class="link-tab">D</a></li>
+        </ul>
+        <div class="viewport-slide">
+            <ul class="list-slide">
+                <li class="items-slide">A</li>
+                <li class="items-slide">B</li>
+                <li class="items-slide">C</li>
+                <li class="items-slide">D</li>
+            </ul>
+        </div>
+    </div>
+    <hr/>
+    <div id="tabNavigation">
+        <h2>3. 탭 네비게이션</h2>
+        <div class="viewport-slide">
+            <ul class="list-slide">
+                <li class="items-slide">A</li>
+                <li class="items-slide">B</li>
+                <li class="items-slide">C</li>
+                <li class="items-slide">D</li>
+            </ul>
+            <ul class="nav-tab">
+                <li class="items-nav on"><a href="javascript:;" class="link-nav">A</a></li>
+                <li class="items-nav"><a href="javascript:;" class="link-nav">B</a></li>
+                <li class="items-nav"><a href="javascript:;" class="link-nav">C</a></li>
+                <li class="items-nav"><a href="javascript:;" class="link-nav">D</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="js/a.chaos.js"></script>
+</body>
+</html>
