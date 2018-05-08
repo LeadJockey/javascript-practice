@@ -1,10 +1,8 @@
 
 const $ctx = $('#wrap');
-
 const $menu = $ctx.find('.list_menu');
 const $menuList = $menu.find('.menu_item');
-const tf = _templateFactory();
-
+const TF = _templateFactory();
 const state = {
   currentMenuIndex:0,
   menus:[
@@ -12,6 +10,7 @@ const state = {
       isClickAble:true,
       isContOpened:false,
       isSelected:false,
+      isChangedText:false,
       text:'지역시',
       defaultText:'지역시'
     },
@@ -19,6 +18,7 @@ const state = {
       isClickAble:false,
       isContOpened:false,
       isSelected:false,
+      isChangedText:false,
       text:'지역구',
       defaultText:'지역구'
     },
@@ -26,14 +26,16 @@ const state = {
       isClickAble:false,
       isContOpened:false,
       isSelected:false,
+      isChangedText:false,
       text:'지역동',
       defaultText:'지역동'
     }
   ]
 };
+
 bindEvents();
 render(
-  stateLog,
+  _stateLog,
   menuTab,
   menuCont,
 );
@@ -42,7 +44,6 @@ function setState(state, newState){
   $.extend(state, newState);
   $(state).trigger('state-updated');
 }
-
 function render(){
   const args = Array.prototype.slice.call(arguments);
 
@@ -54,42 +55,54 @@ function render(){
 
   $(state).on('state-updated', _reDraw);
 }
-
 function bindEvents(){
+  // 메뉴 탬 클릭시
   $menuList.on('click', 'a' ,function(){
-    const $this = $(this).parents('.menu_item');
-    const idx = $this.index();
+    const $this = $(this);
+    const $menuItem = $this.parents('.menu_item');
+    const idx = $menuItem.index();
     const menus = state.menus.slice();
     const targetMenu = menus[idx];
     const tmpFlag = targetMenu.isContOpened;
 
-    menus.forEach(function(v,i){
-       v.isClickAble = (i === idx && v.isSelected);
-    });
-
+    //toggle
     targetMenu.isContOpened = !tmpFlag;
+
     setState(state, { currentMenuIndex:idx, menus:menus });
   });
-  // $menuList.on('click', 'span' ,function(){
-  //   const $this = $(this).parents('.menu_item');
-  //   const idx = $this.index();
-  //   const menus = state.menus.slice();
-  //
-  //   menus.forEach(function(v,i){
-  //     v.isClickAble = !(i <idx && v.isSelected);
-  //   });
-  // });
-
-
-    $ctx.on('click','.tmpl_ssb a', function(){
+  // 지역 클릭시 (동적)
+  $ctx.on('click','.tmpl_ssb a', function(){
     const $this = $(this);
     const idx = $this.parents('.tmpl_ssb').data('tmpl-idx');
-    const text = $this.text();
+    const selectedText = $this.text();
     const menus = state.menus.slice();
     const targetMenu = menus[idx];
-    targetMenu.text = text;
+    const nextMenu = menus[idx+1]||targetMenu;
+    const text = targetMenu.text;
+
+    //toggle 행위에대한 반응
+    targetMenu.text = selectedText;
+    targetMenu.isChangedText = text !== selectedText;
     targetMenu.isSelected = true;
     targetMenu.isContOpened = false;
+
+    // 지역 선택에 대한 반응
+    if(targetMenu.isChangedText){
+      if(nextMenu.isClickAble){
+        //reset
+        menus.forEach(function(menu,i){
+          if(i > idx){
+            menu.isClickAble = false;
+            menu.isSelected = false;
+            menu.text = menu.defaultText;
+          }
+        });
+      }else{
+        //active next
+        nextMenu.isClickAble = true;
+      }
+    }
+
     setState(state, { menus:menus });
   });
 }
@@ -108,8 +121,7 @@ function _templateFactory(){
     getTemplate:getTemplate
   }
 }
-
-function stateLog(){
+function _stateLog(){
   console.table(state.menus);
 }
 
@@ -138,7 +150,7 @@ function menuCont(){
 
   $ctx.find('.tmpl_ssb').remove();
   if(state.menus[state.currentMenuIndex].isContOpened){
-    const html = tf.getTemplate('#sequentialSelectBoxTemplate').render(RESULT_DATA);
+    const html = TF.getTemplate('#sequentialSelectBoxTemplate').render(RESULT_DATA);
     $menu.after(html);
   }
 }
