@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+</head>
+<body style="background-color:#efefef">
+<canvas id="canvas" height="500px" width="500px" style="background-color:#fff"></canvas>
+<button id="btn">click: state - update</button>
+<script type="text/javascript" src="pipeline.js"></script>
+<script type="text/javascript" src="state.js"></script>
+<script type="text/javascript">
+
+  //'hello+ world' -'HELLO' -> 'H1E2L3L4O5'
+  // data -> uppercase -> insertOrderingNumber
+  const presetStages = [];
+  presetStages.push(init);
+  const convertString = new M.Pipeline(presetStages);
+
+  convertString.pipe(addStr)
+               .pipe(toUpperStr)
+               .pipe(insertNumber);
+  convertString.process('hello');
+
+  function init(str){
+    console.log('init ' + str);
+    return str;
+  }
+
+  function addStr(str){
+    console.log(str + 'world');
+    return str + 'world';
+  }
+
+  function toUpperStr(str){
+    console.log(str.toUpperCase());
+    return str.toUpperCase();
+  }
+
+  function insertNumber(str){
+    const result = [];
+    str.split('').forEach(function(v, i){
+      result.push(v + i);
+    });
+    console.log(result.join(''));
+    return result.join('');
+  }
+
+</script>
+</body>
+</html>
