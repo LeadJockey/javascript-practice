@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn">update</button>
+<div id="target"></div>
+<script>
+  (function(doc, exports){
+
+  })(document, window);
+
+
+  const state = {
+    tick:0
+  };
+
+  // const update = new CustomEvent('update', { detail:{}, bubbles:true, cancelable:true });
+  const update = new Event('update');
+  const create = new Event('create');
+
+
+  // custom event listener
+  // document.addEventListener('update', function(){
+  //   Object.assign(state, { tick:state.tick + 1 });
+  //   console.log('updated');
+  // });
+  //
+  // document.addEventListener('create', function(){
+  //   Object.assign(state, { message:'hello' + state.tick + 1 });
+  //   console.log('created');
+  // });
+
+
+  function setState(newState){
+    Object.assign(state, newState);
+    document.dispatchEvent(update);
+    console.table(state);
+  }
+
+  function render(){
+    const args = Array.prototype.slice.call(arguments);
+    document.addEventListener('update', function(){
+      args.forEach(function(fn){
+        fn();
+      });
+    });
+  }
+
+  function a(number){
+    return function(){
+      document.getElementById('target').innerHTML = `<div>${state.tick + number}</div>`;
+    }
+  }
+
+  // render
+  render(
+    a(1000),
+    a(1000),
+    a(1000),
+    a(1000),
+    a(1000),
+    a(1000)
+  );
+
+
+  // elem listener
+  document.getElementById('btn')
+          .addEventListener('click', function(){
+            setState({tick:state.tick+1});
+            // document.dispatchEvent(update); // trigger
+            // document.dispatchEvent(create); // trigger
+            // console.table(state);
+          });
+
+
+</script>
+</body>
+</html>
