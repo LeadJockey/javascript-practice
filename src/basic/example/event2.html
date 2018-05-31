@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn">update</button>
+<div id="target"></div>
+<script>
+
+    // EventDrivenStructure modules
+  (function(doc, exports){
+    'use strict';
+
+    var EventDrivenStructure = function(presetState){
+      this.listeners = {};
+      this.state = presetState || {};
+    };
+
+    EventDrivenStructure.prototype.on = function(type, callback){
+      if(!this.listeners[type]){
+        this.listeners[type] = callback;
+      }
+    };
+
+    EventDrivenStructure.prototype.trigger = function(type){
+      if(!this.listeners[type]){
+        return;
+      }
+      this.listeners[type].call(this, type);
+    };
+
+    EventDrivenStructure.prototype.setState = function(type, newState){
+      Object.assign(this.state, newState);
+      this.trigger(type);
+      console.table(this.state);
+    };
+
+    EventDrivenStructure.prototype.renderedBy = function(type){
+      const that = this;
+      return function(){
+        var args = Array.prototype.slice.call(arguments);
+        that.on(type, function(){
+          args.forEach(function(fn){
+            fn();
+          });
+        });
+      }
+    };
+
+    exports.M = exports.M || {};
+
+    exports.M.EventDrivenStructure =  EventDrivenStructure;
+
+  })(document, window);
+
+  // your some scripts;
+  (function(){
+    'use strict';
+
+    //--- declare : elem ---//
+    var target = document.getElementById('target');
+    var btn = document.getElementById('btn');
+
+    //--- declare : structure ---//
+    var presetState = { tick:0 };
+    // state 는 모듈 내부에 동작
+    var EDS = new window.M.EventDrivenStructure(presetState);
+
+    //--- execute : on update event ---//
+    EDS.renderedBy('update')(erase, insertText(), insertText('hello'), insertText('world'), insertText('shawn'), insertText('test'));
+
+    //--- event listener : event -> trig custom event ---//
+    btn.addEventListener('click', function(){
+      // change state : set new State
+      EDS.setState('update', { tick:EDS.state.tick + 1 });
+    });
+
+    //--- draw functions ---//
+
+    function insertText(msg){
+      return function(){
+        var node = document.createElement('div');
+        node.innerHTML = EDS.state.tick + (msg || '');
+        target.appendChild(node);
+      }
+    }
+
+    function erase(){
+      target.innerHTML = '';
+    }
+  })()
+</script>
+</body>
+</html>
