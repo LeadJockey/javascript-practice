@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin:0;padding:0}
+        img{display:block;width:100%;vertical-align:top}
+        .target{overflow:hidden;width:720px}
+        .wrap_thumb{float:left}
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="target">
+        <div class="wrap_thumb"><img src="https://dummyimage.com/200x100/000/fff" alt=""></div>
+        <div class="wrap_thumb"><img src="https://dummyimage.com/100x100/000/fff" alt=""></div>
+        <div class="wrap_thumb"><img src="https://dummyimage.com/180x100/000/fff" alt=""></div>
+        <div class="wrap_thumb"><img src="https://dummyimage.com/120x100/000/fff" alt=""></div>
+        <div class="wrap_thumb"><img src="https://dummyimage.com/50x100/000/fff" alt=""></div>
+        <div class="wrap_thumb"><img src="https://dummyimage.com/70x100/000/fff" alt=""></div>
+    </div>
+</div>
+<script type="text/javascript">
+  (function(doc){
+    'use strict';
+
+    //utils
+    var $ = function(selector, ctx){
+      return Array.prototype.slice.call((ctx || doc).querySelectorAll(selector));
+    };
+    var flexibleBox = function(opts){
+      this.elems = opts.el || [];
+      this.totalWidth = opts.w || 720;
+      this.init();
+    };
+    flexibleBox.prototype.init = function(){
+      var that = this;
+      this.elems.forEach(function(el, idx){
+        if(!el){return;}
+        var percent = Math.floor((($('img',el)[0].width / that.totalWidth) * 10000)) / 100;
+        el.style.width = percent + '%';
+      });
+    };
+
+    //load
+    window.addEventListener('load', function(){
+      var fb = new flexibleBox({ el:$('.wrap_thumb', $('.wrapper')[0]) });
+    });
+
+  })(document);
+</script>
+</body>
+</html>
