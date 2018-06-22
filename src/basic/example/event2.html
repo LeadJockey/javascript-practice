@@ -69,7 +69,14 @@
     var EDS = new window.M.EventDrivenStructure(presetState);
 
     //--- execute : on update event ---//
-    EDS.renderedBy('update')(erase, insertText(), insertText('hello'), insertText('world'), insertText('shawn'), insertText('test'));
+    EDS.renderedBy('update')(
+                              erase,
+                              insertText(),
+                              insertText('hello'),
+                              insertText('world'),
+                              insertText('shawn'),
+                              insertText('test')
+                            );
 
     //--- event listener : event -> trig custom event ---//
     btn.addEventListener('click', function(){

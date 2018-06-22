@@ -6,7 +6,7 @@
     <style>
         *{margin:0;padding:0}
         img{display:block;width:100%;vertical-align:top}
-        .target{overflow:hidden;width:720px}
+        .target{overflow:hidden;width:900px}
         .wrap_thumb{float:left}
     </style>
 </head>
@@ -29,23 +29,29 @@
     var $ = function(selector, ctx){
       return Array.prototype.slice.call((ctx || doc).querySelectorAll(selector));
     };
-    var flexibleBox = function(opts){
-      this.elems = opts.el || [];
-      this.totalWidth = opts.w || 720;
+    var flexibleBox = function(elem){
+      this.elems = elem || [];
       this.init();
     };
     flexibleBox.prototype.init = function(){
       var that = this;
+      var totalWidth = that.getTotalWidth();
       this.elems.forEach(function(el, idx){
-        if(!el){return;}
-        var percent = Math.floor((($('img',el)[0].width / that.totalWidth) * 10000)) / 100;
+        var percent = Math.floor((($('img',el)[0].width / totalWidth) * 10000)) / 100;
         el.style.width = percent + '%';
       });
+    };
+    flexibleBox.prototype.getTotalWidth = function(){
+      var totalWidth = 0;
+      this.elems.forEach(function(el, idx){
+        totalWidth += $('img',el)[0].width;
+      });
+      return totalWidth;
     };
 
     //load
     window.addEventListener('load', function(){
-      var fb = new flexibleBox({ el:$('.wrap_thumb', $('.wrapper')[0]) });
+      var fb = new flexibleBox($('.wrap_thumb', $('.wrapper')[0]));
     });
 
   })(document);

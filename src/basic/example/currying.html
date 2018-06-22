@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function add(a){
+      return function (b){
+        return function(c){
+          return a+ b+ c;
+        }
+      }
+    }
+
+    function hello(){
+      return 'hello';
+    }
+
+    function world(){
+      return 'world';
+    }
+
+    function name(name){
+      return name;
+    }
+
+
+    const hi = add(hello())(world())(name('shawn'));
+
+    console.log(hi);
+
+</script>
+</body>
+</html>
