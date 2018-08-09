@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin:0;padding:0}
+        #wrapper{position:relative;width:600px;height:600px;margin:100px auto;background-color:#efefef}
+    </style>
+</head>
+<body>
+<div id="wrapper" style="width:600px;height:600px;">
+    <!--동적 랜딩 영역-->
+</div>
+<script>
+  //즉시실행 함수
+  (function(exports, doc){
+    'use strict';
+
+    var ctx = doc.getElementById('wrapper');
+    var boxList = [];
+
+    function toNumber(prop){
+      return parseInt(prop.replace('px', ''), 10);
+    }
+    function createBox(x, y, w, h, c){
+      var div = doc.createElement('DIV');
+      var style = div.style;
+      style.backgroundColor = c;
+      style.position = 'absolute';
+      style.width = w + 'px';
+      style.height = h + 'px';
+      style.left = x + 'px';
+      style.top = y + 'px';
+      boxList.push(div);
+      console.log(boxList);
+      return div;
+    }
+    function drawBox(boxList){
+      for(var i = 0; i < boxList.length; i++){
+        ctx.appendChild(boxList[i]);
+      }
+    }
+    function moveBox(box, speed, engine){
+      var ctxStyle = ctx.style;
+      var boxStyle = box.style;
+      var x = toNumber(boxStyle.left);
+      var y = toNumber(boxStyle.top);
+      var ctxW = toNumber(ctxStyle.width);
+      var boxW = toNumber(boxStyle.width);
+      var ctxY = toNumber(ctxStyle.height);
+      var boxY = toNumber(boxStyle.height);
+      var option = {
+        box:box,
+        x:x,
+        y:y,
+        ctxW:ctxW,
+        boxW:boxW,
+        ctxY:ctxY,
+        boxY:boxY,
+        speed:speed
+      };
+      engine(option);
+    }
+    function toRight(option){
+      var movement = setInterval(function(){
+        if(option.x === (option.ctxW - option.boxW)){
+          clearInterval(movement);
+        }else{
+          option.box.style.left = (option.x += 1) + 'px';
+        }
+      }, option.speed);
+    }
+    function toBottom(option){
+      var movement = setInterval(function(){
+        if(option.y === (option.ctxY - option.boxY)){
+          clearInterval(movement);
+        }else{
+          option.box.style.top = (option.y += 1) + 'px';
+        }
+      }, option.speed);
+    }
+    function toLeft(option){
+      var movement = setInterval(function(){
+        if(option.x === 0){
+          clearInterval(movement);
+        }else{
+          option.box.style.left = (option.x -= 1) + 'px';
+        }
+      }, option.speed);
+    }
+    function toTop(option){
+      var movement = setInterval(function(){
+        if(option.y === 0){
+          clearInterval(movement);
+        }else{
+          option.box.style.top = (option.y -= 1) + 'px';
+        }
+      }, option.speed);
+    }
+
+    createBox(0, 0, 100, 100, 'red');
+    createBox(100, 100, 100, 100, 'blue');
+    createBox(200, 200, 100, 100, 'green');
+    createBox(300, 300, 100, 100, 'yellow');
+    createBox(400, 400, 100, 100, 'pink');
+    createBox(500, 500, 100, 100, 'orange');
+
+    drawBox(boxList);
+
+    moveBox(boxList[0], 10, toRight);
+    moveBox(boxList[1], 10, toBottom);
+    moveBox(boxList[2], 10, toLeft);
+    moveBox(boxList[3], 10, toRight);
+    moveBox(boxList[5], 10, toLeft);
+    moveBox(boxList[4], 10, toTop);
+
+  })(window, document);
+</script>
+</body>
+</html>

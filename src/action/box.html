@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="target"></div>
+<script>
+  (function(exports, doc){
+    'use strict';
+
+    function Structure(){
+      this.state = {};
+      this.listener = {};
+    }
+
+    Structure.prototype.setState = function(newState){
+      Object.assign(this.state, newState);
+      return this;
+    };
+    Structure.prototype.setEvent = function(type, action){
+      if(this.listener[type]){
+        console.log('the type of event already registered. please check this instance.listener');
+      }else{
+        this.listener[type] = action;
+      }
+      return this;
+    };
+    Structure.prototype.render = function(){
+      var args = Array.prototype.slice.call(arguments);
+      var that = this;
+      return function(){
+        var html = '';
+        args.forEach(function(draw, index){html += draw();});
+        (that.state.target || doc.body).innerHTML = html;
+        return this;
+      }
+    };
+    Structure.prototype.trigger = function(type){
+      console.log(this.listener[type]);
+      this.listener[type].call(this, type);
+      return this;
+    };
+
+    var a = new Structure();
+
+    function draw(){
+      return '<div class="wrap_coll">' +
+                '<div class="coll_tit">제목</div>' +
+                '<div class="coll_cont">' +
+                    '<span>내용</span>' +
+                '</div>' +
+            '</div>';
+    }
+    console.log(a);
+
+    a.setState({target:doc.getElementById('target')})
+     .setEvent('render', a.render(draw))
+     .trigger('render');
+
+
+
+
+  })(window, document)
+</script>
+</body>
+</html>

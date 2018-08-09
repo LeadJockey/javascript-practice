@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>api test</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="target"></div>
+<script>
+  'use strict';
+  var url = "http://172.28.31.229:3000/users";
+  var data = JSON.stringify({ name:'timer : '+new Date().getMilliseconds() });
+
+  requestApiByAjax('POST', url, data);
+  // requestApiByAjax('GET', url);
+  // requestApiByAjax('GET', url + '/1');
+  // requestApiByAjax('DELETE', url + '/4');
+
+  // requestApiByHXR('POST', url, data);
+  // requestApiByHXR('GET', url);
+  // requestApiByHXR('GET', url + '/1');
+  // requestApiByHXR('DELETE', url + '/2');
+
+  function requestApiByAjax(type, url, data){
+    var settings = {
+      "async":true,
+      "crossDomain":true,
+      "url":url || "",
+      "method":type || "",
+      "headers":{
+        "content-type":"application/json",
+        "cache-control":"no-cache"
+      },
+      "processData":false,
+      "data":data || data
+    };
+
+    $.ajax(settings).done(function(response){
+      console.log(response);
+    });
+  }
+
+  function requestApiByHXR(type, url, data){
+    var xhr = new XMLHttpRequest();
+    // xhr.withCredentials = true; - 동일한 도메인의 사이트에서는 동작 x, 하지만 크로스 브라우징 에서 사용
+    xhr.addEventListener("readystatechange", function(){
+      if(this.readyState === 4){
+        console.log(JSON.parse(this.responseText));
+      }
+    });
+    xhr.open(type, url);
+    xhr.setRequestHeader("content-type", "application/json");
+    xhr.setRequestHeader("cache-control", "no-cache");
+    xhr.send(data);
+  }
+
+</script>
+</body>
+</html>
