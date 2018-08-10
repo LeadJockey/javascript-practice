@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul class="list_video"></ul>
+<script>
+  (function(exports, doc){
+    'use strict';
+
+    var videos = [
+      {
+        videoId:'h2TLNdaQkL4',
+        width:'400',
+        height:'300'
+      },
+      {
+        videoId:'h2TLNdaQkL4',
+        width:'400',
+        height:'300'
+      },
+      {
+        videoId:'h2TLNdaQkL4',
+        width:'400',
+        height:'300'
+      },
+      {
+        videoId:'h2TLNdaQkL4',
+        width:'400',
+        height:'300'
+      },
+      {
+        videoId:'h2TLNdaQkL4',
+        width:'400',
+        height:'300'
+      }
+    ];
+    var target = doc.getElementsByClassName('list_video')[0];
+    var ul = doc.createElement('ul');
+    videos.forEach(function(video, index){
+      ul.appendChild(createVideo(video));
+    });
+    target.innerHTML = ul.innerHTML;
+
+
+    /**
+     * 영상리스트에 들어갈 비디오 아이탬을 원하는 wrapper Element 에 감싸서 노드를 반환하는 함수
+     * - wrapper Element 에는 video_ + videoId 로 이루어진 클래스가생성됨
+     * @param opts {Object}
+     * - videoId {String}: 'h2TLNdaQkL4',
+     * - width {String} : '400',
+     * - height {String} : '300',
+     * - wrapElementType {String} : 'li' (elementName - default: li),
+     * @returns {Node}
+     */
+    function createVideo(opts){
+      var videoId = opts.videoId || '';
+      var width = opts.width || '';
+      var height = opts.height || '';
+      var wrapElementType = opts.wrapElementType || 'li';
+      var wrapElement = doc.createElement(wrapElementType);
+      var iframe = doc.createElement('iframe');
+      wrapElement.classList = 'video_' + videoId;
+      iframe.src = "https://www.youtube.com/embed/" + videoId;
+      iframe.setAttribute('width', width);
+      iframe.setAttribute('height', height);
+      wrapElement.appendChild(iframe);
+      return wrapElement;
+    }
+
+
+  })(window, document);
+</script>
+</body>
+</html>

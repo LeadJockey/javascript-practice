@@ -11,11 +11,11 @@
 <div id="target"></div>
 <script>
   'use strict';
-  var url = "http://172.28.31.229:3000/users";
+  var url = "http://172.28.31.229:3000/dummy";
   var data = JSON.stringify({ name:'timer : '+new Date().getMilliseconds() });
 
-  requestApiByAjax('POST', url, data);
-  // requestApiByAjax('GET', url);
+  // requestApiByAjax('POST', url, data);
+  requestApiByAjax('GET', url);
   // requestApiByAjax('GET', url + '/1');
   // requestApiByAjax('DELETE', url + '/4');
 
