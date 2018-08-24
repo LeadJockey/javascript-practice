@@ -17,7 +17,8 @@
         .thumb_img{display:inline-block;width:100%;vertical-align:top}
         [class^="section_"]{padding:10px}
         .tit_section{padding:10px;font-size:25px;border-bottom:1px solid #444;background-color:#fff}
-        .cont_section{padding:10px;background-color:#efefef}
+        .cont_section{overflow:hidden;padding:10px;background-color:#efefef}
+
 
         /*section:load*/
         .section_load .list_thumb{overflow:hidden;padding:5px}
@@ -27,7 +28,6 @@
         }
 
         /*section:menu*/
-        .section_menu .cont_section{overflow:hidden;padding:5px}
         .section_menu .list_menu{overflow:hidden;float:left;margin-right:5px;width:200px;height:200px;padding:20px;background-color:#fff;transition:all .5s}
         .section_menu .list_menu li{height:26%;background-color:#000;transition:all .5s}
         .section_menu .list_menu li + li{margin-top:11%}
@@ -55,17 +55,134 @@
         .section_menu .action_type4:hover li:nth-child(1){margin-top:6%}
 
         /*section:preloader*/
-
-        .section_loader .wrap_loader{width:200px;height:200px;padding:20px;box-sizing:border-box;background-color:#fff}
+        .section_loader .wrap_loader{overflow:hidden;float:left;margin-right:5px;width:200px;height:200px;padding:20px;background-color:#fff}
 
         .section_loader .action_type1 .frame_loader{height:100%;border-radius:50%}
         .section_loader .action_type1 .bg_frame{border:2px solid #efefef;opacity:.5;}
-        .section_loader .action_type1 .bar_frame{border-top:3px solid #007aff;animation:loading 3s infinite}
-
+        .section_loader .action_type1 .bar_frame{border-top:3px solid;animation:loading 15s infinite ease}
         @keyframes loading{
-            from{transform:rotate(0);}
-            to{transform:rotate(360deg);}
+            0%{transform:rotate(0);border-top-color:deepskyblue}
+            25%{transform:rotate(360deg);border-top-color:orange}
+            50%{transform:rotate(720deg);border-top-color:red}
+            75%{transform:rotate(1080deg);border-top-color:green}
+            100%{transform:rotate(1440deg);border-top-color:green}
         }
+
+        .section_loader .action_type2 .list_loader{overflow:hidden;height:100%;transform:rotate(90deg)}
+        .section_loader .action_type2 .list_loader li{width:26%;height:26%;margin:auto;background-color:deeppink;border-radius:50%;transition:all 1s}
+        .section_loader .action_type2 .list_loader li + li{margin-top:11%}
+        .section_loader .action_type2 .list_loader li:nth-child(1){animation:loading2_1 2s infinite ease}
+        .section_loader .action_type2 .list_loader li:nth-child(2){animation:loading2_2 2s infinite ease}
+        .section_loader .action_type2 .list_loader li:nth-child(3){animation:loading2_3 2s infinite ease}
+        @keyframes loading2_1{
+            0%{transform:scale(.6)}
+            60%{transform:scale(1)}
+            100%{transform:scale(.6)}
+        }
+        @keyframes loading2_2{
+            0%{transform:scale(.6)}
+            40%{transform:scale(1)}
+            100%{transform:scale(.6)}
+        }
+        @keyframes loading2_3{
+            0%{transform:scale(.6)}
+            20%{transform:scale(1)}
+            100%{transform:scale(.6)}
+        }
+
+        .section_loader .action_type3{position:relative;background-color:#11245f}
+        .section_loader .action_type3 .coming{
+            border-radius:50%;
+            border-top:100px solid #e6280d;
+            border-left:100px solid #e6280d;
+            border-right:100px solid rgba(0,0,0,0);
+            border-bottom:100px solid rgba(0,0,0,0);
+            transform:rotate(-45deg);
+            animation:loading3_1 2s infinite ease
+        }
+        .section_loader .action_type3 .face{
+            position:absolute;
+            top:60px;
+            left:60px;
+            right:60px;
+            bottom:60px;
+            border-radius:50%;
+            border-top:60px solid #fff;
+            border-left:60px solid #fff;
+            border-right:60px solid rgba(0,0,0,0);
+            border-bottom:60px solid rgba(0,0,0,0);
+            transform:rotate(-45deg);
+            animation:loading3_2 2s infinite ease
+        }
+        .section_loader .action_type3 .cheek{
+            position:absolute;
+            top:60px;
+            left:60px;
+            right:60px;
+            bottom:60px;
+            border-radius:50%;
+            border-top:60px solid rgba(0,0,0,0);
+            border-left:60px solid #efefef;
+            border-right:60px solid #ffcb0f;
+            border-bottom:60px solid rgba(0,0,0,0);
+            transform:rotate(-45deg);
+            animation:loading3_3 2s infinite ease
+        }
+        .section_loader .action_type3 .beak{
+            position:absolute;
+            top:90px;
+            left:90px;
+            right:90px;
+            bottom:90px;
+            border-radius:50%;
+            border-top:10px solid #444;
+            border-left:30px solid rgba(0,0,0,0);
+            border-right:30px solid rgba(0,0,0,0);
+            border-bottom:30px solid #ff9a0f;
+            transform:rotate(-45deg);
+            animation:loading3_4 2s infinite ease;
+        }
+        @keyframes loading3_1{
+             0%{transform:rotate(-45deg)}
+             50%{transform:rotate(135deg)}
+             100%{transform:rotate(315deg)}
+         }
+        @keyframes loading3_2{
+            0%{transform:rotate(-45deg)}
+            50%{transform:rotate(-225deg)}
+            100%{transform:rotate(-405deg)}
+        }
+        @keyframes loading3_3{
+            0%{transform:rotate(-45deg)}
+            50%{transform:rotate(-135deg)}
+            100%{transform:rotate(-45deg)}
+        }
+        @keyframes loading3_4{
+            0%{transform:rotate(-45deg)}
+            50%{transform:rotate(45deg)}
+            100%{transform:rotate(-45deg)}
+        }
+
+        .section_loader .action_type4{position:relative;background-color:#444;perspective:100px}
+        .section_loader .action_type4 .planet{width:50%;height:50%;margin:25%;border-radius:50%;
+            border-bottom:20px solid #3c342747;box-sizing:border-box;background-color:#ff8c08;
+            transform:rotate(-50deg);
+        }
+        .section_loader .action_type4 .rings{position:absolute;top:7px;left:50px;width:60%;height:70%;
+            border:2px solid #fff;box-sizing:border-box;border-radius:50%;transform:rotateX(60deg) rotateZ(150deg);
+            animation:loading4 2s infinite;
+        }
+        .section_loader .action_type4 .satellite{
+           width:4%;height:4%;margin:-2% auto 0 ;border-radius:50%;background-color:red;transform:rotate(-50deg);
+        }
+
+        @keyframes loading4{
+            0%{transform:rotateX(60deg) rotateZ(150deg)}
+            50%{transform:rotateX(60deg) rotateZ(230deg)}
+            100%{transform:rotateX(60deg) rotateZ(410deg)}
+        }
+
+
     </style>
     <script type="text/javascript">
       (function(exports){
@@ -166,6 +283,24 @@
             <div class="frame_loader bg_frame">
                 <div class="frame_loader bar_frame"></div>
             </div>
+        </div>
+        <div class="wrap_loader action_type2">
+            <ul class="list_loader">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="wrap_loader action_type3">
+            <div class="coming"></div>
+            <div class="face"></div>
+            <div class="beak"></div>
+            <div class="cheek"></div>
+        </div>
+        <div class="wrap_loader action_type4">
+            <div class="planet"></div>
+            <div class="rings"><div class="satellite"></div></div>
+
         </div>
     </div>
 </div>
