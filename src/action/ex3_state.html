@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>state</title>
+    <style type="text/css">
+        *{margin:0;padding:0}
+        ul, ol{list-style:none}
+        .wrap_some{overflow-x:auto;overflow-y:hidden;height:100px;width:300px;margin:0 auto;border:1px solid #ff3e25}
+        .wrap_some::-webkit-scrollbar{display:none}
+        .list_some{overflow:hidden}
+        .list_some li{float:left;width:80px;height:80px;margin:10px;border:none;color:#222;text-align:center;line-height:90px;font-size:40px;font-weight:bolder;background-color:#5fd8ff}
+        .list_some .on{width:90px;height:90px;margin:4px;border:1px solid #222;}
+    </style>
+</head>
+<body>
+<div class="test_target">
+    <div class="wrap_some">
+        <ol class="list_some" style="width:800px">
+            <li>0</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+        </ol>
+    </div>
+    <!--next-->
+    <!--prev-->
+</div>
+<script type="text/javascript">
+  'use strict';
+
+  //utils
+  function selectAll(target, parentDOM){
+    return Array.prototype.slice.call(parentDOM.querySelectorAll(target));
+  }
+
+  function selectOne(target, parentDOM){
+    return Array.prototype.slice.call(parentDOM.querySelectorAll(target))[0];
+  }
+
+  function hasClass(target, className){
+    var regex = new RegExp('(\\s|^)' + className + '(\\s|$)');
+    return regex.test(target.getAttribute('class'));
+  }
+
+  //void
+  function addClass(target, className){
+    var oldClass = target.getAttribute('class');
+    if(hasClass(target, className)){
+      return;
+    }
+    if(oldClass){
+      target.setAttribute('class', oldClass + ' ' + className);
+      return;
+    }
+    target.setAttribute('class', className);
+  }
+
+  function removeClass(target, className){
+    if(!hasClass(target, className)){
+      return;
+    }
+    var regex = new RegExp('(\\s|^)' + className + '(\\s|$)', 'g');
+    var removedClass = target.getAttribute('class').replace(regex, '');
+    target.setAttribute('class', removedClass);
+  }
+
+  //test
+  (function(exports, doc){
+    var state = {
+      startIndex:5
+    };
+
+    var ctx = selectOne('.test_target', doc);
+    var xscroll = selectOne('.wrap_some', ctx);
+    var items = selectAll('.list_some li', ctx);
+    var currentItem = items[state.startIndex];
+    var moveScroll;
+
+    items.forEach(function(item, idx){
+      removeClass(item, 'on');
+    });
+    addClass(currentItem, 'on');
+
+    // function onFocus(target, itemSize, speed){
+    //   return function(){
+    //     if(target.scrollLeft < itemSize){
+    //       target.scrollLeft++;
+    //       moveScroll = requestAnimationFrame(onFocus(xscroll, 100, 100));
+    //     }
+    //   }
+    //
+    // }
+    // moveScroll = requestAnimationFrame(onFocus)
+
+  })(window, document);
+</script>
+</body>
+</html>
