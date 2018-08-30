@@ -7,10 +7,11 @@
 </head>
 <body>
 <div id="target"></div>
-
+<button id="btn">click</button>
 <script id="sampleTemplate" type="text/x-jsrender">
     <h1>hello jsRender</h1>
     <p>my name is : {{:name}}</p>
+
 
 
 </script>
@@ -22,6 +23,8 @@
       code:404
     };
     var eventPool = {};
+
+    var btn = doc.getElementById('btn');
 
     function setState(newState){
       Object.assign(state, newState);
@@ -59,8 +62,15 @@
 
     console.table(state);
     addEvent('render', render(draw));
-    setState({code:200});
-    trigger('render');
+
+    btn.addEventListener('click', function(){
+      var value = parseInt(prompt('code'), 10);
+      setState({ code:value });
+      if(state.code === 200){
+        trigger('render');
+        btn.style.display = 'none';
+      }
+    });
 
   })(window, document);
 </script>
