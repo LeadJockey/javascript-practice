@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>state</title>
+    <title>requestAnimationFrame</title>
     <style type="text/css">
         *{margin:0;padding:0}
         ul, ol{list-style:none}
@@ -14,7 +14,7 @@
         .wrap_some::-webkit-scrollbar{display:none}
         .list_some{overflow:hidden}
         .list_some li{float:left;width:80px;height:80px;margin:10px;border:none;color:#222;text-align:center;line-height:90px;font-size:40px;font-weight:bolder;background-color:#5fd8ff}
-        .list_some .on{width:90px;height:90px;margin:5px;border:none;background-color:#007aff}
+        .list_some .on{width:90px;height:90px;margin:4px;border:1px solid #222}
         .btn_next{float:right}
         .btn_prev{float:left}
     </style>
@@ -22,10 +22,15 @@
 <body>
 <div class="test_target">
     <div class="wrap_some">
-        <ol class="list_some" style="width:300px">
+        <ol class="list_some" style="width:800px">
             <li>0</li>
             <li>1</li>
             <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
         </ol>
     </div>
     <button class="btn_prev">prev</button>
@@ -33,16 +38,21 @@
 </div>
 <script type="text/javascript">
   'use strict';
+  //for request animation frame
+  var requestAnimationFrame = window.requestAnimationFrame
+    || window.mozRequestAnimationFrame
+    || window.webkitRequestAnimationFrame
+    || window.msRequestAnimationFrame;
+  var cancelAnimationFrame = window.cancelAnimationFrame
+    || window.mozCancelAnimationFrame;
 
   //utils
   function selectAll(target, parentDOM){
     return Array.prototype.slice.call(parentDOM.querySelectorAll(target));
   }
-
   function selectOne(target, parentDOM){
     return Array.prototype.slice.call(parentDOM.querySelectorAll(target))[0];
   }
-
   function hasClass(target, className){
     var regex = new RegExp('(\\s|^)' + className + '(\\s|$)');
     return regex.test(target.getAttribute('class'));
@@ -60,7 +70,6 @@
     }
     target.setAttribute('class', className);
   }
-
   function removeClass(target, className){
     if(!hasClass(target, className)){
       return;
@@ -73,37 +82,60 @@
   //test
   (function(exports, doc){
     var state = {
-      startIndex:0
+      startIndex:2
     };
 
     var ctx = selectOne('.test_target', doc);
+    var xscroll = selectOne('.wrap_some', ctx);
     var nextBtn = selectOne('.btn_next', ctx);
     var prevBtn = selectOne('.btn_prev', ctx);
     var items = selectAll('.list_some li', ctx);
+    var frame;
 
-    function render(){
+    bindEvents();
+
+    function bindEvents(){
+
+      action();
+      prevBtn.addEventListener('click', function(){
+        state.startIndex-=2;
+        console.table(state);
+        action();
+      });
+      nextBtn.addEventListener('click', function(){
+        state.startIndex+=2;
+        console.table(state);
+        action();
+      });
+    }
+
+    function action(){
       var currentItem = items[state.startIndex];
       items.forEach(function(item, idx){
         removeClass(item, 'on');
       });
       addClass(currentItem, 'on');
-    }
 
-    render();
-    prevBtn.addEventListener('click', function(){
-      if(state.startIndex <= 0){
-        return;
-      }
-      state.startIndex--;
-      render();
-    });
-    nextBtn.addEventListener('click', function(){
-      if(state.startIndex >= items.length - 1){
-        return;
-      }
-      state.startIndex++;
-      render();
-    });
+      var focus = function(timestamp, target, dist, duration){
+        var progress = Math.min(timestamp / duration, 1);
+        //logic
+
+        target.scrollLeft = (dist * progress).toFixed(2);
+
+        if(timestamp < duration){
+          requestAnimationFrame(function(timestamp){
+            focus(timestamp, target, dist, duration);
+          });
+        }else{
+          cancelAnimationFrame(frame);
+          frame = undefined;
+        }
+      };
+      frame = requestAnimationFrame(function(timestamp){
+        var dist = currentItem.offsetLeft - xscroll.offsetLeft -5 -100;
+        focus(timestamp, xscroll, dist, 1000);
+      });
+    }
 
 
   })(window, document);

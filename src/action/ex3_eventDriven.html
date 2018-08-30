@@ -3,66 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="//www.jsviews.com/download/jsrender.js"></script>
 </head>
 <body>
 <div id="target"></div>
+
+<script id="sampleTemplate" type="text/x-jsrender">
+    <h1>hello jsRender</h1>
+    <p>my name is : {{:name}}</p>
+
+
+</script>
 <script>
   (function(exports, doc){
     'use strict';
+    var jsRender = exports.jsrender;
+    var state = {
+      code:404
+    };
+    var eventPool = {};
 
-    function Structure(){
-      this.state = {};
-      this.listener = {};
+    function setState(newState){
+      Object.assign(state, newState);
+      console.table(state);
     }
 
-    Structure.prototype.setState = function(newState){
-      Object.assign(this.state, newState);
-      return this;
-    };
-    Structure.prototype.setEvent = function(type, action){
-      if(this.listener[type]){
-        console.log('the type of event already registered. please check this instance.listener');
+    function addEvent(eventType, event){
+      if(eventPool[eventType]){
+        console.log('등록하려는 이벤이트가 이미 등록되어 있습니다. 다른 타입을 지정해 주세요.');
       }else{
-        this.listener[type] = action;
+        eventPool[eventType] = event;
       }
-      return this;
-    };
-    Structure.prototype.render = function(){
-      var args = Array.prototype.slice.call(arguments);
-      var that = this;
-      return function(){
-        var html = '';
-        args.forEach(function(draw, index){html += draw();});
-        (that.state.target || doc.body).innerHTML = html;
-        return this;
-      }
-    };
-    Structure.prototype.trigger = function(type){
-      console.log(this.listener[type]);
-      this.listener[type].call(this, type);
-      return this;
-    };
+    }
 
-    var a = new Structure();
+    function trigger(eventType){
+      eventPool[eventType].call(this, eventType);
+    }
+
+    function render(){
+      var args = Array.prototype.slice.call(arguments);
+      return function(){
+        args.forEach(function(func, idx){
+          func();
+        });
+      }
+    }
 
     function draw(){
-      return '<div class="wrap_coll">' +
-                '<div class="coll_tit">제목</div>' +
-                '<div class="coll_cont">' +
-                    '<span>내용</span>' +
-                '</div>' +
-            '</div>';
+      var sampleTemplate = doc.getElementById('sampleTemplate');
+      var target = doc.getElementById('target');
+      var tmpl = sampleTemplate.innerHTML;
+      var data = { name:"shawn" };
+      target.innerHTML = jsRender.templates(tmpl).render(data);
     }
-    console.log(a);
 
-    a.setState({target:doc.getElementById('target')})
-     .setEvent('render', a.render(draw))
-     .trigger('render');
+    console.table(state);
+    addEvent('render', render(draw));
+    setState({code:200});
+    trigger('render');
 
-
-
-
-  })(window, document)
+  })(window, document);
 </script>
 </body>
 </html>
