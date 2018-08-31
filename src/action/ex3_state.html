@@ -38,11 +38,9 @@
   function selectAll(target, parentDOM){
     return Array.prototype.slice.call(parentDOM.querySelectorAll(target));
   }
-
   function selectOne(target, parentDOM){
     return Array.prototype.slice.call(parentDOM.querySelectorAll(target))[0];
   }
-
   function hasClass(target, className){
     var regex = new RegExp('(\\s|^)' + className + '(\\s|$)');
     return regex.test(target.getAttribute('class'));
@@ -60,7 +58,6 @@
     }
     target.setAttribute('class', className);
   }
-
   function removeClass(target, className){
     if(!hasClass(target, className)){
       return;
@@ -81,13 +78,6 @@
     var prevBtn = selectOne('.btn_prev', ctx);
     var items = selectAll('.list_some li', ctx);
 
-    function render(){
-      var currentItem = items[state.startIndex];
-      items.forEach(function(item, idx){
-        removeClass(item, 'on');
-      });
-      addClass(currentItem, 'on');
-    }
 
     render();
     prevBtn.addEventListener('click', function(){
@@ -95,6 +85,7 @@
         return;
       }
       state.startIndex--;
+      console.table(state);
       render();
     });
     nextBtn.addEventListener('click', function(){
@@ -102,9 +93,17 @@
         return;
       }
       state.startIndex++;
+      console.table(state);
       render();
     });
 
+    function render(){
+      var currentItem = items[state.startIndex];
+      items.forEach(function(item, idx){
+        removeClass(item, 'on');
+      });
+      addClass(currentItem, 'on');
+    }
 
   })(window, document);
 </script>

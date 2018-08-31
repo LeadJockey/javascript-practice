@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        button{background-color:#5fd8ff}
+        .wrap_target{width:300px;height:300px;background-color:#efefef}
+        .list_item{overflow:hidden;list-style:none}
+        .list_item li{float:left;width:100px;height:100px;margin:5px;text-align:center;line-height:100px;background-color:#efefef}
+    </style>
+</head>
+<body>
+
+<div class="wrap_target"></div>
+<button class="btn">click</button>
+<hr>
+<ul class="list_item">
+    <li>0</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</ul>
+<button class="btn_prev">prev</button>
+<button class="btn_next">next</button>
+<script type="text/javascript">
+    'use strict';
+    //utils
+    function selectAll(target, parentDOM){
+      return Array.prototype.slice.call(parentDOM.querySelectorAll(target));
+    }
+    function selectOne(target, parentDOM){
+      return selectAll(target, parentDOM)[0];
+    }
+
+    window.onload = function(){
+        //전역 스코프
+      (function(exports, doc){
+        // 즉시실행 함수의 스코프
+        // 변수 선언부
+        var state = {
+          bg:'#59ef74',
+          tit:'state study',
+          date:'20180830',
+          flag:false,
+
+
+          defaultBgColor:'#efefef',
+          changeBgColor:'#ef8b3f',
+          startIndex:0
+        };
+        var target = selectOne('.wrap_target', doc);
+        var btn = selectOne('.btn', doc);
+        var list = selectAll('.list_item li', doc);
+        var prev = selectOne('.btn_prev', doc);
+        var next = selectOne('.btn_next', doc);
+
+        // 함수 실행부
+
+        //initial state
+        console.table(state);
+        changeBgColor();
+
+        btn.addEventListener('click', function(){
+          setState({bg:'#ef8757',name:'shawn'});
+          changeBgColor();
+        });
+
+        draw();
+
+        next.addEventListener('click', function(){
+          setState({startIndex:state.startIndex+1});
+          draw();
+        });
+        prev.addEventListener('click', function(){
+          setState({startIndex:state.startIndex-1});
+          draw();
+        });
+
+
+        // 함수 선언부
+        function setState(newState){
+          Object.assign(state, newState);
+          console.table(state);
+        }
+        function changeBgColor(){
+          target.style.backgroundColor = state.bg;
+        }
+
+
+        function draw(){
+          list.forEach(function(item, idx){
+            console.log(item);
+            if(idx === state.startIndex){
+              item.style.backgroundColor = state.changeBgColor;
+            }else{
+              item.style.backgroundColor = state.defaultBgColor;
+            }
+          });
+        }
+
+      })(window, document);
+
+    }
+</script>
+</body>
+</html>
