@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>event driven</title>
+</head>
+<body>
+<div id="box" style="width:300px;height:300px;border:1px dotted gray"></div>
+<button id="btn">change color</button>
+<script type="text/javascript">
+  'use strict';
+  window.onload = function(){
+    (function(exports, doc){
+      // 선언부
+      var state = { bgColor:'red' };
+      var eventPool = {};
+      var box = doc.getElementById('box');
+      var btn = doc.getElementById('btn');
+
+      // 실행부
+      init();
+
+      // 함수부
+      function init(){
+        console.log('init');
+        // 초기 화면 셋팅을 위한 함수 실행
+        draw(box);
+
+        // 이벤트로 인한 변경사항에 대한 리액션? 리드로우?
+        bindEvents();
+      }
+      function bindEvents(){
+        console.log('bindEvent');
+        addEvent('shawn:changeBg',changeBg);
+
+        btn.addEventListener('click', function(){
+          console.log('btn clicked!');
+          trigger('shawn:changeBg');
+        });
+      }
+      function setState(newState){
+        Object.assign(state,newState);
+        console.log('state updated!');
+        console.table(state);
+      }
+      function addEvent(eventType, action){
+        eventPool[eventType] = action;
+      }
+      function trigger(eventType){
+        if(eventPool[eventType]){
+          eventPool[eventType].call(this, eventType);
+        }
+      }
+      function draw(target){
+        console.log('draw target');
+        target.style.backgroundColor = state.bgColor;
+      }
+      function changeBg(){
+        setState({bgColor:'blue'});
+        draw(box);
+      }
+    })(window, document);
+  };
+</script>
+</body>
+</html>
