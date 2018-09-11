@@ -1,0 +1,33 @@
+/* ico */
+.ico_game{overflow:hidden;font-size:0;line-height:0;text-indent:-9999px;vertical-align:top;
+width:50px;height:50px;
+background:url("../image/ico_item.png") 0 0 no-repeat}
+.ico_item1{background-position:0 0}
+.ico_item2{background-position:0 -50px}
+.ico_item3{background-position:0 -100px}
+.ico_item4{background-position:0 -150px}
+.ico_item5{background-position:-50px 0}
+.ico_item6{background-position:-50px -50px}
+.ico_item7{background-position:-50px -100px}
+.ico_item8{background-position:-50px -150px}
+.ico_item9{background-position:-100px 0}
+.ico_item10{background-position:-100px -50px}
+.ico_item11{background-position:-100px -100px}
+.ico_item12{background-position:-100px -150px}
+.ico_item13{background-position:-150px 0}
+.ico_item14{background-position:-150px -50px}
+.ico_item15{background-position:-150px -100px}
+.ico_item16{background-position:-150px -150px}
+
+/* inventory */
+.wrap_inventory{position:absolute;right:10px;bottom:10px;padding:40px 10px 10px 10px;border-radius:5px;background-color:#222}
+.wrap_inventory .list_inventory{overflow:hidden}
+.wrap_inventory .list_inventory li{float:left}
+.wrap_inventory .list_item{width:200px;height:200px;background:url("../image/bg_inventory.png") no-repeat}
+.wrap_inventory .list_item li{width:25%;height:25%}
+.wrap_inventory .list_item .link_item{display:block;height:100%}
+.wrap_inventory .list_btn{height:20px;padding-top:10px}
+.wrap_inventory .list_btn li+li{margin-left:10px}
+.wrap_inventory .list_btn .btn_func{display:block;width:20px;height:20px;border-radius:5px;background-color:#efcc29}
+.wrap_inventory .btn_close{position:absolute;top:10px;right:10px;width:20px;height:20px;color:#fff;border-radius:5px;background-color:#dec577}
+

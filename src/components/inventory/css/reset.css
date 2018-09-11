@@ -1,0 +1,6 @@
+*{margin:0;padding:0}
+ol,ul{list-style:none}
+a{text-decoration:none;color:#444}
+body{background-color:#efefef}
+.screen_out{overflow:hidden;position:absolute;width:0;height:0;line-height:0;text-indent:-9999px;}
+.screen{position:relative;width:600px;height:400px;margin:50px auto 0;background-color:white}

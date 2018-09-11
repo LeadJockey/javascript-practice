@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>inventory</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div class="screen">
+    <div class="wrap_inventory">
+        <ul class="list_inventory list_item">
+            <li ondrop="drop(event)" >
+                <a id="item1" href="javascript:;" class="link_item" draggable="true" ondragstart="drag(event)">
+                    <div class="ico_game ico_item1"></div>
+                </a>
+            </li>
+            <li ondrop="drop(event)" >
+                <a id="item2" href="javascript:;" class="link_item" draggable="true" ondragstart="drag(event)">
+                    <div class="ico_game ico_item2"></div>
+                </a>
+            </li>
+            <li ondrop="drop(event)" >
+                <a id="item3" href="javascript:;" class="link_item" draggable="true" ondragstart="drag(event)">
+                    <div class="ico_game ico_item3"></div>
+                </a>
+            </li>
+            <li ondrop="drop(event)"></li>
+            <li ondrop="drop(event)" ></li>
+            <li ondrop="drop(event)" ></li>
+            <li ondrop="drop(event)" ></li>
+            <li ondrop="drop(event)" ></li>
+            <li ondrop="drop(event)" ></li>
+            <li ondrop="drop(event)" ></li>
+            <li ondrop="drop(event)" ></li>
+            <li ondrop="drop(event)" ></li>
+            <li ondrop="drop(event)" ></li>
+            <li ondrop="drop(event)" ></li>
+            <li ondrop="drop(event)" ></li>
+            <li ondrop="drop(event)" ></li>
+        </ul>
+        <ul class="list_inventory list_btn">
+            <li>
+                <a href="javascript:;" class="btn_func">
+                    <span class="screen_out">닫기</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;" class="btn_func">
+                    <span class="screen_out">닫기</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;" class="btn_func">
+                    <span class="screen_out">닫기</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;" class="btn_func">
+                    <span class="screen_out">닫기</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;" class="btn_func">
+                    <span class="screen_out">닫기</span>
+                </a>
+            </li>
+        </ul>
+        <a href="javascript:;" class="btn_close">
+            <span class="screen_out">X</span>
+        </a>
+    </div>
+</div>
+<script>
+    'use strict';
+    var items = selectAll('.list_item li');
+
+    function selectAll(selector, parent){
+      return Array.prototype.slice.call((parent||document).querySelectorAll(selector))
+    }
+    function getNodeIndex(nodeElement){
+      return Array.prototype.indexOf.call(nodeElement.parentElement.children, nodeElement);
+    }
+
+    function drag(ev) {
+      console.log('de');
+      ev.dataTransfer.setData('homeIdx', getNodeIndex(ev.target.closest('A').parentNode));
+      ev.dataTransfer.setData('homeId', ev.target.id);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      console.log('dd');
+      ev.target.closest('LI').innerHTML ='';
+      ev.target.appendChild(document.getElementById(ev.dataTransfer.getData('homeId')));
+    }
+
+
+    (function(exports, doc){
+
+      function Inventory(opts){
+        this.inventory = opts.inventory || {};
+        this.capacity = opts.capacity || 16;
+        this.setItem();
+      }
+
+      Inventory.prototype.drawItem = function(){
+     /* <a id="item1" href="javascript:;" class="link_item" draggable="true" ondragstart="drag(event)">
+          <div class="ico_game ico_item1"></div>
+          </a>
+
+          {
+          id:'item',
+          href:'javascript:;',
+          class:'link_item',
+          draggable:true,
+          ondragstart:drag(event)
+        }
+
+          */
+        var a = document.createElement('A');
+        console.log(a);
+
+        a.setAttribute({id:'item'},{class:'link_item'});
+      };
+      Inventory.prototype.setItem = function(){
+
+      };
+      Inventory.prototype.sortByRank = function(){};
+
+      var setting = {
+        inventory:{
+          item1:'도끼',
+          item2:'칼',
+          item3:'지팡이'
+        },
+        capacity:16
+      };
+      var inventory = new Inventory(setting);
+      inventory.drawItem();
+
+
+    })(window, document);
+</script>
+</body>
+</html>
