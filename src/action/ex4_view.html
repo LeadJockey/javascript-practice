@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>view</title>
+    <link rel="stylesheet" href="ex4_view.css">
+    <script type="text/javascript">
+      'use strict';
+      //selectAll
+      function selectAll(selector, parentDOM){
+        return Array.prototype.slice.call(parentDOM.querySelectorAll(selector));
+      }
+      //selectOne
+      function selectOne(selector, parentDOM){
+        return selectAll(selector, parentDOM)[0];
+      }
+      //setState
+      function setState(state, newState){
+        Object.assign(state, newState);
+        console.log(state);
+      }
+      //addClass
+      function addClass(elem, className){
+        elem.classList.value += ' ' + className;
+      }
+      //removeClass
+      function removeClass(elem, className){
+        elem.classList.value = elem.classList.value.replace(className, '');
+      }
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="head"></div>
+    <div class="main">
+        <div class="article">
+            <button class="btn_news2">type2</button>
+            <button class="btn_news1">type1</button>
+            <div class="news">
+                <div class="box" style="background-color:red">A</div>
+                <div class="box">
+                    <div class="item" style="background-color:royalblue">B</div>
+                    <div class="item" style="background-color:rosybrown">C</div>
+                </div>
+            </div>
+            <div class="live">
+                <strong>다음 실시간 검색어 순위</strong>
+                <ol class="list_rank">
+                    <li><a href="javascript:;" class="link_rank"></a></li>
+                    <li><a href="javascript:;" class="link_rank"></a></li>
+                    <li><a href="javascript:;" class="link_rank"></a></li>
+                    <li><a href="javascript:;" class="link_rank"></a></li>
+                    <li><a href="javascript:;" class="link_rank"></a></li>
+                    <li><a href="javascript:;" class="link_rank"></a></li>
+                    <li><a href="javascript:;" class="link_rank"></a></li>
+                    <li><a href="javascript:;" class="link_rank"></a></li>
+                    <li><a href="javascript:;" class="link_rank"></a></li>
+                    <li><a href="javascript:;" class="link_rank"></a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="foot"></div>
+</div>
+<script type="text/javascript">
+    'use strict';
+    window.onload = function(){
+
+      (function(exports, doc){
+        //선언부
+        //const
+        var DAUM_QUERY_STRING = 'https://search.daum.net/search?w=tot&DA=YZR&t__nil_searchbox=btn&sug=&sugo=&q=';
+        var LIVE_RANKING_URL = 'http://172.28.31.229:3000/crawl';
+        //value
+        var state = {};
+        var initialSetting = {
+          headBg: 'deeppink',
+          mainBg: 'skyblue',
+          footBg: 'orange',
+          headHeight: 150,
+          mainHeight: 'auto',
+          footHeight: 100,
+          newsType: 'type1'
+        };
+
+        //elem
+        var ctx = selectOne('.wrapper', doc);
+        var elemHead = selectOne('.head', ctx);
+        var elemMain = selectOne('.main', ctx);
+        var elemFoot = selectOne('.foot', ctx);
+        var elemRankList = selectAll('.list_rank .link_rank', elemMain);
+        var elemNews = selectOne('.news', elemMain);
+        var elemBtnNews1 = selectOne('.btn_news1', elemMain);
+        var elemBtnNews2 = selectOne('.btn_news2', elemMain);
+        //실행부
+        init();
+        //함수부
+        function init(){
+          setState(state, initialSetting);
+          requestApiByHXR('GET', LIVE_RANKING_URL, getData);
+          drawHead(elemHead);
+          drawMain(elemMain);
+          drawFoot(elemFoot);
+          drawNews(state.newsType);
+          bindEvents();
+        }
+        //events
+        function bindEvents(){
+          elemBtnNews1.addEventListener('click', function(){
+            setState(state, {newsType:'type2'});
+            drawNews(state.newsType, 'type1');
+          });
+          elemBtnNews2.addEventListener('click', function(){
+            setState(state, {newsType:'type1'});
+            drawNews(state.newsType, 'type2');
+          });
+        }
+        function requestApiByHXR(type, url, getData){
+          var xhr = new XMLHttpRequest();
+          xhr.addEventListener('readystatechange', function(){
+            if(this.readyState === 4){
+              getData(JSON.parse(this.responseText));
+            }
+          });
+          xhr.open(type, url);
+          xhr.setRequestHeader('content-type', 'application/json');
+          xhr.setRequestHeader('cache-control', 'no-cache');
+          xhr.send();
+        }
+        function getData(data){
+          console.log('data loaded', data);
+          drawRankingList(data[0].data);
+        }
+        //draw
+        function drawHead(elem){
+          var elemStyle = elem.style;
+          var elemHeight = state.headHeight;
+          elemStyle.backgroundColor = state.headBg;
+          elemStyle.height = elemHeight === 'auto' ? elemHeight:elemHeight + 'px';
+        }
+        function drawMain(elem){
+          var elemStyle = elem.style;
+          var elemHeight = state.mainHeight;
+          elemStyle.backgroundColor = state.mainBg;
+          elemStyle.height = elemHeight === 'auto' ? elemHeight:elemHeight + 'px';
+        }
+        function drawFoot(elem){
+          var elemStyle = elem.style;
+          var elemHeight = state.footHeight;
+          elemStyle.backgroundColor = state.footBg;
+          elemStyle.height = elemHeight === 'auto' ? elemHeight:elemHeight + 'px';
+        }
+        function drawRankingList(rankingList){
+          elemRankList.forEach(function(item, index){
+            var rankingItem = rankingList[index];
+            var rank = rankingItem.rank || '';
+            var name = rankingItem.el || '';
+            item.innerText =  rank + name;
+            item.href = DAUM_QUERY_STRING + name;
+          });
+        }
+        function drawNews(addType, removeType){
+          removeClass(elemNews, removeType);
+          addClass(elemNews, addType);
+        }
+
+      })(window, document);
+
+    };
+</script>
+</body>
+</html>

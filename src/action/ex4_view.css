@@ -1,0 +1,9 @@
+*{margin:0;padding:0}
+ol{list-style:none}
+.article{overflow:hidden;padding:20px}
+.news{float:left;width:440px;padding:0 20px}
+.type1 .box{float:left;width:50%;height:400px}
+.type1 .item{float:left;height:200px;width:100%}
+.type2 .box{float:left;width:100%;height:200px}
+.type2 .item{float:left;height:200px;width:50%}
+.live{float:right;width:200px;padding:0 20px}
