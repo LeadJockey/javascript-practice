@@ -23,10 +23,10 @@
                     <div class="list_slide">
                         <div class="item_slide"><div class="test_item" style="height:180px;">0</div></div>
                         <div class="item_slide"><div class="test_item" style="height:200px;">1</div></div>
-                        <div class="item_slide"><div class="test_item" style="height:300px;">2</div></div>
-                        <div class="item_slide"><div class="test_item" style="height:400px;">3</div></div>
+                        <div class="item_slide"><div class="test_item" style="height:600px;">2</div></div>
+                        <div class="item_slide"><div class="test_item" style="height:180px;">3</div></div>
                         <div class="item_slide"><div class="test_item" style="height:500px;">4</div></div>
-                        <div class="item_slide"><div class="test_item" style="height:600px;">5</div></div>
+                        <div class="item_slide"><div class="test_item" style="height:300px;">5</div></div>
                     </div>
                 </div>
                 <div class="box_extender">
@@ -63,20 +63,19 @@
           slider.moveToPrev();
         });
         slider.selectOne('.list_slide').addEventListener('touchstart', function(e){
-          console.log('start',e.touches[0]);
           touchStartX = e.touches[0].clientX;
         });
         slider.selectOne('.list_slide').addEventListener('touchend', function(e){
-          console.log('end',e.changedTouches[0]);
           var touchEndX = e.changedTouches[0].clientX;
+          if(!(Math.abs(touchStartX - touchEndX) > 70)){
+            return;
+          }
           if(touchStartX < touchEndX){
             slider.moveToPrev();
           }else if(touchStartX > touchEndX){
             slider.moveToNext();
-
           }
         });
-
 
       })(window, document);
 
