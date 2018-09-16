@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>slide</title>
+    <link rel="stylesheet" href="index.css">
+    <script type="text/javascript" src="slider.js"></script>
+</head>
+<body>
+<div class="ctx">
+    <!--<div style="height:100px;background-color:#5fd8ff"></div>-->
+    <!--<div style="overflow:hidden">-->
+        <!--<div style="float:left;width:100px;height:300px;background-color:deeppink"></div>-->
+        <!--<div style="float:left;width:300px;height:300px;">-->
+
+
+            <div class="comp_slide">
+                <strong class="screen_out">슬라이드 영역</strong>
+                <div class="box_slide">
+                    <div class="list_slide">
+                        <div class="item_slide"><div class="test_item" style="height:180px;">0</div></div>
+                        <div class="item_slide"><div class="test_item" style="height:200px;">1</div></div>
+                        <div class="item_slide"><div class="test_item" style="height:300px;">2</div></div>
+                        <div class="item_slide"><div class="test_item" style="height:400px;">3</div></div>
+                        <div class="item_slide"><div class="test_item" style="height:500px;">4</div></div>
+                        <div class="item_slide"><div class="test_item" style="height:600px;">5</div></div>
+                    </div>
+                </div>
+                <div class="box_extender">
+                    <a href="javascript:;" class="btn_prev">
+                        <span class="ico_comp ico_prev">prev</span>
+                        <span class="screen_out">이전 슬라이드</span>
+                    </a>
+                    <a href="javascript:;" class="btn_next">
+                        <span class="ico_comp ico_next">next</span>
+                        <span class="screen_out">다음 슬라이드</span>
+                    </a>
+                </div>
+            </div>
+
+
+        <!--</div>-->
+        <!--<div style="float:left;width:100px;height:300px;background-color:darkslategray"></div>-->
+    <!--</div>-->
+    <!--<div style="height:100px;background-color:#0b7800"></div>-->
+
+</div>
+<script type="text/javascript">
+
+
+    window.onload = function(){
+      (function(exports,doc){
+        var elemCtx = doc.querySelector('.ctx');
+        var slider = new exports.FE.M.Slider(elemCtx);
+        var touchStartX = 0;
+        slider.selectOne('.btn_next').addEventListener('click', function(){
+          slider.moveToNext();
+        });
+        slider.selectOne('.btn_prev').addEventListener('click', function(){
+          slider.moveToPrev();
+        });
+        slider.selectOne('.list_slide').addEventListener('touchstart', function(e){
+          console.log('start',e.touches[0]);
+          touchStartX = e.touches[0].clientX;
+        });
+        slider.selectOne('.list_slide').addEventListener('touchend', function(e){
+          console.log('end',e.changedTouches[0]);
+          var touchEndX = e.changedTouches[0].clientX;
+          if(touchStartX < touchEndX){
+            slider.moveToPrev();
+          }else if(touchStartX > touchEndX){
+            slider.moveToNext();
+
+          }
+        });
+
+
+      })(window, document);
+
+    }
+</script>
+</body>
+</html>

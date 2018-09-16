@@ -1,0 +1,15 @@
+/* reset */
+*{margin:0;padding:0}
+a{text-decoration:none}
+a:hover,a:focus{text-decoration:none}
+body{background-color:#efefef}
+.screen_out{overflow:hidden;position:absolute;width:0;height:0;line-height:0;text-indent:-9999px}
+.hide{display:none}
+/* test */
+.ctx{background-color:#fff}
+.test_item{height:180px;font-size:50px;line-height:180px;color:#fff;background-color:#007aff;text-align:center}
+
+/* component */
+
+
+
