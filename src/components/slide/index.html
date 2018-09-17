@@ -29,16 +29,14 @@
                         <div class="item_slide"><div class="test_item" style="height:300px;">5</div></div>
                     </div>
                 </div>
-                <div class="box_extender">
-                    <a href="javascript:;" class="btn_prev">
-                        <span class="ico_comp ico_prev">prev</span>
-                        <span class="screen_out">이전 슬라이드</span>
-                    </a>
-                    <a href="javascript:;" class="btn_next">
-                        <span class="ico_comp ico_next">next</span>
-                        <span class="screen_out">다음 슬라이드</span>
-                    </a>
-                </div>
+                <a href="javascript:;" class="btn_prev">
+                    <span class="ico_comp ico_prev">prev</span>
+                    <span class="screen_out">이전 슬라이드</span>
+                </a>
+                <a href="javascript:;" class="btn_next">
+                    <span class="ico_comp ico_next">next</span>
+                    <span class="screen_out">다음 슬라이드</span>
+                </a>
             </div>
 
 
@@ -49,9 +47,9 @@
 
 </div>
 <script type="text/javascript">
-
-
+    'use strict';
     window.onload = function(){
+
       (function(exports,doc){
         var elemCtx = doc.querySelector('.ctx');
         var slider = new exports.FE.M.Slider(elemCtx);
@@ -76,7 +74,6 @@
             slider.moveToNext();
           }
         });
-
       })(window, document);
 
     }

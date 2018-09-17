@@ -55,14 +55,15 @@
   //set
   Slider.prototype.setBasicStyle = function(){
     var elemListStyle = this.elem.list.style;
+    var elemCompStyle = this.elem.comp.style;
     elemListStyle.overflow = 'hidden';
     elemListStyle.transitionTimingFunction = 'cubic-bezier(0,0,0.25,1)';
     elemListStyle.transitionDuration = '300ms';
     elemListStyle.transform = 'translate(0,0)';
     elemListStyle.webkitTransform = 'translate(0,0)';
     elemListStyle.msTransform = 'translate(0,0)';
-    this.elem.comp.style.overflow = 'hidden';
-    this.elem.listWrap.style.position = 'relative';
+    elemCompStyle.overflow = 'hidden';
+    elemCompStyle.position = 'relative';
     this.elem.item.forEach(function(item, index){
       item.style.float = 'left';
     });
@@ -95,7 +96,6 @@
     this.elem.listWrap = this.selectOne(this.selector.listWrap, this.elem.comp);
     this.elem.list = this.selectOne(this.selector.list, this.elem.listWrap);
     this.elem.item = this.selectAll(this.selector.item, this.elem.list);
-    console.dir(this.elem);
   };
   Slider.prototype.setItemLength = function(){
     this.setState({length:this.elem.item.length});

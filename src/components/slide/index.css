@@ -10,6 +10,8 @@ body{background-color:#efefef}
 .test_item{height:180px;font-size:50px;line-height:180px;color:#fff;background-color:#007aff;text-align:center}
 
 /* component */
+.btn_prev{position:absolute;left:0;top:70px;width:40px;height:50px;line-height:50px;background-color:#333;color:#efefef;text-align:center}
+.btn_next{position:absolute;right:0;top:70px;width:40px;height:50px;line-height:50px;background-color:#333;color:#efefef;text-align:center}
 
 
 
