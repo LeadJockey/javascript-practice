@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page</title>
+    <style>
+        /* reset */
+        *{margin:0;padding:0}
+        a{text-decoration:none}
+        a:hover,a:focus{text-decoration:none}
+        body{background-color:#cfefd1}
+        .screen_out{overflow:hidden;position:absolute;width:0;height:0;line-height:0;text-indent:-9999px}
+        .hide{display:none}
+        .thumb_img{display:inline-block;width:100%;vertical-align:top}
+        .wrap_thumb{}
+    </style>
+    <script src="//www.jsviews.com/download/jsrender.js"></script>
+    <script type="text/javascript" src="../components/slide/slider.js"></script>
+</head>
+<body>
+
+<div class="wrap_store">
+    <div class="comp_slide">
+        <strong class="screen_out">슬라이드 영역</strong>
+        <div class="box_slide">
+            <div class="list_slide"><!--아이탬 동적 랜--></div>
+        </div>
+    </div>
+</div>
+
+<script id="itemTmpl" type="text/x-jsrender">
+    <div  class="item_slide" style="text-align:center;background-color:#444;color:#fff">
+        <div class="wrap_thumb">
+            <img src="{{:image}}" class="thumb_img" alt="">
+        </div>
+        <p>[ {{:name}} ]</p>
+        <p>{{:category}} *- {{:massage}} -*</p>
+        <p>
+            {{for batches}}
+                #{{:#data}}
+            {{/for}}
+        </p>
+        <del>{{:price.original}},</del>
+        <span>{{:price.discounted}} {{:price.currency}}(할인 {{:price.discount}}%)</span>
+        <p>
+            색상: {{for colors}}
+                {{:#data}},
+            {{/for}}
+        </p>
+        <p>
+            사이즈: {{for sizes}}
+                {{:#data}},
+            {{/for}}
+        </p>
+    </div>
+</script>
+<script type="text/javascript">
+    'use strict';
+    window.onload = function(){
+      (function(exports, doc){
+        //선언부
+        //const
+        var REQUEST_URL_GOODS = 'http://172.28.31.229:3000/store/goods';
+        //elem
+        var elemCtx = doc.querySelector('.wrap_store');
+        var itemTmpl = doc.querySelector('#itemTmpl');
+        var target = doc.querySelector('.list_slide');
+        //instance
+        var jsRender = exports.jsrender;
+        var slider;
+
+        //value
+        var touchStartX = 0;
+        //실행부
+        init();
+        //함수부
+        function init(){
+          requestApiByHXR('GET', REQUEST_URL_GOODS, getGoods);
+        }
+        function bindEvents(){
+          slider = new exports.FE.M.Slider(elemCtx);
+          slider.resizeForImgLoad();
+          slider.selectOne('.list_slide').addEventListener('touchstart', function(e){
+            touchStartX = e.touches[0].clientX;
+          });
+          slider.selectOne('.list_slide').addEventListener('touchend', function(e){
+            var touchEndX = e.changedTouches[0].clientX;
+            if(!(Math.abs(touchStartX - touchEndX) > 70)){
+              return;
+            }
+            if(touchStartX < touchEndX){
+              slider.moveToPrev();
+            }else if(touchStartX > touchEndX){
+              slider.moveToNext();
+            }
+          });
+        }
+        function requestApiByHXR(type, url, getData){
+          var xhr = new XMLHttpRequest();
+          xhr.addEventListener('readystatechange', function(){
+            if(this.readyState === 4){
+              getData(JSON.parse(this.responseText));
+            }
+          });
+          xhr.open(type, url);
+          xhr.setRequestHeader('content-type', 'application/json');
+          xhr.setRequestHeader('cache-control', 'no-cache');
+          xhr.send();
+        }
+        function getGoods(dataList){
+          console.log(dataList);
+          drawSliderItem(dataList);
+          bindEvents();
+        }
+        function drawSliderItem (dataList){
+          var html = '';
+          dataList.forEach(function(data, index){
+            html += jsRender.templates(itemTmpl.innerHTML).render(data);
+          });
+          target.innerHTML = html;
+        }
+
+      })(window, document);
+    };
+</script>
+</body>
+</html>

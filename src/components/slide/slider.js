@@ -135,6 +135,13 @@
     var translateX = -1 * (this.state.width * this.state.currentIndex);
     this.elem.list.style.transform = 'translate( ' + translateX + 'px,0)';
   };
-  Slider.prototype.reset = function(){};
+  Slider.prototype.resizeForImgLoad = function(){
+    var that = this;
+    this.selectAll('img', this.elem.item[this.state.currentIndex]).forEach(function(image, index){
+      image.addEventListener('load', function(){
+        that.setSliderSize();
+      });
+    });
+  };
 
 })(window);
