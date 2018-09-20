@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page</title>
+    <style>
+        /* reset */
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, textarea, p, blockquote, th, td, input, select, button{margin:0;padding:0}
+        fieldset, img{border:0 none}
+        dl, ul, ol, menu, li{list-style:none}
+        blockquote, q{quotes:none}
+        blockquote:before, blockquote:after, q:before, q:after{content:'';content:none}
+        input, select, textarea, button{vertical-align:middle}
+        input::-ms-clear{display:none}
+        button{border:0 none;background-color:transparent;cursor:pointer}
+        body{background:#fff}
+        body, th, td, input, select, textarea, button{font-size:12px;line-height:1.5;font-family:'돋움', dotum, sans-serif;color:#333}
+        /* color값은 디자인가이드에 맞게사용 */
+        a{color:#333;text-decoration:none}
+        a:active, a:hover{text-decoration:underline}
+        a:active{background-color:transparent}
+        address, caption, cite, code, dfn, em, var{font-style:normal;font-weight:normal}
+        /* global */
+        #kakaoIndex{overflow:hidden;position:absolute;left:-9999px;width:0;height:1px;margin:0;padding:0}
+        /* 스킵네비게이션 */
+        .ir_pm{display:block;overflow:hidden;font-size:0;line-height:0;text-indent:-9999px}
+        /* PC용 사용된 이미지내 의미있는 텍스트의 대체텍스트를 제공할때 */
+        .ir_pm{display:block;overflow:hidden;font-size:1px;line-height:0;color:transparent}
+        /* Mobile용 사용된 이미지내 의미있는 텍스트의 대체텍스트를 제공할때 */
+        .ir_wa{display:block;overflow:hidden;position:relative;z-index:-1;width:100%;height:100%}
+        /* 중요한 이미지 대체텍스트로 이미지off시에도 대체 텍스트를 보여주고자 할때 */
+        .ir_caption{overflow:hidden;width:1px;font-size:1px;line-height:0;text-indent:-9999px}
+        /* Table caption에 숨김텍스트를 제공할때 */
+        .screen_out{overflow:hidden;position:absolute;width:0;height:0;line-height:0;text-indent:-9999px}
+        /* 대체텍스트가 아닌 접근성을 위한 숨김텍스트를 제공할때 */
+        .show{display:block}
+        .hide{display:none}
+    </style>
+    <style>
+        .wrap_goods{padding:50px;font-size:14px}
+        .list_goods{}
+        .list_goods li{display:block;width:600px;height:400px;margin-bottom:10px;background:skyblue}
+        .list_goods .link_goods{}
+        .list_goods .link_goods:hover,
+        .list_goods .link_goods:focus{text-decoration:none}
+        .list_goods .thumb_goods{display:block;overflow:hidden;width:600px;height:400px}
+        .list_goods .thumb_goods .img_g{display:block;width:100%}
+        .list_goods .info_goods{position:relative;padding:10px 20px 70px;border:1px solid #ccc;border-top:0 none}
+        .info_goods .tit_goods{display:block;margin-bottom:20px;font-size:16px}
+        .info_goods .txt_category{position:absolute;left:0;right:0;bottom:0;height:30px;padding-left:20px;border-top:1px solid #eee;font-weight:normal;line-height:32px;color:#ccc;text-transform:uppercase}
+        .info_goods .txt_batches{position:absolute;left:0;top:-40px;right:0;height:40px;padding:0 20px;line-height:40px;color:#fff;background:rgba(0, 0, 0, 0.5)}
+        .info_goods .txt_price{display:block;font-weight:bold;font-size:20px;text-align:right}
+        .info_goods .txt_option{}
+        .info_goods .emph_massage{float:left;font-weight:bold;font-size:20px;color:#f00}
+        .info_goods .price_original{display:inline-block;font-size:16px;color:#ccc}
+        .info_goods .price_discount{position:absolute;left:0;top:-400px;width:70px;height:70px;font-weight:bold;font-size:24px;line-height:70px;color:#fff;background:rgba(255, 20, 147, 0.75);text-align:center}
+        .info_goods .price_discounted{display:inline-block}
+        .info_goods .option_size{display:block}
+        .info_goods .option_color{display:block}
+    </style>
+</head>
+<body>
+<div class="wrap_goods">
+    <ul class="list_goods">
+        <li>
+            <a href="javascript:;" class="link_goods">
+                <span class="thumb_goods">
+                    <img src="http://ojsfile.ohmynews.com/STD_IMG_FILE/2012/0526/IE001444157_STD.jpg" class="img_g"
+                         alt="[임블리데이] 슬랙스 미친바지 땡블리진 청바지"></span>
+                <div class="info_goods">
+                    <strong class="tit_goods">[임블리데이] 슬랙스 미친바지 땡블리진 청바지_ALL_여성</strong>
+                    <span class="txt_category">design</span>
+                    <span class="txt_batches">#완전편한 #가을신상 #지금필요 #여리여리한</span>
+                    <span class="txt_price">
+							<em class="emph_massage">초대박 할인가!</em>
+							<span class="price_discount"><span class="screen_out">할인율</span>26%</span>
+							<del class="price_original"><span class="screen_out">상품가격</span>87,000원</del>
+							<span class="price_discounted"><span class="screen_out">판매가격</span>64,380원</span>
+						</span>
+                    <span class="txt_option">
+							<span class="option_size">사이즈: 4XL, 3XL, 2XL, XL, BIG</span>
+							<span class="option_color">색상: 화이트</span>
+						</span>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+  'use strict';
+  window.onload = function(){
+
+    (function(exports, doc){
+      //선언부
+      //const
+      var REQUEST_URL_GOODS = 'http://172.28.31.229:3000/store/goods';
+      //DOM element
+      var ctx = selectOne('.wrap_goods');
+
+      var elItemName = selectOne('.tit_goods', ctx);
+      var elItemCategory = selectOne('.txt_category', ctx);
+      var elItemBatches = selectOne('.txt_batches', ctx);
+      var elTextOption = selectOne('.txt_option', ctx);
+      var elTextPrice = selectOne('.txt_price', ctx);
+
+      var elItemSize = selectOne('.option_size', elTextOption);
+      var elItemColor = selectOne('.option_color', elTextOption);
+
+      var elItemMassage = selectOne('.emph_massage', elTextPrice);
+      var elItemDiscount = selectOne('.price_discount', elTextPrice);
+      var elItemOriginal = selectOne('.price_original', elTextPrice);
+      var elItemDiscounted = selectOne('.price_discounted', elTextPrice);
+
+      //실행부
+      requestApiByHXR('GET', REQUEST_URL_GOODS, getData);
+
+      //함수부
+      function requestApiByHXR(type, url, getData){
+        var xhr = new XMLHttpRequest();
+        xhr.addEventListener('readystatechange', function(){
+          if(this.readyState === 4){
+            getData(JSON.parse(this.responseText));
+          }
+        });
+        xhr.open(type, url);
+        xhr.setRequestHeader('content-type', 'application/json');
+        xhr.setRequestHeader('cache-control', 'no-cache');
+        xhr.send();
+      }
+
+      function getData(dataList){
+        console.dir(dataList);
+        var target = dataList[prompt('인덱스 입력 0- 49')];
+        elItemName.innerText = getName(target);
+        elItemCategory.innerText = getCategory(target);
+        elItemMassage.innerText = getMassage(target);
+        elItemBatches.innerText = getBatches(target);
+        elItemSize.innerText = getSize(target);
+        elItemColor.innerText = getColor(target);
+        elItemDiscount.innerText = getDiscountPrice(target);
+        elItemOriginal.innerText = getOriginalPrice(target);
+        elItemDiscounted.innerText = getDiscountedPrice(target);
+      }
+
+      function getName(item){
+        return item.name || '';
+      }
+
+      function getCategory(item){
+        return item.category || '';
+      }
+
+      function getMassage(item){
+        return item.massage || '';
+      }
+
+      function getDiscountPrice(item){
+        return item.price.discount + '%';
+      }
+
+      function getOriginalPrice(item){
+        var currency = getCurrency(item);
+        return currencyHandler((item.price.original || 0), currency) + currency;
+      }
+
+      function getDiscountedPrice(item){
+        var currency = getCurrency(item);
+        return currencyHandler((item.price.discounted || 0), currency) + currency;
+      }
+
+      function getCurrency(item){
+        return item.price.currency || '';
+      }
+
+      function currencyHandler(price, currency){
+        var result = '';
+        switch(currency){
+          case '원':
+            result = addComma(price, 4);
+            break;
+          case '루블':
+            result = addComma(price, 2);
+            break;
+          case '유로':
+            result = addComma(price, 5);
+            break;
+          default:
+            result = addComma(price, 3);
+        }
+        return result;
+      }
+
+      function addComma(number, count){
+        var addedCommaList = [];
+        var slicedStringNumberList = Array.prototype.slice.call(number.toString());
+        slicedStringNumberList.reverse().forEach(function(str, index){
+          if((index + 1) % (count || 3) === 0){
+            addedCommaList.push(',' + str);
+          }else{
+            addedCommaList.push(str);
+          }
+        });
+        var result = addedCommaList.reverse().join('');
+        if(result && (result[0] === ',')){
+          result = result.substr(1);
+        }
+        return result;
+      }
+
+      function getBatches(item){
+        return '# ' + item.batches.join(' # ');
+      }
+
+      function getSize(item){
+        return '사이즈: ' + item.sizes.join(', ');
+      }
+
+      function getColor(item){
+        return '색상: ' + item.colors.join(', ');
+      }
+
+
+      //util
+      function selectOne(selector, parentDOM){
+        return (parentDOM || doc).querySelector(selector);
+      }
+
+      function selectAll(selector, parentDOM){
+        return Array.prototype.slice.call((parentDOM || doc).querySelectorAll(selector));
+      }
+
+    })(window, document);
+
+  };
+</script>
+</body>
+</html>
