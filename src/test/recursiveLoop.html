@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    loop(test);
+
+    function loop(fn){
+      var stack = [];
+      var current = fn;
+      do{
+        setTimeout(function(){
+          stack.push(fn);
+          console.dir(fn);
+
+        }, 1000);
+      }while(current = stack.pop());
+    }
+
+    function test(){
+      console.log('test');
+    }
+
+    // console.log(recu/rsiveLoop(timer));
+
+    // var list = [1,2,3,4,5];
+    // console.log(list.pop());
+</script>
+</body>
+</html>

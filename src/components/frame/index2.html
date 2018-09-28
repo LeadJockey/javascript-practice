@@ -6,6 +6,7 @@
     <meta name="format-detection" content="telephone=no">
     <title>market fest 2018 | 카카오페이</title>
     <style>
+        @charset "UTF-8";
         /* reset */
         body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,button{margin:0;padding:0}
         fieldset,img{border:0 none}
@@ -21,9 +22,9 @@
         input[type='search']::-webkit-search-cancel-button{-webkit-appearance:none}
 
         body{background:#fff}
-        body,th,td,input,select,textarea,button{font-size:14px;line-height:1.5;font-family:AppleSDGothicNeo-Regular,'Malgun Gothic','맑은 고딕',dotum,'돋움',sans-serif;color:#333}
+        body,th,td,input,select,textarea,button{font-size:14px;line-height:1.5;font-family:AppleSDGothicNeo-Regular,sans-serif;color:#1a1a1a}
 
-        a{color:#333;text-decoration:none}
+        a{color:#1a1a1a;text-decoration:none}
         a:active, a:hover{text-decoration:none}
         address,caption,cite,code,dfn,em,var{font-style:normal;font-weight:normal}
 
@@ -33,61 +34,88 @@
         .show{display:block}
         .hide{display:none}
 
-        .prm_market{min-width:320px}
+        /* common */
+        .img_g{display:block;width:100%}
+        .ico_prm{display:inline-block;overflow:hidden;font-size:1px;line-height:0;color:transparent;background-image:url(//t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/ico_prm.png);background-repeat:no-repeat;background-size:125px 60px;vertical-align:top}
+        .ico_pass{width:42px;height:23px;background-position:0 0}
+        .ico_detail{width:14px;height:13px;background-position:-45px 0}
+        .ico_next{width:11px;height:11px;background-position:-45px -15px}
+        .ico_katalk{width:30px;height:30px;background-position:0 -30px}
+        .ico_kastory{width:30px;height:30px;background-position:-30px -30px}
+        .ico_facebook{width:30px;height:30px;background-position:-60px -30px}
+        .ico_url{width:30px;height:30px;background-position:-90px -30px}
+
+        /* visual */
+        .prm_market{padding-bottom:60px;min-width:320px}
         .prm_market .evnet_intro{background-color:#ffde00}
-        .prm_market .inner_g{position:relative;overflow:hidden;margin:0 auto;max-width:375px}
+        .prm_market .inner_event{position:relative;overflow:hidden;margin:0 auto}
+        .evnet_intro .wrap_slide{position:absolute;top:10.4%;left:0;width:100%;height:35.4%;margin:0 auto}
+        .evnet_intro .wrap_slide .frame_g{position:absolute;top:0;right:11.7%;bottom:0;left:11.7%;z-index:10;background:url(//t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/bg_slide.png) 0 0 no-repeat;background-size:contain}
+        .evnet_intro .slide{width:300%;height:100%}
+        .evnet_intro .slide:after{display:block;visibility:hidden;height:0;font-size:0;clear:both;content:''}
+        .evnet_intro .panel{position:absolute;top:0;left:0;width:100%;height:100%}
+        .evnet_intro .panel_visual1 .img_g{position:relative;z-index:20;margin-top:-12%}
+        .evnet_intro .panel_visual2{overflow:hidden}
+        .evnet_intro .visual_item{position:absolute;top:0;right:11.7%;left:11.7%;background-color:#ffde00;box-sizing:border-box}
+        .evnet_intro .thumb_img{display:block;overflow:hidden;height:100%}
+        .evnet_intro .ico_visual{position:absolute;bottom:23.3%;right:23%;width:22%;height:20.9%;background:url(//t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/ico_visual.png) 0 0 no-repeat;background-size:cover}
+        .evnet_intro .img_bar{display:none;position:absolute;top:100%;right:0;left:0}
+        .evnet_intro .btn_pass{position:fixed;right:0;bottom:0;left:0;z-index:100;width:100%;height:60px;font-weight:bold;font-size:22px;line-height:60px;color:#ffde00;background-color:#1a1a1a}
+        .evnet_intro .btn_pass .ico_pass{margin:19px 19px 0 0}
 
-        .prm_market .img_g{display:block;width:100%}
-        /*.prm_market [class^="ico_"]{display:block;overflow:hidden;font-size:1px;line-height:0;color:transparent;background-image:url(images/img_event.png);background-repeat:no-repeat;background-size:247px 250px}*/
+        /* contents */
+        .prm_market .event_detail{background:url(//t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/bg_detail.png) 100% 0 no-repeat;background-size:165px}
+        .event_detail .inner_event{padding:58px 20px 68px;max-width:303px}
+        .event_detail .tit_detail{margin:0 3px;font-size:19px}
+        .event_detail .emph_detail{display:block;margin-top:5px;font-weight:bold;font-size:32px;line-height:39px}
+        .event_detail .list_detail{overflow:hidden;padding:17px 3px 0}
+        .event_detail .list_detail dt{float:left;clear:both;font-size:15px;line-height:30px}
+        .event_detail .list_detail dt:after{display:inline-block;width:1px;height:12px;margin:0 12px;background-color:#1a1a1a;content:''}
+        .event_detail .list_detail dd{overflow:hidden;font-size:15px;line-height:30px}
+        .event_detail .btn_detail{width:100%;height:54px;margin-top:52px;border:2px solid #1a1a1a;font-weight:bold;font-size:17px;line-height:54px}
+        .event_detail .btn_detail .ico_detail{margin:20px 0 0 30px}
 
+        .prm_market .tit_event{font-weight:bold;font-size:33px;line-height:45px}
+        .prm_market .desc_event{padding:7px 0 33px;font-size:14px;line-height:22px}
+        .prm_market .num_event{display:block;width:36px;height:36px;margin:0 auto 20px;border:1px solid #1a1a1a;border-radius:50%;font-weight:500;font-size:12px;line-height:36px;font-family:-apple-system,BlinkMacSystemFont,AppleSdGothicNeo-Regular,sans-serif}
 
-        .prm_market .wrap_slide{position:absolute;top:10.4%;left:0;width:100%;height:35.4%;margin:0 auto}
-        .prm_market .slide{width:300%;height:100%}
-        .prm_market .slide:after{display:block;visibility:hidden;height:0;font-size:0;clear:both;content:''}
-        .prm_market .panel{position:absolute;top:0;left:0;width:100%;height:100%}
-        .prm_market .panel_visual1 .img_g{margin-top:-12%}
+        .prm_market .event_ticket{padding:58px 0 217px 0;background:#f3f3f6 url(//t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/bg_ticket.png) 50% 100% no-repeat;background-size:320px 190px;text-align:center}
+        .event_ticket .list_ticket{display:inline-block;vertical-align:top}
+        .event_ticket .list_ticket dt{float:left;font-weight:bold;font-size:14px}
+        .event_ticket .list_ticket dt:after{display:inline-block;width:1px;height:10px;margin:4px 8px 0;background-color:#868688;vertical-align:top;content:''}
+        .event_ticket .list_ticket dd{float:left;font-weight:bold;font-size:14px}
+        .event_ticket .list_ticket dd + dt{margin-left:30px}
 
-        .prm_market [class^="visual_item"]{overflow:hidden;position:absolute;right:11.7%;left:11.7%;background-color:#ffde00}
-        .prm_market .visual_item1{height:100%}
-        .prm_market .visual_item2{height:0}
-        .prm_market .visual_item3{height:0}
+        .prm_market .event_emoticon{padding:58px 0 217px 0;background:#fff url(//t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/bg_emoticon.png) 50% 100% no-repeat;background-size:320px 231px;text-align:center}
 
-        .prm_market .panel_visual3 .img_g{width:76.5%;margin:0 auto}
+        .prm_market .event_qr{padding:72px 0 503px;background:#f6f6fc url(//t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/bg_qr.png) 50% 100% no-repeat;background-size:320px 503px;text-align:center}
+        .event_qr .tit_qr{font-size:26px}
+        .event_qr .list_qr{display:inline-block;padding:11px 0 38px;vertical-align:top}
+        .event_qr .list_qr li{float:left}
+        .event_qr .list_qr .ico_next{margin:4px 6px 0}
 
-        .prm_market .btn_pass{position:fixed;right:0;bottom:0;left:0;width:100%;height:60px;color:#ffde00;background-color:#1a1a1a}
+        .prm_market .event_share{padding:47px 0 50px;text-align:center}
+        .event_share .tit_share{font-size:22px}
+        .event_share .wrap_btn{margin-top:26px;font-size:0}
+        .event_share .btn_share{width:49px;height:49px;margin:0 8px;border:1px solid #1a1a1a}
 
-        .ico_home{
-            background:url(images/ico_visual.png) 0 0 no-repeat;background-size:315px 60px;
-            position:absolute;
-            right:110px;
-            bottom:68px;
-            width:63px;
-            height:60px;
-            -webkit-animation: change_position 1s infinite 200ms;
-            -moz-animation: change_position 1s infinite 200ms;
-            -o-animation: change_position 1s infinite 200ms;
-            -ms-animation: change_position 1s infinite 200ms;
-            animation: change_position 10s infinite 200ms;
+        .prm_market .event_notice{background-color:#f3f3f6}
+        .event_notice .inner_event{padding:35px 25px 60px;max-width:325px}
+        .event_notice .tit_notice{font-weight:normal;font-size:18px;color:#666}
+        .event_notice .tit_list{display:block;padding:17px 0 5px;font-weight:normal;font-size:12px;color:#666}
+        .event_notice .list_notice li,.event_notice .desc_notice{display:block;padding-left:10px;font-size:10px;color:#666;line-height:18px;text-indent:-10px}
+        .event_notice .list_notice li:before{margin-right:6px;content:'-'}
+        .event_notice .desc_notice:before{margin-right:6px;content:'*'}
+        .event_notice .list_notice + .desc_notice{margin-top:8px}
 
-        }
-        @keyframes change_position{
-            0%{background-position:0 0}
-            20%{background-position:0 0}
-            20.11%{background-position:-63px 0}
-            40%{background-position:-63px 0}
-            40.11%{background-position:-126px 0}
-            60%{background-position:-126px 0}
-            60.11%{background-position:-189px 0}
-            80%{background-position:-189px 0}
-            80.11%{background-position:-252px 0}
-            100%{background-position:-252px 0}
-        }
+        .prm_market .event_foot{height:50px;padding:0 25px;line-height:50px;background-color:#1a1a1a}
+        .event_foot small{font-size:13px;color:#fff;font-family:-apple-system,BlinkMacSystemFont,AppleSdGothicNeo-Regular,sans-serif}
     </style>
 </head>
 <body>
 <div id="kakaoPromotion" class="prm_market">
     <div id="kakaoHead" class="evnet_intro">
-        <div class="inner_g">
+        <div class="inner_event">
             <img src="images/img_intro.png" class="img_g" alt="">
             <div class="ir_pm">
                 <h1>카카오페이</h1>
@@ -96,206 +124,285 @@
             </div>
             <div class="wrap_slide">
                 <div class="slide">
-                    <div class="panel panel_visual1" style="left:100%"><img data-src="images/img_visual1.png" class="img_g" alt=""></div>
-                    <div class="panel panel_visual2" style="left:100%">
-                        <div class="visual_item1 item_panel" style="height:100%"><img data-src="images/img_visual2.png" class="img_g" alt=""></div>
-                        <div class="visual_item2 item_panel" style="height:0"><img data-src="images/img_visual2_2.png" class="img_g" alt=""></div>
-                        <div class="visual_item3 item_panel" style="height:0"><img data-src="images/img_visual2_3.png" class="img_g" alt=""></div>
+                    <div class="panel panel_visual1" style="left: -50%;"><img class="img_g" alt="" data-src="http://t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/img_visual1.png"></div>
+                    <div class="panel panel_visual2" style="left: 50%;">
+                        <div class="visual_item item_panel" style="height:100%">
+                            <span class="thumb_img"><img class="img_g" alt="" data-src="http://t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/img_visual2_1.png"></span>
+                        </div>
+                        <div class="visual_item item_panel" style="height: 0px;">
+                            <span class="thumb_img"><img class="img_g" alt="" data-src="http://t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/img_visual2_2_180928.png"></span>
+                            <span class="img_bar" style="display: none;"><img class="img_g" alt="" src="http://t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/img_bar.png"></span>
+                        </div>
+                        <div class="visual_item item_panel" style="height: 0px;">
+                            <span class="thumb_img"><img class="img_g" alt="" data-src="http://t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/img_visual2_3.png"></span>
+                            <span class="img_bar" style="display: none;"><img class="img_g" alt="" data-src="http://t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/img_bar.png"></span>
+                        </div>
+                        <div class="visual_item item_panel" style="height: 0px;">
+                            <span class="thumb_img"><img class="img_g" alt="" data-src="http://t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/img_visual2_4.png"></span>
+                            <span class="img_bar" style="display: none;"><img class="img_g" alt="" data-src="http://t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/img_bar.png"></span>
+                        </div>
                     </div>
-                    <div class="panel panel_visual3" style="left:0">
-                        <img data-src="images/img_visual3.png" class="img_g" alt="">
-                        <span class="ico_home"></span>
+                    <div class="panel panel_visual3" style="left: 100%;">
+                        <div class="visual_item">
+                            <img class="img_g" alt="" data-src="http://t1.daumcdn.net/kakaopay/pay-promotion/marketfest/m640/img_visual3.png">
+                            <span class="ico_visual" style="background-position: 25% 0px;"></span>
+                        </div>
                     </div>
                 </div>
+                <span class="frame_g"></span>
             </div>
-            <button type="button" class="btn_pass">익스프레스 패스 신청</button>
+            <button type="button" class="btn_pass"><span class="ico_prm ico_pass"></span>익스프레스 패스 신청</button>
         </div>
     </div>
     <hr class="hide">
-    <div id="kakaoContent" class="ir_pm">
-        <!-- <div class="event_detail">
-            <h3>마켓페스트 2018에서 카카오페이와 만나요!</h3>
+    <div id="kakaoContent">
+        <div class="event_detail">
+            <div class="inner_event">
+                <h3 class="tit_detail">마켓페스트 2018에서 <em class="emph_detail">카카오페이와<br>만나요!</em></h3>
+                <dl class="list_detail">
+                    <dt>일시</dt>
+                    <dd>2018.10.27(토)-28(일) 오후 12-7시</dd>
+                    <dt>장소</dt>
+                    <dd>동대문 DDP 알림 1/2관</dd>
+                    <dt>참가</dt>
+                    <dd>누구나</dd>
+                </dl>
+                <button type="button" class="btn_detail">마켓페스트 2018 자세히 보기<span class="ico_prm ico_detail"></span></button>
+            </div>
         </div>
         <div class="event_ticket">
-            <h3>누구보다 빠르게 입장!</h3>
+            <h3 class="tit_event">
+                <span class="num_event"><span class="screen_out">이벤트</span>1</span>
+                누구보다 빠르게 입장!
+            </h3>
+            <p class="desc_event">카카오페이에 계좌연결하면<br>대기 없이 바로 입장 가능한 익스프레스 패스 증정</p>
+            <em class="ir_pm">200명 1인 2매</em>
+            <dl class="list_ticket">
+                <dt>기간</dt>
+                <dd>10.10-10.21</dd>
+                <dt>발표일</dt>
+                <dd>10.22</dd>
+            </dl>
         </div>
         <div class="event_emoticon">
-            <h3>카카오프렌즈 이모티콘 받기!</h3>
+            <h3 class="tit_event">
+                <span class="num_event"><span class="screen_out">이벤트</span>2</span>
+                카카오프렌즈<br>이모티콘 받기!
+            </h3>
+            <p class="desc_event">현장에서 카카오페이 QR결제시 100% 증정</p>
+            <em class="ir_pm">1인 1회</em>
         </div>
         <div class="event_qr">
-            <h3>카카오페이 QR결제 방법!</h3>
+            <h3 class="tit_qr">카카오페이 QR결제 방법!</h3>
+            <ol class="list_qr">
+                <li>카톡 더보기 결제<span class="ico_prm ico_next">다음</span></li>
+                <li>QR 찍고<span class="ico_prm ico_next">다음</span></li>
+                <li>금액 입력</li>
+            </ol>
         </div>
         <div class="event_share">
-            <h3>친구들과 함께 즐겨요!</h3>
+            <h3 class="tit_share">친구들과 함께 즐겨요!</h3>
+            <div class="wrap_btn">
+                <button type="button" class="btn_share"><span class="ico_prm ico_katalk">카카오톡 공유</span></button>
+                <button type="button" class="btn_share"><span class="ico_prm ico_kastory">카카오스토리 공유</span></button>
+                <button type="button" class="btn_share"><span class="ico_prm ico_facebook">페이스북 공유</span></button>
+                <button type="button" class="btn_share"><span class="ico_prm ico_url">URL 복사</span></button>
+            </div>
         </div>
         <div class="event_notice">
-            <h3>꼭 참고해 주세요!</h3>
-            <strong>이벤트 1</strong>
-            <ul>
-                <li>조건: 카카오페이에 계좌연결이 완료된 경우에만 참여 가능합니다. 단, 이미 계좌연결이 된 경우에는 바로 신청 가능합니다.</li>
-                <li>당첨안내: 10월 22일 (당첨자에 한해 카카오페이 플러스친구 메시지를 통해 발표됩니다.)</li>
-                <li>상품: 익스프레스 패스</li>
-            </ul>
-            <em>해당 티켓은 대기 없이 즉시 입장 할 수 있으며, 행사 기간 중 원하는 날짜에 1일만 사용 가능합니다</em>
-            <em>당첨자 확인 후 티켓 발권은 1회로 제한됩니다.</em>
-            <strong>이벤트 2</strong>
-            <ul>
-                <li>조건: 마켓페스트 현장에서 카카오페이로 QR결제 시, 카카오프렌즈 이모티콘을 드립니다. (1인당 1회) 단, 이미 해당 이모티콘을 1회 이상 받으신 경우 중복 제공되지 않습니다.</li>
-                <li>당첨안내: 이모티콘은 카카오페이 플러스친구 메시지를 통해 즉시 발송됩니다.(다운로드 후 사용)</li>
-            </ul>
-            <em>본 이벤트는 당사 사정에 의해 별도 고지 없이 변경 및 조기 종료 될 수 있습니다.</em>
-            <em>카카오톡/카카오페이 탈퇴 시 이벤트 당첨 대상에서 제외될 수 있습니다.</em>
-        </div> -->
+            <div class="inner_event">
+                <h3 class="tit_notice">꼭 참고해 주세요!</h3>
+                <strong class="tit_list">이벤트 1</strong>
+                <ul class="list_notice">
+                    <li>조건: 카카오페이에 계좌연결이 완료된 경우에만 참여 가능합니다.<br>단, 이미 계좌연결이 된 경우에는 바로 신청 가능합니다.</li>
+                    <li>당첨안내: 10월 22일<br>(당첨자에 한해 카카오페이 플러스친구 메시지를 통해 발표됩니다.)</li>
+                    <li>상품: 익스프레스 패스</li>
+                </ul>
+                <p class="desc_notice">해당 티켓은 대기 없이 즉시 입장 할 수 있으며, 행사 기간 중 원하는 날짜에 1일만 사용 가능합니다</p>
+                <p class="desc_notice">당첨자 확인 후 티켓 발권은 1회로 제한됩니다.</p>
+                <strong class="tit_list">이벤트 2</strong>
+                <ul class="list_notice">
+                    <li>조건: 마켓페스트 현장에서 카카오페이로 QR결제 시, 카카오프렌즈 이모티콘을 드립니다. (1인당 1회) 단, 이미 해당 이모티콘을 1회 이상 받으신 경우 중복 제공되지 않습니다.</li>
+                    <li>당첨안내: 이모티콘은 카카오페이 플러스친구 메시지를 통해 즉시 발송됩니다.(다운로드 후 사용)</li>
+                </ul>
+                <p class="desc_notice">본 이벤트는 당사 사정에 의해 별도 고지 없이 변경 및 조기 종료 될 수 있습니다.</p>
+                <p class="desc_notice">카카오톡/카카오페이 탈퇴 시 이벤트 당첨 대상에서 제외될 수 있습니다.</p>
+            </div>
+        </div>
     </div>
     <hr class="hide">
-    <!-- <div id="kakaoFoot"><small>&copy; Kakao Corp.</small></div> -->
+    <div id="kakaoFoot" class="event_foot"><small>© Kakao Corp.</small></div>
 </div>
 <script type="text/javascript">
-    window.onload = function(){
-      (function(doc){
-        'use strict';
-        //const
-        var FPS = 1000 / 60;
-        var START_POSITION = 0; // 0~100%
-        var END_POSITION = 100; // 0~100%
-        var SWIPE_DURATION = 600; // ms
-        var SLIDE_DURATION = 300; // ms
-        var SWIPE_DELAY = 4000; // ms
-        var SLIDE_DELAY = 1600; //ms
+  'use strict';
+  window.onload = function(){
+    (function(doc){
+      //const
+      var FPS = 1000 / 60;
+      var START_POSITION = 0; // 0~100
+      var END_POSITION = 100; // 0~100
+      var SWIPE_DURATION = 600; // ms
+      var SWIPE_DELAY = 4000; // ms
+      var SLIDE_DURATION = 500; // ms
+      var SLIDE_DELAY = 1600; //ms
+      var ICON_DURATION = 200; // ms
+      var ICON_LOOP_COUNT = 40; // 30~50
+      var ICON_POSITION_LIST = ['0 0', '25% 0', '50% 0', '75% 0', '100% 0'];
+      //elem
+      var ctx = selectOne('.prm_market');
+      var elSlide = selectOne('.slide', ctx);
+      var elIcon = selectOne('.ico_visual', elSlide);
+      var elImageList = selectAll('[data-src]', elSlide);
+      var elSwipeList = selectAll('.panel', elSlide);
+      var elSlideList = selectAll('.item_panel', elSlide);
+      var elImgBarList = selectAll('.img_bar', elSlide);
+      //value
+      var tick = 0; // 0~1, 0=0%, 1=100%
+      var animationProgress = 0; // 0~100
+      var framePool = {
+        0:function(){
+          elSwipeList[0].style.left = '0';
+          elSwipeList[1].style.left = '100%';
+          elSwipeList[2].style.left = '100%';
+          elSlideList[0].style.height = '100%';
+          elSlideList[1].style.height = '0';
+          elSlideList[2].style.height = '0';
+          elSlideList[3].style.height = '0';
+          nextFrame(1)();
+        },
+        1:function(){
+          delay(animate(swipeLeft(elSwipeList[0], elSwipeList[1]), FPS, END_POSITION, nextFrame(2)), SWIPE_DELAY);
+        },
+        2:function(){
+          delay(animate(slideDown(elSlideList[1], elImgBarList[0]), FPS, END_POSITION, nextFrame(3)), SLIDE_DELAY);
+        },
+        3:function(){
+          delay(animate(slideDown(elSlideList[2], elImgBarList[1]), FPS, END_POSITION, nextFrame(4)), SLIDE_DELAY);
+        },
+        4:function(){
+          delay(animate(slideDown(elSlideList[3], elImgBarList[2]), FPS, END_POSITION, nextFrame(5)), SLIDE_DELAY);
+        },
+        5:function(){
+          delay(animate(swipeLeft(elSwipeList[1], elSwipeList[2]), FPS, END_POSITION, nextFrame(6)), SLIDE_DELAY);
+          delay(changeIcon, SLIDE_DELAY/2);
+        },
+        6:function(){
+          delay(animate(swipeLeft(elSwipeList[2], elSwipeList[0]), FPS, END_POSITION, nextFrame(0)), SWIPE_DELAY);
 
-        //elem
-        var ctx = selectOne('.prm_market');
-        var elSlide = selectOne('.slide', ctx);
-        var elImageList = selectAll('[data-src]', elSlide);
-        var elSwipeList = selectAll('.panel', elSlide);
-        var elSlideList = selectAll('.item_panel', elSlide);
-
-        //value
-        var tick = 0; // 0~1, 0=0%, 1=100%
-        var animationProgress = 0;
-        var framePool = {
-          0:function(){
-            elSwipeList[0].style.left = '0';
-            elSwipeList[1].style.left = '100%';
-            elSwipeList[2].style.left = '100%';
-            elSlideList[0].style.height = '100%';
-            elSlideList[1].style.height = '0';
-            elSlideList[2].style.height = '0';
-            nextFrame(1)();
-          },
-          1:function(){
-            delay(animate(swipeLeft(elSwipeList[0], elSwipeList[1]), nextFrame(2)), SWIPE_DELAY);
-          },
-          2:function(){
-            delay(animate(slideDown(elSlideList[1]), nextFrame(3)), SLIDE_DELAY);
-          },
-          3:function(){
-            delay(animate(slideDown(elSlideList[2]), nextFrame(4)), SLIDE_DELAY);
-          },
-          4:function(){
-            delay(animate(swipeLeft(elSwipeList[1], elSwipeList[2]), nextFrame(5)), SLIDE_DELAY);
-          },
-          5:function(){
-            delay(animate(swipeLeft(elSwipeList[2], elSwipeList[0]), nextFrame(0)), SWIPE_DELAY);
+        }
+      };
+      play();
+      //util
+      function selectOne(selector, parentDOM){
+        return (parentDOM || doc).querySelector(selector);
+      }
+      function selectAll(selector, parentDOM){
+        return Array.prototype.slice.call((parentDOM || doc).querySelectorAll(selector));
+      }
+      //void
+      function play(){
+        loadImages(elImageList, nextFrame(0));
+      }
+      function easeInOutExpo(t, b, c, d){
+        if(t === 0){
+          return b;
+        }
+        if(t === d){
+          return b + c;
+        }
+        if((t /= d / 2) < 1){
+          return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
+        }
+        return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
+      }
+      function delay(next, ms){
+        setTimeout(function(){
+          next();
+        }, ms || 1000);
+      }
+      function loadImages(imageList, next){
+        var loadedImageList = [];
+        imageList.forEach(function(img, index){
+          img.src = img.getAttribute('data-src');
+          img.removeAttribute('data-src');
+          img.onload = function(){
+            loadedImageList.push(img);
+            if(elImageList.length === loadedImageList.length){
+              next();
+            }
+          };
+        });
+      }
+      //return function
+      function animate(frame, fps, maxProgress, next){
+        return function(){
+          frame();
+          if(Math.abs(animationProgress) < maxProgress){
+            setTimeout(function(){
+              animate(frame, fps, maxProgress, next)();
+            }, fps);
+          }else{
+            tick = 0;
+            animationProgress = 0;
+            if(next){
+              next();
+            }
           }
         };
-
-        // play();
-
-        //util
-        function selectOne(selector, parentDOM){
-          return (parentDOM || doc).querySelector(selector);
-        }
-        function selectAll(selector, parentDOM){
-          return Array.prototype.slice.call((parentDOM || doc).querySelectorAll(selector));
-        }
-        //void
-        function play(){
-          loadImages(elImageList, nextFrame(0));
-        }
-        function easeInOutExpo(t, b, c, d){
-          if(t === 0){
-            return b;
+      }
+      function nextFrame(frameIndex){
+        return function(){
+          if(!framePool[frameIndex]){
+            return;
           }
-          if(t === d){
-            return b + c;
-          }
-          if((t /= d / 2) < 1){
-            return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
-          }
-          return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
+          framePool[frameIndex].call(this, frameIndex);
+        };
+      }
+      function swipeLeft(swipeTarget, nextTarget){
+        return function(){
+          var percent = Number(easeInOutExpo((tick += FPS), START_POSITION, END_POSITION, SWIPE_DURATION).toFixed(0));
+          animationProgress = percent;
+          percent *= -1;
+          swipeTarget.style.left = percent + '%';
+          nextTarget.style.left = (percent + END_POSITION) + '%';
+        };
+      }
+      function slideDown(slideTarget, barTarget){
+        return function(){
+          var percent = Number(easeInOutExpo((tick += FPS), START_POSITION, END_POSITION, SLIDE_DURATION).toFixed(0));
+          animationProgress = percent;
+          slideTarget.style.height = percent + '%';
+          barHandler(barTarget, percent);
+        };
+      }
+      function barHandler(barTarget, percent){
+        var barTargetStyle = barTarget.style;
+        if(percent < 1){
+          barTargetStyle.display = 'block';
         }
-        function delay(next, ms){
-          setTimeout(function(){
-            next();
-          }, ms || 1000);
+        if(percent > 99){
+          barTargetStyle.display = 'none';
         }
-        function loadImages(imageList, next){
-          var loadedImageList = [];
-          imageList.forEach(function(img, index){
-            img.src = img.getAttribute('data-src');
-            img.removeAttribute('data-src');
-            img.onload = function(){
-              loadedImageList.push(img);
-              if(elImageList.length === loadedImageList.length){
-                next();
-              }
-            };
-          });
-        }
-        //return function
-        function animate(frame, next){
-          return function(){
-            frame();
-            if(Math.abs(animationProgress) < END_POSITION){
-              setTimeout(function(){
-                animate(frame, next)();
-              }, FPS);
-            }else{
-              tick = 0;
-              animationProgress = 0;
-              if(next){
-                next();
-              }
-            }
-          };
-        }
-        function nextFrame(frameIndex){
-          return function(){
-            if(!framePool[frameIndex]){
-              return;
-            }
-            framePool[frameIndex].call(this, frameIndex);
-          };
-        }
-        function swipeLeft(swipeTarget, nextTarget){
-          return function(){
-            var percent = Number(easeInOutExpo((tick += FPS), START_POSITION, END_POSITION, SWIPE_DURATION).toFixed(0));
-            animationProgress = percent;
-            percent *= -1;
-            swipeTarget.style.left = percent + '%';
-            nextTarget.style.left = (percent + END_POSITION) + '%';
-          };
-        }
-        function slideDown(slideTarget){
-          return function(){
-            var percent = Number(easeInOutExpo((tick += FPS), START_POSITION, END_POSITION, SLIDE_DURATION).toFixed(0));
-            animationProgress = percent;
-            slideTarget.style.height = percent + '%';
-            barHandler(slideTarget, percent);
-          };
-        }
-        function barHandler(fadeOutTarget, percent){
-          var fadeOutTargetStyle = fadeOutTarget.style;
-          if(percent === 0){
-            fadeOutTargetStyle.borderBottom = '4px solid #1a1a1a';
-          }
-          if(percent > 98){
-            fadeOutTargetStyle.borderBottom = '0 none';
+      }
+      function changeIcon(){
+        var iconIndex = 0;
+        var cnt = 0;
+        changeIconFrame();
+        function changeIconFrame(){
+          iconIndex = iconIndex < (ICON_POSITION_LIST.length - 1) ? iconIndex + 1:0;
+          elIcon.style.backgroundPosition = ICON_POSITION_LIST[iconIndex];
+          cnt++;
+          if(cnt > ICON_LOOP_COUNT){
+            cnt = 0;
+          }else{
+            setTimeout(function(){
+              changeIconFrame();
+            },ICON_DURATION);
           }
         }
-      })(document);
-    };
+      }
+    })(document);
+  };
 </script>
 </body>
 </html>
