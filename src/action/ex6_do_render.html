@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>page</title>
+    <title>render</title>
     <style>
         /* reset */
         body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, textarea, p, blockquote, th, td, input, select, button{margin:0;padding:0}
@@ -61,63 +61,89 @@
         .info_goods .option_size{display:block}
         .info_goods .option_color{display:block}
     </style>
+    <script src="//www.jsviews.com/download/jsrender.js"></script>
 </head>
 <body>
-<div class="wrap_goods">
-    <ul class="list_goods">
-        <li>
-            <a href="javascript:;" class="link_goods">
+<div id="target"><!--js render 를 통해서 동적으로 마크업이 랜딩 됩니다.--></div>
+<ul id="list_item">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<script id="sampleTemplate" type="text/x-jsrender">
+    <div class="wrap_goods">
+        <ul class="list_goods">
+            <li>
+                <a href="javascript:;" class="link_goods">
                 <span class="thumb_goods">
                     <img src="http://ojsfile.ohmynews.com/STD_IMG_FILE/2012/0526/IE001444157_STD.jpg" class="img_g"
                          alt="[임블리데이] 슬랙스 미친바지 땡블리진 청바지"></span>
-                <div class="info_goods">
-                    <strong class="tit_goods">[임블리데이] 슬랙스 미친바지 땡블리진 청바지_ALL_여성</strong>
-                    <span class="txt_category">design</span>
-                    <span class="txt_batches">#완전편한 #가을신상 #지금필요 #여리여리한</span>
-                    <span class="txt_price">
+                    <div class="info_goods">
+                        <strong class="tit_goods">{{:name}}</strong>
+                        <span class="txt_category">design</span>
+                        <span class="txt_batches">#완전편한 #가을신상 #지금필요 #여리여리한</span>
+                        <span class="txt_price">
 							<em class="emph_massage">초대박 할인가!</em>
 							<span class="price_discount"><span class="screen_out">할인율</span>26%</span>
 							<del class="price_original"><span class="screen_out">상품가격</span>87,000원</del>
 							<span class="price_discounted"><span class="screen_out">판매가격</span>64,380원</span>
 						</span>
-                    <span class="txt_option">
+                        <span class="txt_option">
 							<span class="option_size">사이즈: 4XL, 3XL, 2XL, XL, BIG</span>
 							<span class="option_color">색상: 화이트</span>
 						</span>
-                </div>
-            </a>
-        </li>
-    </ul>
-</div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+
+</script>
 <script type="text/javascript">
   'use strict';
   window.onload = function(){
 
     (function(exports, doc){
+
       //선언부
       //const
       var REQUEST_URL_GOODS = 'http://172.28.31.229:3000/store/goods';
-      //DOM element
-      var ctx = selectOne('.wrap_goods');
-
-      var elItemName = selectOne('.tit_goods', ctx);
-      var elItemCategory = selectOne('.txt_category', ctx);
-      var elItemBatches = selectOne('.txt_batches', ctx);
-      var elTextOption = selectOne('.txt_option', ctx);
-      var elTextPrice = selectOne('.txt_price', ctx);
-
-      var elItemSize = selectOne('.option_size', elTextOption);
-      var elItemColor = selectOne('.option_color', elTextOption);
-
-      var elItemMassage = selectOne('.emph_massage', elTextPrice);
-      var elItemDiscount = selectOne('.price_discount', elTextPrice);
-      var elItemOriginal = selectOne('.price_original', elTextPrice);
-      var elItemDiscounted = selectOne('.price_discounted', elTextPrice);
+      //elem
+      var elListItem = doc.getElementById('list_item').children;
+      //value
+      var jsRender = exports.jsrender;
+      var arrayListItem = Array.prototype.slice.call(elListItem);
+      //tmpl
+      var tmplSample = doc.getElementById('sampleTemplate');
+      var tmplSampleHTML = tmplSample.innerHTML;
+      //data
 
       //실행부
-      requestApiByHXR('GET', REQUEST_URL_GOODS, getData);
+      init();
 
       //함수부
+      function init(){
+        requestApiByHXR('GET', REQUEST_URL_GOODS, getData);
+      }
+
+      function bindEvents(dataList){
+        arrayListItem.forEach(function(item, idx){
+          item.addEventListener('click', function(){
+            setItemName(dataList);
+            item.innerHTML = jsRender.templates(tmplSampleHTML).render(dataList[idx]);
+          });
+        });
+      }
+
       function requestApiByHXR(type, url, getData){
         var xhr = new XMLHttpRequest();
         xhr.addEventListener('readystatechange', function(){
@@ -132,92 +158,16 @@
       }
 
       function getData(dataList){
-        console.dir(dataList);
-        var target = dataList[prompt('인덱스 입력 0- 49')];
-        elItemName.innerText = getName(target);
-        elItemCategory.innerText = getCategory(target);
-        elItemMassage.innerText = getMassage(target);
-        elItemBatches.innerText = getBatches(target);
-        elItemSize.innerText = getSize(target);
-        elItemColor.innerText = getColor(target);
-        elItemDiscount.innerText = getDiscountPrice(target);
-        elItemOriginal.innerText = getOriginalPrice(target);
-        elItemDiscounted.innerText = getDiscountedPrice(target);
+        console.log(dataList);
+        setItemName(dataList);
+        bindEvents(dataList);
       }
-      function getName(item){
-        return item.name || '';
-      }
-      function getCategory(item){
-        return item.category || '';
-      }
-      function getMassage(item){
-        return item.massage || '';
-      }
-      function getDiscountPrice(item){
-        return item.price.discount + '%';
-      }
-      function getOriginalPrice(item){
-        var currency = getCurrency(item);
-        return currencyHandler((item.price.original || 0), currency) + currency;
-      }
-      function getDiscountedPrice(item){
-        var currency = getCurrency(item);
-        return currencyHandler((item.price.discounted || 0), currency) + currency;
-      }
-      function getCurrency(item){
-        return item.price.currency || '';
-      }
-      function currencyHandler(price, currency){
-        var result = '';
-        switch(currency){
-          case '원':
-            result = addComma(price, 4);
-            break;
-          case '루블':
-            result = addComma(price, 2);
-            break;
-          case '유로':
-            result = addComma(price, 5);
-            break;
-          default:
-            result = addComma(price, 3);
-        }
-        return result;
-      }
-      function addComma(number, count){
-        var addedCommaList = [];
-        var slicedStringNumberList = Array.prototype.slice.call(number.toString());
-        slicedStringNumberList.reverse().forEach(function(str, index){
-          if((index + 1) % (count || 3) === 0){
-            addedCommaList.push(',' + str);
-          }else{
-            addedCommaList.push(str);
-          }
+
+      function setItemName(dataList){
+        console.log(dataList);
+        arrayListItem.forEach(function(item, idx){
+          item.innerHTML = dataList[idx].name;
         });
-        var result = addedCommaList.reverse().join('');
-        if(result && (result[0] === ',')){
-          result = result.substr(1);
-        }
-        return result;
-      }
-      function getBatches(item){
-        return '# ' + item.batches.join(' # ');
-      }
-      function getSize(item){
-        return '사이즈: ' + item.sizes.join(', ');
-      }
-      function getColor(item){
-        return '색상: ' + item.colors.join(', ');
-      }
-
-
-      //util
-      function selectOne(selector, parentDOM){
-        return (parentDOM || doc).querySelector(selector);
-      }
-
-      function selectAll(selector, parentDOM){
-        return Array.prototype.slice.call((parentDOM || doc).querySelectorAll(selector));
       }
 
     })(window, document);

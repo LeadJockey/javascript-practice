@@ -288,7 +288,6 @@
         },
         6:function(){
           delay(animate(swipeLeft(elSwipeList[2], elSwipeList[0]), FPS, END_POSITION, nextFrame(0)), SWIPE_DELAY);
-
         }
       };
       play();
@@ -333,6 +332,32 @@
           };
         });
       }
+      function barHandler(barTarget, percent){
+        var barTargetStyle = barTarget.style;
+        if(percent < 1){
+          barTargetStyle.display = 'block';
+        }
+        if(percent > 99){
+          barTargetStyle.display = 'none';
+        }
+      }
+      function changeIcon(){
+        var iconIndex = 0;
+        var cnt = 0;
+        changeIconFrame();
+        function changeIconFrame(){
+          iconIndex = iconIndex < (ICON_POSITION_LIST.length - 1) ? iconIndex + 1:0;
+          elIcon.style.backgroundPosition = ICON_POSITION_LIST[iconIndex];
+          cnt++;
+          if(cnt > ICON_LOOP_COUNT){
+            cnt = 0;
+          }else{
+            setTimeout(function(){
+              changeIconFrame();
+            },ICON_DURATION);
+          }
+        }
+      }
       //return function
       function animate(frame, fps, maxProgress, next){
         return function(){
@@ -374,32 +399,6 @@
           slideTarget.style.height = percent + '%';
           barHandler(barTarget, percent);
         };
-      }
-      function barHandler(barTarget, percent){
-        var barTargetStyle = barTarget.style;
-        if(percent < 1){
-          barTargetStyle.display = 'block';
-        }
-        if(percent > 99){
-          barTargetStyle.display = 'none';
-        }
-      }
-      function changeIcon(){
-        var iconIndex = 0;
-        var cnt = 0;
-        changeIconFrame();
-        function changeIconFrame(){
-          iconIndex = iconIndex < (ICON_POSITION_LIST.length - 1) ? iconIndex + 1:0;
-          elIcon.style.backgroundPosition = ICON_POSITION_LIST[iconIndex];
-          cnt++;
-          if(cnt > ICON_LOOP_COUNT){
-            cnt = 0;
-          }else{
-            setTimeout(function(){
-              changeIconFrame();
-            },ICON_DURATION);
-          }
-        }
       }
     })(document);
   };
