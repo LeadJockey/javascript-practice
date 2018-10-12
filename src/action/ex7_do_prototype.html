@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  'use strict';
+
+  (function(exports, doc){
+
+    // function FishBread(powder, ingredient, duration){
+    //   this.powder = powder || '밀가루';
+    //   this.ingredient = ingredient || '앙꼬';
+    //   this.duraition = duration || 30;
+    //   this.start();
+    // }
+    //
+    // FishBread.prototype.knead = function(){
+    //   console.log(this.powder + '를 가지고 반죽을 합니다.');
+    //   return this;
+    // };
+    // FishBread.prototype.bake = function(){
+    //   console.log(this.duraition + '초 동안 반죽을 굽습니다.');
+    //   return this;
+    // };
+    // FishBread.prototype.add = function(){
+    //   console.log(this.ingredient + '를 첨가합니다.');
+    //   return this;
+    // };
+    // FishBread.prototype.roll = function(){
+    //   console.log('반대편을 굽습니다.');
+    //   return this;
+    // };
+    // FishBread.prototype.start = function(){
+    //   this.knead().add().bake().roll().bake();
+    //   console.log('완성 ----');
+    // };
+    //
+    // var fishBread = new FishBread('밀가루', '앙꼬', 5);
+    // var fishBread2 = new FishBread('밀가루', '슈크림', 5);
+    //
+    // console.log(fishBread);
+    // console.log(fishBread2);
+    //
+    // console.log(Array.prototype.forEach);
+
+    //햄버거 만들기
+
+    //생성자 함수
+    function Hamburger(opts){
+      this.opts = opts || {};
+      this.bread = this.opts.bread || '기본빵';
+      this.source = this.opts.source || '기본소스';
+      this.petty = this.opts.petty || '기본패티';
+      this.veges = this.opts.veges || [];
+      this.ingredients = this.opts.ingredients || [];
+      this.create();
+    }
+
+    //프로토타입 함수들
+    Hamburger.prototype.bake = function(){
+      console.log(this.bread + '을 구워요.');
+      return this;
+    };
+    Hamburger.prototype.addSpecialSource = function(){
+      console.log(this.source + '를(을) 첨가해요.');
+      return this;
+    };
+    Hamburger.prototype.addPetty = function(){
+      console.log(this.petty + '를 얹어요.');
+      return this;
+    };
+    Hamburger.prototype.addVeges = function(){
+      if(this.veges.length > 0){
+        console.log('야채를 순서대로 집어넣어요.'+ this.veges.join(','));
+      }
+      return this;
+    };
+    Hamburger.prototype.addIngredients = function(){
+      console.log('추가재료를 순서대로 집어넣어요.' + this.ingredients.join(','));
+      return this;
+    };
+    Hamburger.prototype.wrap = function(){
+      console.log('햄버거를 포장해요. ====== 4,900 원');
+      return this;
+    };
+    Hamburger.prototype.create = function(){
+      this.bake()
+          .addSpecialSource()
+          .addPetty()
+          .addVeges()
+          .addIngredients()
+          .wrap();
+    };
+
+
+    var bigmac = new Hamburger();
+    // {
+    //   // bread:'호밀빵',
+    //   source:'특별한소스',
+    //     petty:'순쇠고기패티',
+    //   // veges:['양상추', '토마토', '피클', '양파'],
+    //   ingredients:['치즈','계란후라이']
+    // }
+
+  })(window, document);
+</script>
+</body>
+</html>
