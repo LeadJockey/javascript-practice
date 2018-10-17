@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sort</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  'use strict';
+
+  var RANDOM_NUMERIC_LIST = [1, 5, 10, 7, 3, 9, 2, 8, 4, 6];
+  var RANDOM_ALPHABETIC_LIST = ['a', 'e', 'f', 'B', 'o', 'x', 'z', 'M', 'l', 'p', 'm', 'i'];
+  var RANDOM_CHUNK_LIST = [
+    [1,'a'],
+    [7,'c'],
+    [3,'d'],
+    [3,'a'],
+    [10,'z']
+  ];
+  var TEST_USER_LIST = [
+    {
+      'age':17,
+      'name':'edward',
+      'goal':5
+    },
+    {
+      'age':12,
+      'name':'zero',
+      'goal':3
+    },
+    {
+      'age':10,
+      'name':'apple',
+      'goal':9
+    }
+  ];
+
+  function sortForwardNumeric(numericList){
+    return numericList.sort(function(a, b){
+      return a - b;
+    });
+  }
+  function sortReverseNumeric(numericList){
+    return numericList.sort(function(a, b){
+      return b - a;
+    });
+  }
+  function sortForwardAlphabetic(alphabeticList){
+    return alphabeticList.sort(function(a, b){
+      return a < b ? -1:a > b ? 1:0;
+    });
+  }
+  function sortReverseAlphabetic(alphabeticList){
+    return alphabeticList.sort(function(a, b){
+      return a < b ? 1:a > b ? -1:0;
+    });
+  }
+  function sortForwardAlphabeticWithLowerCase(alphabeticList){
+    return alphabeticList.sort(function(a, b){
+      var x = a.toLowerCase();
+      var y = b.toLowerCase();
+      return x < y ? -1:x > y ? 1:0;
+    });
+  }
+  function sortReverseAlphabeticWithLowerCase(alphabeticList){
+    return alphabeticList.sort(function(a, b){
+      var x = a.toLowerCase();
+      var y = b.toLowerCase();
+      return x < y ? 1:x > y ? -1:0;
+    });
+  }
+  function sortChunkList(chunkList){
+    return chunkList.sort(function(a,b){
+      if(a[0] === b[0]){
+        var x = a[1].toLowerCase();
+        var y = b[1].toLowerCase();
+        return x < y ? -1:x > y ? 1:0;
+      }
+      return a[0] - b[0];
+    });
+  }
+  function sortByObjectKey(list, key){
+    return list.sort(function(a, b){
+      return a[key] - b[key];
+    });
+  }
+  function mySort(list){
+    var copiedList = list.slice();
+    var length = copiedList.length;
+    for(var i = 1; i < length; i += 1){
+      for(var j = length - 1; j >= i; j -= 1){
+        if(copiedList[j - 1] > copiedList[j]){
+          var temp = copiedList[j - 1];
+          copiedList[j - 1] = copiedList[j];
+          copiedList[j] = temp;
+        }
+      }
+    }
+    return copiedList;
+  }
+  function mySortType2(list){
+    var copiedList = list.slice();
+    var length = copiedList.length;
+    for(var i = length - 1; i > 0; i -= 1){
+      for(var j = 1; j <= i; j += 1){
+        if(copiedList[j - 1] > copiedList[j]){
+          var temp = copiedList[j - 1];
+          copiedList[j - 1] = copiedList[j];
+          copiedList[j] = temp;
+        }
+      }
+    }
+    return copiedList;
+  }
+
+  console.log('forwarding numericList', sortForwardNumeric(RANDOM_NUMERIC_LIST));
+  console.log('reversing numericList', sortReverseNumeric(RANDOM_NUMERIC_LIST));
+  console.log('forwarding alphabeticList', sortForwardAlphabetic(RANDOM_ALPHABETIC_LIST));
+  console.log('reversing alphabeticList', sortReverseAlphabetic(RANDOM_ALPHABETIC_LIST));
+  console.log('forwarding alphabeticList lowercase', sortForwardAlphabeticWithLowerCase(RANDOM_ALPHABETIC_LIST));
+  console.log('reversing alphabeticList lowercase', sortReverseAlphabeticWithLowerCase(RANDOM_ALPHABETIC_LIST));
+  console.log('forwarding chunkList', sortChunkList(RANDOM_CHUNK_LIST));
+  console.log('sortByObjectKey age', sortByObjectKey(TEST_USER_LIST, 'age'));
+  console.log('sortByObjectKey goal', sortByObjectKey(TEST_USER_LIST, 'goal'));
+  console.log('my sort', mySort(RANDOM_NUMERIC_LIST));
+  console.log('my sort2', mySortType2(RANDOM_NUMERIC_LIST));
+
+</script>
+</body>
+</html>
