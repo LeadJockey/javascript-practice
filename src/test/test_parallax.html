@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>parallax test</title>
+    <style>
+        *{margin:0;padding:0}
+        .section{height:199px;border-bottom:1px solid #000}
+        .group_layer{position:relative;font-size:40px;line-height:200px;text-align:center}
+        .layer_lv1{position:fixed;top:0;right:0;width:100%;height:1000px;background-color:#0b7800}
+        .layer_lv2{position:fixed;top:0;right:0;width:100%;height:400px;border:50px solid #000;box-sizing:border-box;opacity:.5}
+        .layer_lv3{position:absolute;top:0;right:0;width:100%;height:1000px;background-color:blue;opacity:.3}
+    </style>
+</head>
+<body>
+<div class="group_layer">
+    <div class="layer_lv1" style="top:0;color:red">
+        <div class="section">test section 1</div>
+        <div class="section">test section 2</div>
+        <div class="section">test section 3</div>
+        <div class="section">test section 4</div>
+        <div class="section">test section 5</div>
+    </div>
+    <div class="layer_lv2"></div>
+    <div class="layer_lv3" style="color:orange">
+        <div class="section">test lv3 section 1</div>
+        <div class="section">test lv3 section 2</div>
+        <div class="section">test lv3 section 3</div>
+        <div class="section">test lv3 section 4</div>
+        <div class="section">test lv3 section 5</div>
+    </div>
+</div>
+<script>
+
+    window.onscroll = function(){
+      var tick = 0;
+      // if(tick === 0){
+      //   setTimeout(function(){
+      //     animate(tick);
+      //   },1000);
+      // }
+
+    };
+
+    function animate (tick){
+      setTimeout(function(){
+        tick++;
+        console.log(tick);
+        var top = document.querySelector('.layer_lv1').style.top.replace('px','');
+        document.querySelector('.layer_lv1').style.top = parseInt(top, 10) - 5 +'px';
+        animate(tick);
+      }, 200);
+      if(tick > 10){
+        tick = 0;
+      }
+    }
+</script>
+</body>
+</html>

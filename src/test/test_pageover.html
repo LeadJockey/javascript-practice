@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0}
+        ul{list-style:none}
+        html,body{height:100%}
+        .wrap{position:relative;height:100%}
+        .group_panel{display:none;position:absolute;top:0;right:0;bottom:0;left:0}
+        .group_panel li{float:left;width:25%;height:100%}
+        .group_panel div{width:0;height:100%;background-color:#5fd8ff}
+    </style>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="jquery.easing.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <div>
+        <h1>page home</h1>
+        <a href="http://localhost:63342/javascript-practice/src/test/test_pageover_1.html?_ijt=bq2hvjm1f2vv4idn9pio71j90j" class="target">to about</a>
+    </div>
+   <ul class="group_panel">
+       <li><div></div></li>
+       <li><div></div></li>
+       <li><div></div></li>
+       <li><div></div></li>
+    </ul>
+</div>
+
+<script>
+    'use strict';
+    console.log(jQuery.easing);
+    var target = document.querySelector('.target');
+    var items = Array.prototype.slice.call(document.querySelectorAll('.group_panel div'));
+    var panel = document.querySelector('.group_panel');
+    target.addEventListener('click', function(e){
+      e.preventDefault();
+      panel.style.display = 'block';
+      jQuery(items).animate({width:'100%'}, 700, 'easeInCubic', function(){
+        console.log('finish');
+        window.location = 'http://localhost:63342/javascript-practice/src/test/test_pageover_1.html?_ijt=bq2hvjm1f2vv4idn9pio71j90j';
+      });
+    });
+
+</script>
+</body>
+</html>

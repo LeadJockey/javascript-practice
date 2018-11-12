@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="target">target</div>
+<script type="text/javascript">
+  (function(exports, $){
+    'use strict';
+
+    function Structure(){
+      this.state = {};
+      this.eventPool = {};
+    }
+
+    Structure.prototype.setInitialState = function(initialState){
+      if($.type(initialState) !== 'object') return console.log('initial state should be type object');
+      this.state = initialState || {};
+      return this;
+    };
+    Structure.prototype.setState = function(newState){
+      if($.type(newState) !== 'object') return console.log('new state should be type object');
+      $.extend({}, this.state, newState);
+      return this;
+    };
+    Structure.prototype.setEvent = function(type, handler){
+      if($.type(handler) !== 'function') return console.log('event handler should be type function');
+      if($.type(type) !== 'string') return console.log('event type should be type string');
+      if(this.eventPool[type]) return console.log('event type already exist');
+      this.eventPool[type] = handler;
+      return this;
+    };
+    Structure.prototype.fireEvent = function(type){
+      if(!this.eventPool[type]) return console.log('not found event type in eventPool', this.eventPool);
+      this.eventPool[type].call(this, type);
+      return this;
+    };
+    Structure.prototype.render = function(){
+      var args = Array.prototype.slice.call(arguments);
+      args.forEach(function(renderFunc){
+        if($.type(renderFunc !== 'function')) return;
+        renderFunc();
+      });
+      return this;
+    };
+    exports.FE = exports.FE ? exports.FE:{};
+    exports.FE.Structure = exports.FE.Structure ? exports.FE.Structure:Structure;
+  })(window, jQuery);
+</script>
+<script type="text/javascript">
+  (function($){
+    'use strict';
+    $(document).ready(function(){
+      //module
+      var homepage = new FE.Structure();
+      //value
+      var initialState = {
+        startIndex:0,
+        activeScrollPosition:600
+      };
+      var flag = false;
+      var progress = 0;
+      //elem
+      var $ctx = $('#target');
+
+
+      //execute
+      init();
+
+      //function
+      function init(){
+        homepage.setInitialState(initialState)
+                .setEvent('scroll_active', scrollEventHandler)
+                .setEvent('scroll_none', eventHandler)
+                .setEvent('scroll_hold', eventHandler)
+                .setEvent('slide_active', eventHandler)
+                .setEvent('slide_none', eventHandler)
+                .setEvent('slide_hold', eventHandler);
+        bindEvents();
+        console.log(homepage);
+      }
+
+      function bindEvents(){
+        homepage.fireEvent('scroll_active');
+      }
+
+      function scrollEventHandler(){
+        return function(){
+          homepage.setState({ activeScrollPosition:1200 });
+          console.log('scroll_active event fired!');
+        };
+      }
+
+      function eventHandler(){
+        return function(){
+          console.log('do something ');
+        };
+      }
+    });
+  })(jQuery);
+</script>
+</body>
+</html>

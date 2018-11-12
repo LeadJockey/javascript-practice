@@ -5,4 +5,5 @@ package-lock.json
 javascript-practice.iml
 yarn-error.log
 .vscode/*
+src/unit/*
 

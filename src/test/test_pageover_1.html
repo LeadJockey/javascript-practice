@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin:0;padding:0}
+        ul{list-style:none}
+        html,body{height:100%}
+        .wrap{position:relative;height:100%}
+        .group_panel{position:absolute;top:0;right:0;bottom:0;left:0}
+        .group_panel li{float:left;width:25%;height:100%}
+        .group_panel div{width:100%;height:100%;background-color:#5fd8ff}
+    </style>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="jquery.easing.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <div>
+        <h1>page about</h1>
+        <a href="http://localhost:63342/javascript-practice/src/test/test_pageover.html?_ijt=t1vr6u6kj83gcv2tjji1i1sjve" class="target">to home</a>
+    </div>
+    <ul class="group_panel">
+        <li><div></div></li>
+        <li><div></div></li>
+        <li><div></div></li>
+        <li><div></div></li>
+    </ul>
+</div>
+
+<script>
+  'use strict';
+  console.log(jQuery.easing);
+  var items = Array.prototype.slice.call(document.querySelectorAll('.group_panel div'));
+  var panel = document.querySelector('.group_panel');
+  jQuery(items).animate({width:'0'}, 700, 'easeInCubic', function(){
+    console.log('finish');
+    panel.style.display = 'none';
+  });
+</script>
+</body>
+</html>
