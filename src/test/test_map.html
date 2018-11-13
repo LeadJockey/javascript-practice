@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<canvas id="canvas" width="400" height="200"></canvas>
+<script>
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  var matrix = [
+    //1
+    {x:80,y:20,c:'gray'},
+    {x:160,y:20,c:'gray'},
+    {x:200,y:20,c:'gray'},
+    {x:240,y:20,c:'gray'},
+    {x:260,y:20,c:'gray'},
+    {x:300,y:20,c:'gray'},
+    {x:360,y:20,c:'gray'},
+    //2
+    {x:40,y:40,c:'gray'},
+    {x:60,y:40,c:'gray'},
+    {x:120,y:40,c:'gray'},
+    {x:140,y:40,c:'gray'},
+    {x:160,y:40,c:'gray'},
+    {x:240,y:40,c:'gray'},
+    {x:260,y:40,c:'gray'},
+    {x:280,y:40,c:'gray'},
+    {x:300,y:40,c:'gray'},
+    {x:320,y:40,c:'gray'},
+    {x:340,y:40,c:'gray'},
+    //3
+    {x:20,y:60,c:'gray'},
+    {x:40,y:60,c:'gray'},
+    {x:60,y:60,c:'gray'},
+    {x:80,y:60,c:'gray'},
+    {x:100,y:60,c:'gray'},
+    {x:120,y:60,c:'gray'},
+    {x:140,y:60,c:'gray'},
+    {x:160,y:60,c:'gray'},
+    {x:180,y:60,c:'gray'},
+    {x:280,y:60,c:'gray'},
+    {x:300,y:60,c:'gray'},
+    {x:320,y:60,c:'gray'},
+    {x:340,y:60,c:'gray'},
+    {x:360,y:60,c:'gray'},
+    {x:380,y:60,c:'gray'},
+    //4
+    {x:40,y:80,c:'gray'},
+    {x:60,y:80,c:'gray'},
+    {x:80,y:80,c:'gray'},
+    {x:100,y:80,c:'gray'},
+    {x:120,y:80,c:'gray'},
+    {x:140,y:80,c:'gray'},
+    {x:160,y:80,c:'orange'},
+    {x:280,y:80,c:'gray'},
+    {x:300,y:80,c:'gray'},
+    {x:320,y:80,c:'gray'},
+    {x:340,y:80,c:'gray'},
+    {x:360,y:80,c:'gray'},
+    {x:380,y:80,c:'gray'},
+    //5
+    {x:60,y:100,c:'gray'},
+    {x:80,y:100,c:'gray'},
+    {x:100,y:100,c:'gray'},
+    {x:120,y:100,c:'gray'},
+    {x:140,y:100,c:'gray'},
+    {x:320,y:100,c:'gray'},
+    {x:340,y:100,c:'gray'},
+    {x:360,y:100,c:'gray'},
+    {x:380,y:100,c:'gray'},
+    //6
+    {x:40,y:120,c:'gray'},
+    {x:60,y:120,c:'gray'},
+    {x:80,y:120,c:'gray'},
+    {x:100,y:120,c:'gray'},
+    {x:360,y:120,c:'gray'},
+    {x:380,y:120,c:'gray'},
+    //7
+    {x:40,y:140,c:'gray'},
+    {x:60,y:140,c:'gray'},
+    {x:80,y:140,c:'gray'},
+    {x:160,y:140,c:'gray'},
+    {x:260,y:140,c:'gray'},
+    {x:280,y:140,c:'gray'},
+    {x:340,y:140,c:'gray'},
+    {x:360,y:140,c:'gray'},
+    {x:380,y:140,c:'gray'},
+    //8
+    {x:40,y:160,c:'gray'},
+    {x:60,y:160,c:'gray'},
+    {x:120,y:160,c:'gray'},
+    {x:340,y:160,c:'gray'},
+    {x:360,y:160,c:'gray'},
+    {x:380,y:160,c:'gray'},
+    //9
+    {x:60,y:180,c:'gray'},
+    {x:360,y:180,c:'gray'},
+  ];
+
+  var motionList1 = [
+    //1
+    {x:180,y:60,c:'orange'},
+    {x:160,y:60,c:'orange'},
+    {x:140,y:60,c:'orange'},
+    {x:140,y:80,c:'orange'},
+    {x:140,y:100,c:'orange'},
+    //2
+    {x:160,y:40,c:'orange'},
+    {x:140,y:40,c:'orange'},
+    {x:120,y:40,c:'orange'},
+    {x:120,y:60,c:'orange'},
+    {x:120,y:80,c:'orange'},
+    {x:120,y:100,c:'orange'},
+    {x:120,y:120,c:'orange'},
+
+
+
+
+
+  ];
+  var process = 0;
+
+  ctx.fillRect(0,0,400,200);
+  matrix.forEach(function(pos){
+    createArc(pos.x,pos.y,pos.c);
+  });
+
+  animate(motionList1);
+
+
+
+  function animate(list){
+    console.log(process);
+    if(process === list.length-1){
+      process = 0;
+      return;
+    }else{
+      setTimeout(function(){
+        createArc(list[process].x,list[process].y,list[process].c);
+        process++;
+        animate(list);
+      },200);
+    }
+
+  }
+
+  function createArc(x,y,c){
+    ctx.fillStyle = c;
+    ctx.beginPath();
+    ctx.arc(x, y, 10,0, Math.PI * 2);
+    ctx.fill();
+  }
+</script>
+</body>
+</html>
